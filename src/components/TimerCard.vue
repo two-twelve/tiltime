@@ -1,8 +1,7 @@
 <template>
   <section>
     <h1>{{ title }}</h1>
-    <p>{{ remainingTime }} remaining</p>
-    <p>({{ elapsedTime }} / {{ totalTime }})</p>
+    <p>{{ remainingTime }} remaining until {{ to.toLocaleString() }}</p>
     <p>
       {{ percentageElapsed }}% elapsed, {{ percentageRemaining }}% remaining.
     </p>
@@ -25,12 +24,6 @@ export default defineComponent({
     }
   },
   computed: {
-    totalTime(): number {
-      return this.humanizeDuration(this.to.getTime() - this.from.getTime())
-    },
-    elapsedTime(): number {
-      return this.humanizeDuration(this.currentTime - this.from.getTime())
-    },
     remainingTime(): number {
       return this.humanizeDuration(this.to.getTime() - this.currentTime)
     },
