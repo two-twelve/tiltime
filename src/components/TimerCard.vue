@@ -48,9 +48,9 @@ export default defineComponent({
     humanizeDuration(time: number): number {
       return humanizeDuration(time, {
         round: true,
-        units: [ 'h', 'm', 's' ],
-        conjunction: " and ",
-        serialComma: false
+        units: ['h', 'm', 's'],
+        conjunction: ' and ',
+        serialComma: false,
       })
     },
   },
