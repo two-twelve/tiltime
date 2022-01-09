@@ -1,10 +1,18 @@
 <template>
   <section>
     <h1>{{ title }}</h1>
+
     <p>{{ remainingTime }} remaining until {{ to.toLocaleString() }}</p>
-    <p>
-      {{ percentageElapsed }}% elapsed, {{ percentageRemaining }}% remaining.
-    </p>
+
+    <label for="progress-bar">
+      <template v-if="percentageElapsed < percentageRemaining">
+        {{ percentageElapsed }}% elapsed
+      </template>
+      <template v-else>
+        {{ percentageRemaining }}% remaining
+      </template>
+    </label>
+    <progress id="progress-bar" max="100" :value="percentageElapsed"/>
   </section>
 </template>
 
