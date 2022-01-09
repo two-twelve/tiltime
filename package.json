@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@types/node": "^17.0.8",
+    "prettier": "^2.5.1",
     "vue": "^3.2.25"
   },
   "devDependencies": {
