@@ -3,7 +3,9 @@
     <h1>{{ title }}</h1>
     <p>{{ remainingTime }} remaining</p>
     <p>{{ elapsedTime }} / {{ totalTime }}</p>
-    <p>{{ percentageElapsed }}% elapsed, {{ percentageRemaining }}% remaining.</p>
+    <p>
+      {{ percentageElapsed }}% elapsed, {{ percentageRemaining }}% remaining.
+    </p>
   </section>
 </template>
 
@@ -16,9 +18,11 @@ export default defineComponent({
     from: { type: Date, required: true },
     to: { type: Date, required: true },
   },
-  data(){return{
-    currentTime: Date.now()
-  }},
+  data() {
+    return {
+      currentTime: Date.now(),
+    }
+  },
   computed: {
     totalTime(): number {
       return this.to.getTime() - this.from.getTime()
@@ -34,7 +38,7 @@ export default defineComponent({
     },
     percentageElapsed(): number {
       return 100 - this.percentageRemaining
-    }
+    },
   },
   mounted() {
     setInterval(this.updateCurrentTime, 1000)
@@ -42,7 +46,7 @@ export default defineComponent({
   methods: {
     updateCurrentTime() {
       this.currentTime = Date.now()
-    }
+    },
   },
 })
 </script>
