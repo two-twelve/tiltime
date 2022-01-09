@@ -1,7 +1,8 @@
 <template>
   <section>
     <h1>{{ title }}</h1>
-    <time>{{ remainingTime }} / {{ totalTime }}</time>
+    <p>{{ remainingTime }} remaining</p>
+    <p>{{ elapsedTime }} / {{ totalTime }}</p>
     <p>{{ percentageElapsed }}% elapsed, {{ percentageRemaining }}% remaining.</p>
   </section>
 </template>
@@ -22,8 +23,11 @@ export default defineComponent({
     totalTime(): number {
       return this.to.getTime() - this.from.getTime()
     },
-    remainingTime(): number {
+    elapsedTime(): number {
       return this.currentTime - this.from.getTime()
+    },
+    remainingTime(): number {
+      return this.to.getTime() - this.currentTime
     },
     percentageRemaining(): number {
       return Math.round((this.remainingTime / this.totalTime) * 100)
