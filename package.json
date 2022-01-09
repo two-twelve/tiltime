@@ -4,7 +4,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint --ext .js,.ts,.vue --ignore-path .gitignore --fix src/",
+    "format": "prettier . --write"    
   },
   "dependencies": {
     "@types/node": "^17.0.8",
