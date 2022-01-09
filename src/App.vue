@@ -3,7 +3,7 @@
     <h1>TilTi.me</h1>
     <TimerCard
       :title="'First Timer'"
-      :from="new Date(2022, 0, 1, 0, 0)"
+      :from="new Date(2022, 0, 3, 16, 10)"
       :to="new Date(2022, 0, 21, 21, 45)"
     />
   </main>
