@@ -2,7 +2,7 @@
   <section>
     <h1>{{ title }}</h1>
     <p>{{ remainingTime }} remaining</p>
-    <p>{{ elapsedTime }} / {{ totalTime }}</p>
+    <p>({{ elapsedTime }} / {{ totalTime }})</p>
     <p>
       {{ percentageElapsed }}% elapsed, {{ percentageRemaining }}% remaining.
     </p>
@@ -11,6 +11,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import * as humanizeDuration from 'humanize-duration/humanize-duration.js'
 
 export default defineComponent({
   props: {
@@ -25,16 +26,20 @@ export default defineComponent({
   },
   computed: {
     totalTime(): number {
-      return this.to.getTime() - this.from.getTime()
+      return this.humanizeDuration(this.to.getTime() - this.from.getTime())
     },
     elapsedTime(): number {
-      return this.currentTime - this.from.getTime()
+      return this.humanizeDuration(this.currentTime - this.from.getTime())
     },
     remainingTime(): number {
-      return this.to.getTime() - this.currentTime
+      return this.humanizeDuration(this.to.getTime() - this.currentTime)
     },
     percentageRemaining(): number {
-      return Math.round((this.remainingTime / this.totalTime) * 100)
+      return Math.round(
+        ((this.to.getTime() - this.currentTime) /
+          (this.to.getTime() - this.from.getTime())) *
+          100
+      )
     },
     percentageElapsed(): number {
       return 100 - this.percentageRemaining
@@ -47,8 +52,18 @@ export default defineComponent({
     updateCurrentTime() {
       this.currentTime = Date.now()
     },
+    humanizeDuration(time: number): number {
+      return humanizeDuration(time, {
+        round: true,
+      })
+    },
   },
 })
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+section {
+  width: 600px;
+  max-width: 100%;
+}
+</style>
