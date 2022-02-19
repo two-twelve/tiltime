@@ -2,17 +2,29 @@
   <section>
     <h1>{{ title }}</h1>
 
-    <p>{{ remainingTime }} remaining until {{ to.toLocaleString() }}</p>
+    <div class="start-end-container">
+      <p class="start-container">
+        <span class="start-time">
+          {{ from.toLocaleDateString('en-GB', dateFormatOptions) }}
+        </span>
+      </p>
+      <p class="end-container">
+        <span id="end-time">
+          {{ to.toLocaleDateString('en-GB', dateFormatOptions) }}
+        </span>
+      </p>
+    </div>
 
-    <label for="progress-bar">
-      <template v-if="percentageElapsed < percentageRemaining">
-        {{ percentageElapsed }}% elapsed
-      </template>
-      <template v-else>
-        {{ percentageRemaining }}% remaining
-      </template>
-    </label>
-    <progress id="progress-bar" max="100" :value="percentageElapsed"/>
+    <div class="countdown-container">
+      <span class="countdown"></span>
+    </div>
+
+    <div class="progress-bar-container">
+      <span class="elapsed-bar">
+        <span class="progress-indicator">0% elapsed</span>
+      </span>
+      <span class="remaining-bar"></span>
+    </div>
   </section>
 </template>
 
@@ -29,6 +41,13 @@ export default defineComponent({
   data() {
     return {
       currentTime: Date.now(),
+      dateFormatOptions: {
+        day: 'numeric' as 'numeric' | '2-digit',
+        year: '2-digit' as 'numeric' | '2-digit',
+        month: 'numeric' as 'numeric' | '2-digit' | 'long' | 'short' | 'narrow',
+        hour: 'numeric' as 'numeric' | '2-digit',
+        minute: 'numeric' as 'numeric' | '2-digit'
+      }
     }
   },
   computed: {
