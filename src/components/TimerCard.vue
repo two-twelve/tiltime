@@ -18,7 +18,7 @@
     </div>
 
     <div class="countdown-container">
-      <span class="countdown"></span>
+      <span class="countdown">{{ remainingTime }}</span>
     </div>
 
     <div class="progress-bar-container">
@@ -52,7 +52,7 @@ export default defineComponent({
     }
   },
   computed: {
-    remainingTime(): number {
+    remainingTime(): string {
       return this.humanizeDuration(this.to.getTime() - this.currentTime)
     },
     percentageRemaining(): number {
