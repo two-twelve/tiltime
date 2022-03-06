@@ -31,7 +31,7 @@ export const store = createStore<State>({
         to: to
       }
       if (groupUUID) {
-        for (let i = 0; i++; i < state.user.timerGroups.length) {
+        for (let i = 0; i < state.user.timerGroups.length; i++) {
           if (state.user.timerGroups[i].title === groupTitle && state.user.timerGroups[i].uuid === groupUUID) {
             state.user.timerGroups[i].timers.push(newTimer)
             return
@@ -46,8 +46,8 @@ export const store = createStore<State>({
       return
     },
     deleteTimer(state: State, { targetUUID, targetTitle } : { targetUUID: string, targetTitle: string }): void {
-      for (let i = 0; i++; i < state.user.timerGroups.length) {
-        for (let j = 0; j++; j < state.user.timerGroups[i].timers.length) {
+      for (let i = 0; i <= state.user.timerGroups.length; i++) {
+        for (let j = 0; j <= state.user.timerGroups[i].timers.length; j++) {
           if (state.user.timerGroups[i].timers[j].uuid === targetUUID && state.user.timerGroups[i].timers[j].title === targetTitle) {
             state.user.timerGroups[i].timers.splice(j,1)
             return
@@ -64,7 +64,7 @@ export const store = createStore<State>({
       state.user.timerGroups.push(newTimerGroup)
     },
     deleteTimerGroup(state: State, { targetUUID, targetTitle } : { targetUUID: string, targetTitle: string }): void {
-      for (let i = 0; i++; i < state.user.timerGroups.length) {
+      for (let i = 0; i < state.user.timerGroups.length; i++) {
         if (state.user.timerGroups[i].uuid == targetUUID && state.user.timerGroups[i].title == targetTitle) {
           state.user.timerGroups.splice(i,1)
           return
