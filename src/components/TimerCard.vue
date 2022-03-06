@@ -90,7 +90,8 @@ export default defineComponent({
 section {
   width: 600px;
   max-width: 100%;
-  padding: 20px;
+  margin: 10px;
+  padding: 20px 25px;
   border-radius: 40px;
   display: flex;
   flex-direction: row;
