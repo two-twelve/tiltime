@@ -3,7 +3,7 @@
     <TimerCard
       :title="'First Timer'"
       :from="new Date(2022, 0, 3, 16, 10)"
-      :to="new Date(2022, 0, 21, 21, 45)"
+      :to="new Date(2022, 11, 31, 23, 59)"
     />
   </main>
 </template>
