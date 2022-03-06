@@ -8,8 +8,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useStore } from './store'
-import TimerGroup from './types/timerGroup'
+import { useStore } from '@/store'
+import TimerGroup from '@/types/timerGroup'
 import TimerList from '@/components/TimerList.vue'
 
 export default defineComponent({
