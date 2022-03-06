@@ -1,6 +1,5 @@
 <template>
   <section>
-    <h1>{{ title }}</h1>
     <ul>
       <TimerCard
         v-for="timer of timers"
@@ -24,7 +23,6 @@ export default defineComponent({
     TimerCard,
   },
   props: {
-    title: { type: String, required: true },
     timers: { type: Array as PropType<Array<Timer>>, required: true }
   },
   setup() {}
