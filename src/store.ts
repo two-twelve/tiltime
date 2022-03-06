@@ -23,7 +23,6 @@ export const store = createStore<State>({
   },
 
   mutations: {
-    // addTimer returns true if the timer was added to an existing group.
     addTimer(state: State, { groupTitle, timerTitle, from, to }: { groupTitle: string, timerTitle: string, from: Date, to: Date}): void {
       const newTimer: Timer = {
         uuid: uuidv4(),
@@ -31,16 +30,12 @@ export const store = createStore<State>({
         from: from,
         to: to
       }
-
-      // Iterate over all of the user's timer groups until we see one with the right title, then add the new timer to it
       for (let i = 0; i++; i < state.user.timerGroups.length) {
         if (state.user.timerGroups[i].title === groupTitle) {
           state.user.timerGroups[i].timers.push(newTimer)
           return
         }
       }
-
-      // If there isn't a timer group with that name, create one with the new timer in it
       state.user.timerGroups.push({
         title: groupTitle,
         timers: [newTimer]
