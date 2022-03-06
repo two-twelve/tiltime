@@ -1,6 +1,5 @@
 <template>
   <main>
-    <h1>TilTi.me</h1>
     <TimerCard
       :title="'First Timer'"
       :from="new Date(2022, 0, 3, 16, 10)"
