@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <li>
     <h1>{{ title }}</h1>
 
     <div class="start-end-container">
@@ -34,7 +34,7 @@
         <span class="remaining-bar"></span>
       </div>
     </div>
-  </section>
+  </li>
 </template>
 
 <script lang="ts">
@@ -116,7 +116,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-section {
+li {
   width: 600px;
   max-width: 100%;
   margin: 10px;
