@@ -1,6 +1,9 @@
 <template>
   <li>
-    <h1>{{ title }}</h1>
+    <h1>
+      {{ title }}
+      <font-awesome-icon class="delete-icon" :icon="['fas', 'times']" @click="deleteTimer" />
+    </h1>
 
     <div class="start-end-container">
       <p class="start-container">
@@ -39,12 +42,14 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { useStore } from '@/store'
 
 export default defineComponent({
   props: {
+    uuid: { type: String, required: true },
     title: { type: String, required: true },
     from: { type: Date, required: true },
-    to: { type: Date, required: true },
+    to: { type: Date, required: true }
   },
   data() {
     return {
@@ -55,7 +60,8 @@ export default defineComponent({
         month: 'numeric' as 'numeric' | '2-digit' | 'long' | 'short' | 'narrow',
         hour: 'numeric' as 'numeric' | '2-digit',
         minute: 'numeric' as 'numeric' | '2-digit'
-      }
+      },
+      store: useStore(),
     }
   },
   computed: {
@@ -77,7 +83,7 @@ export default defineComponent({
         ) / 100,
         99.99
       )
-    },
+    }
   },
   mounted() {
     setInterval(this.updateCurrentTime, 1000/30)
@@ -111,6 +117,15 @@ export default defineComponent({
              + "and " + seconds + (seconds == 1 ? " second." : " seconds.")
       }
     },
+    deleteTimer() {
+      this.store.commit(
+        'deleteTimer',
+        {
+          targetUUID: this.uuid,
+          targetTitle: this.title
+        }
+      )
+    }
   },
 })
 </script>
@@ -137,6 +152,11 @@ h1, .progress-bar-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.delete-icon {
+  float: right;
+  padding-top: 5px;
 }
 
 .start-container, .end-container {
