@@ -121,6 +121,9 @@ h1, .progress-bar-container {
 }
 .start-end-container, .countdown-container {
   flex-basis: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .start-container, .end-container {
@@ -129,5 +132,12 @@ h1, .progress-bar-container {
 }
 .icon {
   margin-right: 0.5rem;
+}
+
+.countdown-container {
+  text-align: right;
+}
+.countdown {
+  white-space: pre-line;
 }
 </style>
