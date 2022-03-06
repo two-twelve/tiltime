@@ -81,7 +81,7 @@ export default defineComponent({
     },
   },
   mounted() {
-    setInterval(this.updateCurrentTime, 1000)
+    setInterval(this.updateCurrentTime, 1000/30)
   },
   methods: {
     updateCurrentTime() {
