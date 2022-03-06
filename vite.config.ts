@@ -15,6 +15,7 @@ export default defineConfig({
       scss: {
         additionalData: `
         @import "./src/assets/styles/reset.css";
+        @import "./src/assets/styles/global.scss";
         `
       }
     }
