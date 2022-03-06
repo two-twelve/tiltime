@@ -2,7 +2,7 @@ import TimerGroup from './TimerGroup'
 import ColourTheme from './ColourTheme'
 
 type User = {
-  timerGroups: TimerGroup,
+  timerGroups: Array<TimerGroup>,
   colourTheme: ColourTheme
 }
 
