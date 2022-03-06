@@ -105,4 +105,12 @@ h1, .progress-bar-container {
 .start-end-container, .countdown-container {
   flex-basis: 50%;
 }
+
+.start-container, .end-container {
+  display: flex;
+  align-items: center;
+}
+.icon {
+  margin-right: 0.5rem;
+}
 </style>
