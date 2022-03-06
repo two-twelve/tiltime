@@ -88,5 +88,19 @@ export default defineComponent({
 section {
   width: 600px;
   max-width: 100%;
+  padding: 20px;
+  border-radius: 40px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  border: 1px solid black;
+}
+
+h1, .progress-bar-container {
+  flex-basis: 100%;
+}
+.start-end-container, .countdown-container {
+  flex-basis: 50%;
 }
 </style>
