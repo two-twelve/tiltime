@@ -23,20 +23,23 @@ export const store = createStore<State>({
   },
 
   mutations: {
-    addTimer(state: State, { groupTitle, timerTitle, from, to }: { groupTitle: string, timerTitle: string, from: Date, to: Date}): void {
+    createTimer(state: State, { timerTitle, from, to, groupTitle, groupUUID }: { timerTitle: string, from: Date, to: Date, groupTitle: string, groupUUID: string | undefined}): void {
       const newTimer: Timer = {
         uuid: uuidv4(),
         title: timerTitle,
         from: from,
         to: to
       }
-      for (let i = 0; i++; i < state.user.timerGroups.length) {
-        if (state.user.timerGroups[i].title === groupTitle) {
-          state.user.timerGroups[i].timers.push(newTimer)
-          return
+      if (groupUUID) {
+        for (let i = 0; i++; i < state.user.timerGroups.length) {
+          if (state.user.timerGroups[i].title === groupTitle && state.user.timerGroups[i].uuid === groupUUID) {
+            state.user.timerGroups[i].timers.push(newTimer)
+            return
+          }
         }
       }
       state.user.timerGroups.push({
+        uuid: uuidv4(),
         title: groupTitle,
         timers: [newTimer]
       })
