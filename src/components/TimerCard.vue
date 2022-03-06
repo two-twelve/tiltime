@@ -63,7 +63,6 @@ export default defineComponent({
       return this.humanizeDuration(this.to.getTime() - this.currentTime)
     },
     percentageElapsed(): number {
-      console.log(this.currentTime, this.to.getTime(), this.to.getTime() - this.currentTime)
       if (this.to.getTime() - this.currentTime <= 1000) {
         return 100;
       }
