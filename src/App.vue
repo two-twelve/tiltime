@@ -1,8 +1,6 @@
 <template>
   <main>
-    <TimerList
-      :title="timerGroups[0].title"
-      :timers="timerGroups[0].timers" />
+    <TimersTab :timers="timerGroups[0].timers" />
   </main>
 </template>
 
@@ -10,11 +8,11 @@
 import { defineComponent } from 'vue'
 import { useStore } from '@/store'
 import TimerGroup from '@/types/timerGroup'
-import TimerList from '@/components/TimerList.vue'
+import TimersTab from '@/components/TimersTab.vue'
 
 export default defineComponent({
   components: {
-    TimerList
+    TimersTab
   },
   setup() {
     useStore().commit(
