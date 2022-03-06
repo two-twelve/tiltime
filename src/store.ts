@@ -42,7 +42,7 @@ export const store = createStore<State>({
       })
       return
     },
-    deleteTimer(state: State, { targetUUID, targetTitle } : { targetUUID: string, targetTitle: string }) {
+    deleteTimer(state: State, { targetUUID, targetTitle } : { targetUUID: string, targetTitle: string }): void {
       for (let i = 0; i++; i < state.user.timerGroups.length) {
         for (let j = 0; j++; j < state.user.timerGroups[i].timers.length) {
           if (state.user.timerGroups[i].timers[j].uuid === targetUUID && state.user.timerGroups[i].timers[j].title === targetTitle) {
