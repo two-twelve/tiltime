@@ -32,7 +32,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import * as humanizeDuration from 'humanize-duration/humanize-duration.js'
 
 export default defineComponent({
   props: {
@@ -74,13 +73,30 @@ export default defineComponent({
     updateCurrentTime() {
       this.currentTime = Date.now()
     },
-    humanizeDuration(time: number): number {
-      return humanizeDuration(time, {
-        round: true,
-        units: ['h', 'm', 's'],
-        conjunction: ' and ',
-        serialComma: false,
-      })
+    humanizeDuration(milliseconds: number): string {
+      if (Math.floor(milliseconds / 1000) <= 0) {
+        return "0 hours,\n0 minutes\nand 0 seconds!"
+      }
+
+      let seconds = Math.floor(milliseconds / 1000);
+      let minutes = Math.floor(seconds / 60);
+      let hours = Math.floor(minutes / 60);
+      const days = Math.floor(hours / 24);
+
+      seconds = seconds % 60
+      minutes = minutes % 60
+      hours = hours % 24
+
+      if (days > 0) {
+        return days + (days > 1 ? " days," : " day,") + "\n"
+             + hours + (hours == 1 ? " hour," : " hours,") + " "
+             + minutes + (minutes == 1 ? " minute," : " minutes") + "\n"
+             + "and " + seconds + (seconds == 1 ? " second." : " seconds.")
+      } else {
+        return hours + (hours == 1 ? " hour," : " hours,") + "\n"
+             + minutes + (minutes == 1 ? " minute," : " minutes") + "\n"
+             + "and " + seconds + (seconds == 1 ? " second." : " seconds.")
+      }
     },
   },
 })
