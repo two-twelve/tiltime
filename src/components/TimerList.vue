@@ -8,6 +8,7 @@
         :title="timer.title"
         :from="timer.from"
         :to="timer.to"
+        :uuid="timer.uuid"
       />
     </ul>
   </section>
