@@ -62,15 +62,22 @@ export default defineComponent({
     remainingTime(): string {
       return this.humanizeDuration(this.to.getTime() - this.currentTime)
     },
-    percentageRemaining(): number {
-      return Math.round(
-        ((this.to.getTime() - this.currentTime) /
-          (this.to.getTime() - this.from.getTime())) *
-          100
-      )
-    },
     percentageElapsed(): number {
-      return 100 - this.percentageRemaining
+      console.log(this.currentTime, this.to.getTime(), this.to.getTime() - this.currentTime)
+      if (this.to.getTime() - this.currentTime <= 1000) {
+        return 100;
+      }
+      return Math.min(
+        Math.round(
+          (
+            (this.currentTime - this.from.getTime()) 
+            / (this.to.getTime() - this.from.getTime())
+            * 100 
+            + Number.EPSILON
+          ) * 100
+        ) / 100,
+        99.99
+      )
     },
   },
   mounted() {
