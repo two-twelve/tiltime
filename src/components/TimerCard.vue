@@ -22,10 +22,17 @@
     </div>
 
     <div class="progress-bar-container">
-      <span class="elapsed-bar">
-        <span class="progress-indicator">0% elapsed</span>
+      <span class="progress-indicator-container">
+            <div class="progress-indicator"
+                 :style="'flex-basis:'+(100-percentageElapsed)+'%'">
+              {{ percentageElapsed }}% elapsed
+            </div>
       </span>
-      <span class="remaining-bar"></span>
+      <div class="progress-bar">
+        <span class="elapsed-bar" :style="'flex-basis:'+percentageElapsed+'%'">
+        </span>
+        <span class="remaining-bar"></span>
+      </div>
     </div>
   </section>
 </template>
@@ -139,5 +146,30 @@ h1, .progress-bar-container {
 }
 .countdown {
   white-space: pre-line;
+}
+
+.progress-bar {
+  display:flex;
+}
+.progress-indicator-container {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row-reverse;
+}
+.progress-indicator {
+  font-size: 80%;
+  white-space: nowrap;
+}
+.elapsed-bar, .remaining-bar {
+  height: 5px;
+}
+.elapsed-bar {
+  background: lime;
+  border-radius: 3px 0px 0px 3px;
+}
+.remaining-bar {
+  background: red;
+  border-radius: 0px 3px 3px 0px;
+  flex-grow:1;
 }
 </style>
