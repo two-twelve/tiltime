@@ -4,6 +4,7 @@ import ColourTheme from './types/ColourTheme'
 import Timer from './types/Timer'
 import TimerGroup from './types/timerGroup'
 import User from './types/User'
+import { v4 as uuidv4 } from "uuid";
 
 export interface State {
   user: User
@@ -25,6 +26,7 @@ export const store = createStore<State>({
     // addTimer returns true if the timer was added to an existing group.
     addTimer(state: State, { groupTitle, timerTitle, from, to }: { groupTitle: string, timerTitle: string, from: Date, to: Date}): void {
       const newTimer: Timer = {
+        uuid: uuidv4(),
         title: timerTitle,
         from: from,
         to: to
