@@ -69,7 +69,7 @@ export default defineComponent({
       return this.humanizeDuration(this.to.getTime() - this.currentTime)
     },
     percentageElapsed(): number {
-      if (this.to.getTime() - this.currentTime <= 1000) {
+      if (this.to.getTime() - this.currentTime <= 0) {
         return 100;
       }
       return Math.min(
@@ -93,11 +93,11 @@ export default defineComponent({
       this.currentTime = Date.now()
     },
     humanizeDuration(milliseconds: number): string {
-      if (Math.floor(milliseconds / 1000) <= 0) {
+      if (Math.ceil(milliseconds / 1000) <= 0) {
         return "0 hours,\n0 minutes\nand 0 seconds!"
       }
 
-      let seconds = Math.floor(milliseconds / 1000);
+      let seconds = Math.ceil(milliseconds / 1000);
       let minutes = Math.floor(seconds / 60);
       let hours = Math.floor(minutes / 60);
       const days = Math.floor(hours / 24);
