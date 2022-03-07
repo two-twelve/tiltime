@@ -22,7 +22,7 @@ export default defineComponent({
       const groupUUID = this.store.state.user.timerGroups[0] ? this.store.state.user.timerGroups[0].uuid : undefined
       const from = new Date()
       const to = new Date()
-      to.setDate(from.getDate() + 1)
+      to.setSeconds(from.getSeconds() + 100)
       this.store.commit(
         'createTimer',
         {
