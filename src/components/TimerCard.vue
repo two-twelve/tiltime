@@ -1,7 +1,10 @@
 <template>
   <li>
     <h1>
-      {{ title }}
+      <input v-model="localTitle" 
+             @keyup="updateTimerTitle" 
+             @change="updateTimerTitle"
+             maxlength="20">
       <font-awesome-icon class="delete-icon" :icon="['fas', 'times']" @click="deleteTimer" />
     </h1>
 
@@ -62,6 +65,7 @@ export default defineComponent({
         minute: 'numeric' as 'numeric' | '2-digit'
       },
       store: useStore(),
+      localTitle: this.title
     }
   },
   computed: {
@@ -125,6 +129,16 @@ export default defineComponent({
           targetTitle: this.title
         }
       )
+    },
+    updateTimerTitle() {
+      this.store.commit(
+        'updateTimerTitle',
+        {
+          targetUUID: this.uuid,
+          targetTitle: this.title,
+          newTitle: this.localTitle
+        }
+      )
     }
   },
 })
@@ -154,6 +168,9 @@ h1, .progress-bar-container {
   justify-content: center;
 }
 
+input {
+  font-size: inherit
+}
 .delete-icon {
   float: right;
   padding-top: 5px;
