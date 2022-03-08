@@ -11,15 +11,47 @@
     <div class="start-end-container">
       <p class="start-container">
         <font-awesome-icon class="icon" icon="hourglass-start" />
-        <span class="start-time">
-          {{ from.toLocaleDateString('en-GB', dateFormatOptions) }}
-        </span>
+        <select>
+          <option v-for="day in [...Array(31).keys()]" :key="day" :value="day+1">{{ ('00'+(day+1)).slice(-2) }}</option>
+        </select>
+        /
+        <select>
+          <option v-for="month in [...Array(12).keys()]" :key="month" :value="month+1">{{ ('00'+(month+1)).slice(-2) }}</option>
+        </select>
+        /
+        <select>
+          <option v-for="year in [...Array(10).keys()]" :key="year" :value="year">{{ ('00'+year).slice(-2) }}</option>
+        </select>
+        ,
+        <select class="hour-selector">
+          <option v-for="hour in [...Array(24).keys()]" :key="hour" :value="hour">{{ ('00'+hour).slice(-2) }}</option>
+        </select>
+        :
+        <select>
+          <option v-for="minute in [...Array(60).keys()]" :key="minute" :value="minute">{{ ('00'+minute).slice(-2) }}</option>
+        </select>
       </p>
       <p class="end-container">
         <font-awesome-icon class="icon" icon="hourglass-end" />
-        <span class="end-time">
-          {{ to.toLocaleDateString('en-GB', dateFormatOptions) }}
-        </span>
+        <select>
+          <option v-for="day in [...Array(31).keys()]" :key="day" :value="day+1">{{ ('00'+(day+1)).slice(-2) }}</option>
+        </select>
+        /
+        <select>
+          <option v-for="month in [...Array(12).keys()]" :key="month" :value="month+1">{{ ('00'+(month+1)).slice(-2) }}</option>
+        </select>
+        /
+        <select>
+          <option v-for="year in [...Array(10).keys()]" :key="year" :value="year">{{ ('00'+year).slice(-2) }}</option>
+        </select>
+        ,
+        <select class="hour-selector">
+          <option v-for="hour in [...Array(24).keys()]" :key="hour" :value="hour">{{ ('00'+hour).slice(-2) }}</option>
+        </select>
+        :
+        <select>
+          <option v-for="minute in [...Array(60).keys()]" :key="minute" :value="minute">{{ ('00'+minute).slice(-2) }}</option>
+        </select>
       </p>
     </div>
 
@@ -177,11 +209,18 @@ input {
 }
 
 .start-container, .end-container {
+  font-family: 'Ubuntu Mono', monospace;
   display: flex;
   align-items: center;
 }
 .icon {
   margin-right: 0.5rem;
+}
+select {
+  font-family: 'Ubuntu Mono', monospace;
+}
+.hour-selector {
+  margin-left: 6px;
 }
 
 .countdown-container {
