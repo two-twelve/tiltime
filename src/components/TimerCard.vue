@@ -17,7 +17,7 @@
       </p>
       <p class="end-container">
         <font-awesome-icon class="icon" icon="hourglass-end" />
-        <span id="end-time">
+        <span class="end-time">
           {{ to.toLocaleDateString('en-GB', dateFormatOptions) }}
         </span>
       </p>
