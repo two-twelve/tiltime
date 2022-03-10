@@ -25,6 +25,7 @@
     "stylelint-config-standard": "^24.0.0",
     "uuid": "^8.3.2",
     "vue": "^3.2.25",
+    "vue3-date-time-picker": "^2.7.0",
     "vuex": "^4.0.2"
   },
   "devDependencies": {

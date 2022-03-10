@@ -1,7 +1,10 @@
 <template>
   <main>
     <TimersTab :timers="store.state.user.timerGroups[0] ? store.state.user.timerGroups[0].timers : []" />
+    <Datepicker v-model="from"></Datepicker>
+    <Datepicker v-model="to"></Datepicker>
     <div @click="addMockTimer">Add another timer</div>
+    {{ store.state.user }}
   </main>
 </template>
 
@@ -9,26 +12,28 @@
 import { defineComponent } from 'vue'
 import { useStore } from '@/store'
 import TimersTab from '@/components/TimersTab.vue'
+import Datepicker from 'vue3-date-time-picker';
+import 'vue3-date-time-picker/dist/main.css'
 
 export default defineComponent({
   components: {
-    TimersTab
+    TimersTab,
+    Datepicker
   },
   data() { return {
     store: useStore(),
+    from: new Date(),
+    to: new Date()
   }},
   methods: {
     addMockTimer() {
       const groupUUID = this.store.state.user.timerGroups[0] ? this.store.state.user.timerGroups[0].uuid : undefined
-      const from = new Date()
-      const to = new Date()
-      to.setSeconds(from.getSeconds() + 100)
       this.store.commit(
         'createTimer',
         {
           timerTitle: 'New Timer',
-          from: from,
-          to: to,
+          from: this.from,
+          to: this.to,
           groupTitle: 'Home',
           groupUUID: groupUUID
         }
