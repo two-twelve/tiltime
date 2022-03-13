@@ -1,10 +1,12 @@
 <template>
   <main>
     <TimersTab :timers="store.state.user.timerGroups[0] ? store.state.user.timerGroups[0].timers : []" />
-    <Datepicker v-model="from"></Datepicker>
-    <Datepicker v-model="to"></Datepicker>
-    <div @click="addMockTimer">Add another timer</div>
-    {{ store.state.user }}
+    <label for="from">From:</label>
+    <Datepicker class="datepicker" ref="from" v-model="from"></Datepicker>
+    <label for="to">To:</label>
+    <Datepicker class="datepicker" ref="to" v-model="to"></Datepicker>
+    <div @click="addMockTimer">Create Timer</div>
+    <p class="state">{{ store.state.user }}</p>
   </main>
 </template>
 
