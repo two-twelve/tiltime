@@ -1,0 +1,77 @@
+<template>
+  <form class="new-timer-form">
+    <div class="from">
+      <label for="from">From:</label>
+      <Datepicker ref="from" v-model="from" class="datepicker" @click="disableAuto('from')"></Datepicker>
+    </div>
+    <div class="to">
+      <label for="to">To:</label>
+      <Datepicker ref="to" v-model="to" class="datepicker" @click="disableAuto('to')"></Datepicker>
+    </div>
+    <button type="button" @click="$emit('create',from,to)">Create Timer</button>
+  </form>
+</template>
+
+<script lang="ts">
+import { defineComponent } from 'vue'
+import Datepicker from 'vue3-date-time-picker';
+import 'vue3-date-time-picker/dist/main.css'
+
+export default defineComponent({
+  components: {
+    Datepicker
+  },
+  emits: ['create'],
+  data() { return {
+    from: new Date(),
+    to: new Date(),
+    autoFrom: true,
+    autoTo: true
+  }},
+  mounted() {
+    setInterval(this.updateCurrentTime, 1000)
+  },
+  methods: {
+    updateCurrentTime() {
+      const newTime = Date.now()
+      if (this.autoFrom) {
+        this.from = new Date(newTime)
+      }
+      if (this.autoTo) {
+        const to = new Date(newTime)
+        to.setDate(to.getDate() + 1)
+        this.to = to
+      }
+    },
+    disableAuto(field: 'from' | 'to') {
+      console.log(field)
+      switch (field) {
+        case 'from':
+          this.autoFrom = false
+          break
+        case 'to':
+          this.autoTo = false
+          break
+      }
+    },
+  }
+})
+</script>
+
+<style lang="scss" scoped>
+.new-timer-form, .from, .to {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+.from, .to, label {
+  margin: $spacer;
+}
+button {
+  margin: $spacer*2;
+}
+.datepicker {
+  max-width: 300px;
+}
+</style>
