@@ -21,10 +21,18 @@ export default defineComponent({
     Datepicker
   },
   data() { return {
-    store: useStore(),
-    from: new Date(),
-    to: new Date()
+    store: useStore()
   }},
+  computed: {
+    from(): Date {
+      return new Date()
+    },
+    to(): Date {
+      const to = new Date()
+      to.setDate(to.getDate() + 1)
+      return to
+    }
+  },
   methods: {
     addMockTimer() {
       const groupUUID = this.store.state.user.timerGroups[0] ? this.store.state.user.timerGroups[0].uuid : undefined
