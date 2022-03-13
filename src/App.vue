@@ -3,7 +3,6 @@
     <TimersTab class="timers-tab" :timers="store.state.user.timerGroups[0] ? store.state.user.timerGroups[0].timers : []" />
     <NewTimerForm @create='addMockTimer'/>
   </main>
-  <p class="state">{{ store.state.user }}</p>
 </template>
 
 <script lang="ts">
@@ -47,13 +46,5 @@ main {
 }
 .timers-tab {
   flex-grow: 1;
-}
-.state {
-  background: black;
-  color: white;
-  padding: $spacer;
-  margin: $spacer;
-  font-family: monospace;
-  font-size: 12px;
 }
 </style>
