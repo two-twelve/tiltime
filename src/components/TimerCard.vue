@@ -66,11 +66,18 @@ export default defineComponent({
   },
   computed: {
     remainingTime(): string {
-      return this.humanizeDuration(this.to.getTime() - this.currentTime)
+      if (this.currentTime > this.from.getTime()) {
+        return this.humanizeDuration(this.to.getTime() - this.currentTime)
+      } else {
+        return this.humanizeDuration(this.to.getTime() - this.from.getTime())
+      }
     },
     percentageElapsed(): number {
       if (this.to.getTime() - this.currentTime <= 0) {
         return 100;
+      }
+      if (this.currentTime < this.from.getTime()) {
+        return 0;
       }
       return Math.min(
         Math.round(
