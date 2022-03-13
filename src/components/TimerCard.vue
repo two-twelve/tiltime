@@ -142,11 +142,10 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 li {
-  width: 600px;
-  max-width: 100%;
-  margin: 10px;
-  padding: 20px 25px;
-  border-radius: 40px;
+  max-width: 400px;
+  margin: $spacer;
+  padding: $spacer*2 $spacer*3;
+  border-radius: $spacer * 4;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -169,7 +168,7 @@ input {
 }
 .delete-icon {
   float: right;
-  padding-top: 5px;
+  padding-top: $spacer;
 }
 
 .start-container, .end-container {
@@ -177,7 +176,7 @@ input {
   align-items: center;
 }
 .icon {
-  margin-right: 0.5rem;
+  margin-right: $spacer;
 }
 
 .countdown-container {
@@ -191,7 +190,7 @@ input {
   display:flex;
 }
 .progress-indicator-container {
-  margin-top: 10px;
+  margin-top: $spacer;
   display: flex;
   flex-direction: row-reverse;
 }

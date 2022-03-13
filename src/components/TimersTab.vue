@@ -1,16 +1,14 @@
 <template>
-  <section>
-    <ul>
-      <TimerCard
-        v-for="timer of timers"
-        :key="timer.uuid"
-        :title="timer.title"
-        :from="timer.from"
-        :to="timer.to"
-        :uuid="timer.uuid"
-      />
-    </ul>
-  </section>
+  <ul>
+    <TimerCard
+      v-for="timer of timers"
+      :key="timer.uuid"
+      :title="timer.title"
+      :from="timer.from"
+      :to="timer.to"
+      :uuid="timer.uuid"
+    />
+  </ul>
 </template>
 
 <script lang="ts">
@@ -28,3 +26,14 @@ export default defineComponent({
   setup() {}
 })
 </script>
+
+<style scoped lang="scss">
+ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+}
+</style>
