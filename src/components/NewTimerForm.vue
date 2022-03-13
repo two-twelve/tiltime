@@ -75,11 +75,13 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .new-timer-form {
+  padding: $spacer;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  border-top: 1px solid lightgrey;
 }
 .dates {
   display:flex;
@@ -100,10 +102,17 @@ label {
 }
 button {
   margin: $spacer*2 $spacer*4;
-  width: 80px;
+  border: 1px solid lightgrey;
+  border-radius: 4px;
+  text-align: center;
+  white-space: pre;
+  padding: $spacer;
+  &:hover, &:focus {
+    border-color: grey;
+  }
 }
 .datepicker {
   max-width: 300px;
-  margin: $spacer;
+  margin: $spacer*0.5;
 }
 </style>
