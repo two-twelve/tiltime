@@ -179,9 +179,6 @@ input {
 .icon {
   margin-right: 0.5rem;
 }
-.hour-selector {
-  margin-left: 6px;
-}
 
 .countdown-container {
   text-align: right;
