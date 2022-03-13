@@ -53,4 +53,16 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.datepicker {
+  max-width:300px;
+}
+.state {
+  background: black;
+  color: white;
+  padding: 8px;
+  margin: 8px;
+  font-family: monospace;
+  font-size: 12px;
+}
+</style>
