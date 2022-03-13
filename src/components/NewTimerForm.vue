@@ -59,19 +59,36 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.new-timer-form, .from, .to {
+.new-timer-form {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
 }
-.from, .to, label {
+.dates {
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.from, .to {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+label {
+  width: 40px;
   margin: $spacer;
+  text-align: right;
 }
 button {
-  margin: $spacer*2;
+  margin: $spacer*2 $spacer*4;
+  width: 80px;
 }
 .datepicker {
   max-width: 300px;
+  margin: $spacer;
 }
 </style>
