@@ -36,7 +36,7 @@ export default defineComponent({
           timerTitle: 'New Timer',
           from: from,
           to: to,
-          groupTitle: 'Home',
+          groupTitle: 'New Group',
           groupUUID: groupUUID
         }
       )
