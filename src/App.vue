@@ -1,7 +1,7 @@
 <template>
   <main>
     <TimersTabs :timer-groups="store.state.user.timerGroups" @set-index="setTimerTabIndex"/>
-    <TimersList class="timers-tab" :timers="store.state.user.timerGroups[timerTabIndex] ? store.state.user.timerGroups[0].timers : []" />
+    <TimersList class="timers-tab" :timers="store.state.user.timerGroups[timerTabIndex] ? store.state.user.timerGroups[timerTabIndex].timers : []" />
     <NewTimerForm @create='addMockTimer'/>
   </main>
 </template>
