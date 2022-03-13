@@ -5,7 +5,6 @@
         <label for="from">From:</label>
         <Datepicker ref="from" 
                     v-model="from" 
-                    :text-input="true"
                     :format="'dd/MM/yyyy HH:mm'"
                     class="datepicker" 
                     @click="disableAuto('from')"></Datepicker>
