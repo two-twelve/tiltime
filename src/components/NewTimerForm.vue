@@ -16,7 +16,6 @@
                     v-model="to" 
                     :format="'dd/MM/yyyy HH:mm'"
                     class="datepicker" 
-                    :state="valid ? undefined : false"
                     @click="disableAuto('to')"></Datepicker>
       </div>
     </div>
@@ -46,7 +45,7 @@ export default defineComponent({
     }
   },
   mounted() {
-    setInterval(this.updateCurrentTime, 1000)
+    setInterval(this.updateCurrentTime, 1000/30)
   },
   methods: {
     updateCurrentTime() {
@@ -54,7 +53,7 @@ export default defineComponent({
       if (this.autoFrom) {
         this.from = new Date(newTime)
       }
-      if (this.autoTo) {
+      if (this.autoTo || this.autoFrom > this.autoTo) {
         const to = new Date(newTime)
         to.setDate(to.getDate() + 1)
         this.to = to
