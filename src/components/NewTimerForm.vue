@@ -74,13 +74,18 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .new-timer-form {
+  width: $app-width;
+  max-width: 100%;
   padding: $spacer;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  border-top: 1px solid lightgrey;
+  border-color: lightgrey;
+  border-style: solid;
+  border-width: 1px 1px 0px 1px;
+  border-radius: 5px 5px 0px 0px;
 }
 .dates {
   display:flex;
