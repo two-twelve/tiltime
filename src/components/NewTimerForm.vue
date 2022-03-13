@@ -61,7 +61,6 @@ export default defineComponent({
       }
     },
     disableAuto(field: 'from' | 'to') {
-      console.log(field)
       switch (field) {
         case 'from':
           this.autoFrom = false
