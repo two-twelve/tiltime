@@ -88,7 +88,21 @@ export const store = createStore<State>({
       for (let i = 0; i < state.user.timerGroups.length; i++) {
         if (state.user.timerGroups[i].uuid == targetUUID) {
           state.user.timerGroups.splice(i,1)
-          this.setActiveTimerGroupUUID(state, { timerGroupUUID: state.user.timerGroups[i].uuid })
+          if (state.user.timerGroups[Math.max(i-1, 0)]) {
+            store.commit(
+              'setActiveTimerGroup',
+              {
+                timerGroupUUID: state.user.timerGroups[Math.max(i-1, 0)].uuid
+              }
+            )
+          } else {
+            store.commit(
+              'setActiveTimerGroup',
+              {
+                timerGroupUUID: undefined
+              }
+            )
+          }
           return
         }
       }
