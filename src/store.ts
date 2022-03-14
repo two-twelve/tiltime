@@ -31,6 +31,9 @@ export const store = createStore<State>({
         }
       }
       return []
+    },
+    activeGroupDeletable(): boolean {
+      return store.getters.activeTimers.length == 0
     }
   },
   mutations: {
