@@ -66,7 +66,7 @@ export default defineComponent({
       if (this.autoFrom) {
         this.from = new Date(newTime)
       }
-      if (this.autoTo || this.autoFrom > this.autoTo) {
+      if (this.autoTo || this.autoFrom < this.autoTo) {
         const to = new Date(newTime)
         to.setDate(to.getDate() + 1)
         this.to = to
