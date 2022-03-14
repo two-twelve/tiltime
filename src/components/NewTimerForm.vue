@@ -24,6 +24,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { useStore } from '@/store'
 import Datepicker from 'vue3-date-time-picker';
 import 'vue3-date-time-picker/dist/main.css'
 
@@ -33,6 +34,7 @@ export default defineComponent({
   },
   emits: ['create'],
   data() { return {
+    store: useStore(),
     from: new Date(),
     to: new Date(),
     autoFrom: true,
@@ -47,6 +49,17 @@ export default defineComponent({
     setInterval(this.updateCurrentTime, 1000/30)
   },
   methods: {
+    createTimer() {
+      this.store.commit(
+        'createTimer',
+        {
+          timerTitle: 'New Timer',
+          from: this.from,
+          to: this.to,
+          groupUUID: this.store.state.activeTimerGroupUUID
+        }
+      )
+    },
     updateCurrentTime() {
       const newTime = Date.now()
       if (this.autoFrom) {
