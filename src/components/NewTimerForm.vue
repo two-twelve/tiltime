@@ -3,22 +3,24 @@
     <div class="dates">
       <div class="from">
         <label for="from">From:</label>
-        <Datepicker ref="from" 
-                    v-model="from" 
-                    :format="'dd/MM/yyyy HH:mm'"
-                    class="datepicker" 
-                    @click="disableAuto('from')"></Datepicker>
+        <Datepicker
+          ref="from" 
+          v-model="from" 
+          :format="'dd/MM/yyyy HH:mm'"
+          class="datepicker" 
+          @click="disableAuto('from')"></Datepicker>
       </div>
       <div class="to">
         <label for="to">To:</label>
-        <Datepicker ref="to" 
-                    v-model="to" 
-                    :format="'dd/MM/yyyy HH:mm'"
-                    class="datepicker" 
-                    @click="disableAuto('to')"></Datepicker>
+        <Datepicker
+          ref="to" 
+          v-model="to" 
+          :format="'dd/MM/yyyy HH:mm'"
+          class="datepicker" 
+          @click="disableAuto('to')"></Datepicker>
       </div>
     </div>
-    <button type="button" @click="valid ? $emit('create',from,to) : null">Create Timer</button>
+    <button type="button" @click="valid ? createTimer() : null">Create Timer</button>
   </form>
 </template>
 
@@ -32,7 +34,6 @@ export default defineComponent({
   components: {
     Datepicker
   },
-  emits: ['create'],
   data() { return {
     store: useStore(),
     from: new Date(),
