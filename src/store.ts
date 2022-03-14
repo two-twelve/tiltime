@@ -23,7 +23,16 @@ export const store = createStore<State>({
       activeTimerGroupUUID: undefined,
     }
   },
-
+  getters: {
+    activeTimers(state: State): Array<Timer> {
+      for (const timerGroup of state.user.timerGroups) {
+        if (timerGroup.uuid === state.activeTimerGroupUUID) {
+          return timerGroup.timers
+        }
+      }
+      return []
+    }
+  },
   mutations: {
     createTimer(state: State, { timerTitle, from, to, groupUUID }: { timerTitle: string, from: Date, to: Date, groupUUID: string | undefined}): void {
       const newTimer: Timer = {
