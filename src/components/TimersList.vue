@@ -8,6 +8,9 @@
       :to="timer.to"
       :uuid="timer.uuid"
     />
+    <li v-if="store.state.activeTimerGroupUUID && store.getters.activeGroupDeletable" @click="deleteActiveTimerGroup">
+      Delete this group
+    </li>
   </ul>
 </template>
 
@@ -22,7 +25,17 @@ export default defineComponent({
   },
   data() { return {
     store: useStore()
-  }}
+  }},
+  methods: {
+    deleteActiveTimerGroup() {
+      this.store.commit(
+        'deleteTimerGroup',
+        {
+          targetUUID: this.store.state.activeTimerGroupUUID
+        }
+      )
+    }
+  }
 })
 </script>
 
@@ -34,5 +47,10 @@ ul {
   align-content: flex-start;
   flex-wrap: wrap;
   overflow-y: scroll;
+}
+li {
+  flex-basis: 100%;
+  padding: $spacer*2;
+  text-align: center;
 }
 </style>
