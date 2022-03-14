@@ -27,19 +27,6 @@ export default defineComponent({
   methods: {
     setTimerTabIndex(index: number) {
       this.timerTabIndex = index
-    },
-    addMockTimer(from: Date, to: Date) {
-      const groupUUID = this.store.state.user.timerGroups[0] ? this.store.state.user.timerGroups[0].uuid : undefined
-      this.store.commit(
-        'createTimer',
-        {
-          timerTitle: 'New Timer',
-          from: from,
-          to: to,
-          groupTitle: 'New Group',
-          groupUUID: groupUUID
-        }
-      )
     }
   }
 })
