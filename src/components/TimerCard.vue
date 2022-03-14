@@ -1,10 +1,11 @@
 <template>
   <li>
     <h1>
-      <input v-model="localTitle" 
-             @keyup="updateTimerTitle" 
-             @change="updateTimerTitle"
-             maxlength="20">
+      <input 
+        v-model="localTitle" 
+        maxlength="20" 
+        @keyup="updateTimerTitle"
+        @change="updateTimerTitle">
       <font-awesome-icon class="delete-icon" :icon="['fas', 'times']" @click="deleteTimer" />
     </h1>
 
@@ -25,8 +26,9 @@
 
     <div class="progress-bar-container">
       <span class="progress-indicator-container">
-            <div class="progress-indicator"
-                 :style="'flex-basis:'+(100-percentageElapsed)+'%'">
+            <div
+              class="progress-indicator"
+              :style="'flex-basis:'+(100-percentageElapsed)+'%'">
               {{ percentageElapsed }}% elapsed
             </div>
       </span>
