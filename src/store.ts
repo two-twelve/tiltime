@@ -17,7 +17,7 @@ export const store = createStore<State>({
   state() {
     return {
       user: {
-        timerGroups: [] as Array<TimerGroup>,
+        timerGroups: [{uuid:'Home',title:'Home',timers:[]}] as Array<TimerGroup>,
         colourTheme: 'system' as ColourTheme
       } as User,
       activeTimerGroupUUID: undefined,
@@ -32,8 +32,8 @@ export const store = createStore<State>({
       }
       return []
     },
-    activeGroupDeletable(): boolean {
-      return store.getters.activeTimers.length == 0
+    activeGroupDeletable(state: State): boolean {
+      return !(state.activeTimerGroupUUID === 'Home') && store.getters.activeTimers.length == 0
     }
   },
   mutations: {
