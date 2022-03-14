@@ -1,7 +1,7 @@
 <template>
   <ul>
     <TimerCard
-      v-for="timer of timers"
+      v-for="timer of store.getters.activeTimers"
       :key="timer.uuid"
       :title="timer.title"
       :from="timer.from"
@@ -12,18 +12,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent } from 'vue'
+import { useStore } from '@/store'
 import TimerCard from '@/components/TimerCard.vue'
-import Timer from '@/types/Timer'
 
 export default defineComponent({
   components: {
     TimerCard,
   },
-  props: {
-    timers: { type: Array as PropType<Array<Timer>>, required: true }
-  },
-  setup() {}
+  data() { return {
+    store: useStore()
+  }}
 })
 </script>
 
