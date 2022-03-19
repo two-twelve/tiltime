@@ -6,7 +6,7 @@
           :key="timerGroup.uuid"
           :class="timerGroup.uuid == store.state.activeTimerGroupUUID ? 'selected' : ''"
           @click="setActiveTimerGroup(timerGroup.uuid)">
-        {{ timerGroup.title }}
+        <input :value="timerGroup.title" :size="timerGroup.title.length" @change="updateTimerGroupTitle">
       </li>
       <li>
         <font-awesome-icon 
@@ -42,6 +42,15 @@ export default defineComponent({
           groupTitle: 'New Group'
         }
       )
+    },
+    updateTimerGroupTitle(event: { target: { value: string }}) {
+      this.store.commit(
+        'updateTimerGroupTitle', 
+        {
+          targetUUID: this.store.state.activeTimerGroupUUID,
+          newTitle: event.target.value
+        }
+      )
     }
   }
 })
@@ -64,8 +73,13 @@ ol {
 }
 li {
   margin: $spacer $spacer*2;
-  font-size: 125%;
-  &.selected {
+  display: flex;
+  align-items: center;
+  input {
+    font-size: 125%;
+    text-align: center;
+  }
+  &.selected>input {
     text-decoration: underline;
   }
 }
