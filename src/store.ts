@@ -87,6 +87,14 @@ export const store = createStore<State>({
       }
       state.user.timerGroups.push(newTimerGroup)
     },
+    updateTimerGroupTitle(state: State, { targetUUID, newTitle } : { targetUUID: string, targetTitle: string, newTitle: string }): void {
+      for (let i = 0; i < state.user.timerGroups.length; i++) {
+        if (state.user.timerGroups[i].uuid === targetUUID) {
+          state.user.timerGroups[i].title = newTitle.length > 0 ? newTitle : "Group"
+          return
+        }
+      }
+    },
     deleteTimerGroup(state: State, { targetUUID } : { targetUUID: string }): void {
       for (let i = 0; i < state.user.timerGroups.length; i++) {
         if (state.user.timerGroups[i].uuid == targetUUID) {
