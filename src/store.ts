@@ -20,7 +20,7 @@ export const store = createStore<State>({
         timerGroups: [{uuid:'Home',title:'Home',timers:[]}] as Array<TimerGroup>,
         colourTheme: 'system' as ColourTheme
       } as User,
-      activeTimerGroupUUID: undefined,
+      activeTimerGroupUUID: 'Home',
     }
   },
   getters: {
