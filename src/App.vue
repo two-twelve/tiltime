@@ -1,6 +1,6 @@
 <template>
   <main>
-    <TimersTabs @set-index="setTimerTabIndex"/>
+    <TimersTabs />
     <TimersList class="timers-tab" />
     <NewTimerForm />
   </main>
@@ -8,7 +8,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useStore } from '@/store'
 import TimersTabs from '@/components/TimersTabs.vue'
 import TimersList from '@/components/TimersList.vue'
 import NewTimerForm from '@/components/NewTimerForm.vue'
@@ -19,15 +18,6 @@ export default defineComponent({
     TimersTabs,
     TimersList,
     NewTimerForm,
-  },
-  data() { return {
-    store: useStore(),
-    timerTabIndex: 0,
-  }},
-  methods: {
-    setTimerTabIndex(index: number) {
-      this.timerTabIndex = index
-    }
   }
 })
 </script>
