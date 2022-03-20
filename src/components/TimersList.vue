@@ -1,5 +1,5 @@
 <template>
-  <ul>
+  <ul class="timers-list">
     <TimerCard
       v-for="timer of store.getters.activeTimers"
       :key="timer.uuid"
@@ -13,6 +13,22 @@
       class="delete-group-button"
       @click="deleteActiveTimerGroup">
       Delete This Group
+    </li>
+    <li
+      v-if="store.getters.activeTimers.length == 0 && store.state.user.timerGroups.length == 1"
+      class="welcome-card">
+      <h1 class="welcome-title">🎉 Welcome to TilTi.me 🥳</h1>
+      <p>
+        Get started by making yourself a timer! You could:
+      </p>
+      <ul>
+        <li>Keep track of your deadlines. 📚</li>
+        <li>See how long it is until your next birthday. 🎂</li>
+        <li>Check up on your next holiday. 🏖️</li>
+      </ul>
+      <p>
+        If you run into trouble, make an issue on <a href="https://github.com/TheTeaCat/tiltime" target="_blank">GitHub</a>. 
+      </p>
     </li>
   </ul>
 </template>
@@ -43,7 +59,8 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-ul {
+.timers-list {
+  max-width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -59,5 +76,31 @@ ul {
   flex-basis: 100%;
   font-size: $font-size * 1.2;
   text-align: center;
+}
+.welcome-card {
+  margin: $spacer * 2;
+  padding: $spacer*2 $spacer*4;
+  width: 500px;
+  max-width: 100%;
+  background: $background;
+  border-radius: $spacer * 4;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  .welcome-title {
+    margin: $spacer 0 $spacer*2 0;
+    font-size: $font-size * 1.8;
+    font-weight: $font-weight-bold;
+    text-align: center;
+  }
+  p, ul {
+    margin: $spacer 0;
+  }
+  ul {
+    list-style: disc;
+    li {
+      margin-left: $spacer*4;
+    }
+  }
 }
 </style>
