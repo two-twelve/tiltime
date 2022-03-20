@@ -12,7 +12,7 @@
       v-if="store.state.activeTimerGroupUUID && store.getters.activeGroupDeletable"
       class="delete-group-button"
       @click="deleteActiveTimerGroup">
-      Delete Group
+      Delete This Group
     </li>
   </ul>
 </template>
