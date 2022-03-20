@@ -176,14 +176,14 @@ export default defineComponent({
 }
 .timer-title {
   font-size: $font-size * 1.8;
-  font-weight: $bold;
   display:flex;
-  justify-content: space-between;  
+  justify-content: space-between;
 }
 .timer-title-input {
   padding: $spacer $spacer;
   width: 90%;
   font-size: inherit;
+  font-weight: $font-weight-bold;
   text-align: left;
 }
 .delete-icon {
