@@ -6,7 +6,7 @@
           :key="timerGroup.uuid"
           :class="timerGroup.uuid == store.state.activeTimerGroupUUID ? 'selected' : ''"
           @click="setActiveTimerGroup(timerGroup.uuid)">
-        <input :value="timerGroup.title" :size="timerGroup.title.length" @change="updateTimerGroupTitle">
+        <input :value="timerGroup.title" :size="timerGroup.title.length + 1" @change="updateTimerGroupTitle">
       </li>
       <li>
         <font-awesome-icon 
@@ -58,25 +58,26 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 nav {
-  width:$app-width;
-  max-width: 100%;
-  border-color: lightgrey;
-  border-style: solid;
-  border-width: 0px 1px 1px 1px;
-  border-radius: 0px 0px 5px 5px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background: $white;
   padding: $spacer;
   margin-bottom: $spacer;
+  font-size: $font-size * 1.2;
 }
 ol {
+  width:$app-width;
+  max-width: 100%;
   display: flex;
   flex-direction: row;
+  overflow-x: auto;
 }
 li {
-  margin: $spacer $spacer*2;
+  margin: $spacer*2 $spacer;
   display: flex;
   align-items: center;
   input {
-    font-size: 125%;
     text-align: center;
   }
   &.selected>input {

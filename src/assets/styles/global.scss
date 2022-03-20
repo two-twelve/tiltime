@@ -1,14 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono&family=Vollkorn:ital,wght@1,400;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono&family=Vollkorn:wght@400;700&display=swap');
+
+$bold: 700;
+$font-size: 14px;
+
+$green: hsl(77, 60%, 75%);
+$blue: hsl(205, 60%, 85%);
+$pink: hsl(334, 60%, 80%);
+$white: #ffffff;
+$dark-red: #dc143c;
+$dark-green: #3df53d;
+
+$app-width: 800px;
+$spacer: 6px;
 
 * {
   font-family: 'Vollkorn', serif;
-  font-size: 16px;
 }
 
-h1 {
-  font-size: 180%;
-  font-weight: 800;
+html, body {
+  min-height: 100vh;
 }
-
-$spacer: 6px;
-$app-width: 1000px;

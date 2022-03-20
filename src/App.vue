@@ -27,6 +27,7 @@ main {
   flex-direction: column;
   align-items: center;
   height: 100vh;
+  background: $blue;
 }
 .timers-tab {
   flex-grow: 1;

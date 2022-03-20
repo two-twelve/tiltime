@@ -8,8 +8,8 @@
       :to="timer.to"
       :uuid="timer.uuid"
     />
-    <li v-if="store.state.activeTimerGroupUUID && store.getters.activeGroupDeletable" @click="deleteActiveTimerGroup">
-      Delete this group
+    <li class="delete-group-button" v-if="store.state.activeTimerGroupUUID && store.getters.activeGroupDeletable" @click="deleteActiveTimerGroup">
+      Delete Group
     </li>
   </ul>
 </template>
@@ -48,9 +48,13 @@ ul {
   flex-wrap: wrap;
   overflow-y: scroll;
 }
-li {
+.delete-group-button {
+  margin: $spacer * 2;
+  padding: $spacer $spacer*2;
+  background: $pink;
+  border-radius: $spacer * 4;
   flex-basis: 100%;
-  padding: $spacer*2;
+  font-size: $font-size * 1.2;
   text-align: center;
 }
 </style>

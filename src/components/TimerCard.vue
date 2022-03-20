@@ -1,12 +1,16 @@
 <template>
-  <li>
-    <h1>
-      <input 
-        v-model="localTitle" 
+  <li class="timer-container">
+    <h1 class="timer-title">
+      <input
+        v-model="localTitle"
+        class="timer-title-input" 
         maxlength="20" 
         @keyup="updateTimerTitle"
         @change="updateTimerTitle">
-      <font-awesome-icon class="delete-icon" :icon="['fas', 'times']" @click="deleteTimer" />
+      <font-awesome-icon 
+        class="delete-icon" 
+        :icon="['fas', 'times']" 
+        @click="deleteTimer" />
     </h1>
 
     <div class="start-end-container">
@@ -150,19 +154,18 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-li {
+.timer-container {
+  margin: $spacer * 2;
+  padding: $spacer * 3;
   max-width: 400px;
-  margin: $spacer;
-  padding: $spacer*2 $spacer*3;
-  border-radius: $spacer * 4;
+  background: $white;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-
-  border: 1px solid grey;
+  border-radius: $spacer * 5;
 }
 
-h1, .progress-bar-container {
+.timer-title, .progress-bar-container {
   flex-basis: 100%;
 }
 .start-end-container, .countdown-container {
@@ -171,19 +174,21 @@ h1, .progress-bar-container {
   flex-direction: column;
   justify-content: center;
 }
-
-h1 {
+.timer-title {
+  font-size: $font-size * 1.8;
+  font-weight: $bold;
   display:flex;
-  justify-content: space-between;
+  justify-content: space-between;  
 }
-input {
-  width: 90%;
-  text-align: left;
-  font-size: inherit;
+.timer-title-input {
   padding: $spacer $spacer;
+  width: 90%;
+  font-size: inherit;
+  text-align: left;
 }
 .delete-icon {
   padding: $spacer;
+  font-size: $font-size * 1.4;
 }
 
 .start-container, .end-container {
@@ -193,14 +198,12 @@ input {
 .icon {
   margin-right: $spacer;
 }
-
 .countdown-container {
   text-align: right;
 }
 .countdown {
   white-space: pre-line;
 }
-
 .progress-bar {
   display:flex;
 }
@@ -210,19 +213,22 @@ input {
   flex-direction: row-reverse;
 }
 .progress-indicator {
-  font-size: 80%;
-  white-space: nowrap;
+  font-size: $font-size * 0.8;
   text-align: left;
+  white-space: nowrap;
 }
 .elapsed-bar, .remaining-bar {
   height: 5px;
 }
 .elapsed-bar {
-  background: lime;
+  background: $dark-green;
   border-radius: 3px 0px 0px 3px;
 }
+  .elapsed-bar[style="flex-basis: 100%;"] {
+    border-radius: 3px;    
+  }
 .remaining-bar {
-  background: red;
+  background: $dark-red;
   border-radius: 0px 3px 3px 0px;
   flex-grow:1;
 }

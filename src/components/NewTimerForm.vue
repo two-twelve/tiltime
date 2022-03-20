@@ -1,33 +1,30 @@
 <template>
-  <form class="new-timer-form">
-    <div class="dates">
-      <div class="from">
-        <label for="from">From:</label>
-        <DatePicker v-model="from" mode="dateTime" is24hr>
-          <template #default="{ inputValue, inputEvents }">
-            <input
-              class="bg-white border px-2 py-1 rounded"
-              :value="inputValue"
-              v-on="inputEvents"
-            />
-          </template>
-        </DatePicker>
-      </div>
-      <div class="to">
-        <label for="to">To:</label>
-        <DatePicker v-model="to" mode="dateTime" is24hr>
-          <template #default="{ inputValue, inputEvents }">
-            <input
-              class="bg-white border px-2 py-1 rounded"
-              :value="inputValue"
-              v-on="inputEvents"
-            />
-          </template>
-        </DatePicker>
-      </div>
-    </div>
-    <button type="button" @click="valid ? createTimer() : null">Create Timer</button>
-  </form>
+  <section class="new-timer-form-container">
+    <form class="new-timer-form">
+      <DatePicker 
+        v-model="range"
+        class="time-range"
+        mode="dateTime"
+        color="pink"
+        is24hr is-range>
+        <template #default="{ inputValue, inputEvents }">
+          <input
+            class="time-range-input"
+            readonly
+            :value="inputValue.start + ' - ' + inputValue.end"
+            :size="inputValue.start.length + inputValue.end.length + 3"
+            v-on="inputEvents.start"
+          />
+        </template>
+      </DatePicker>
+      <button 
+        class="create-timer-button"
+        type="button"
+        @click="valid ? createTimer() : null">
+        Create Timer
+      </button>
+    </form>
+  </section>
 </template>
 
 <script lang="ts">
@@ -47,7 +44,15 @@ export default defineComponent({
       const to = new Date()
       to.setHours(new Date().getHours() + 1) 
       return to
-    })()
+    })(),
+    range: {
+      start: new Date(),
+      end: (() => { 
+        const to = new Date()
+        to.setHours(new Date().getHours() + 1) 
+        return to
+      })()
+    }
   }},
   computed: {
     valid(): boolean {
@@ -60,8 +65,8 @@ export default defineComponent({
         'createTimer',
         {
           timerTitle: 'New Timer',
-          from: this.from,
-          to: this.to,
+          from: this.range.start,
+          to: this.range.end,
           groupUUID: this.store.state.activeTimerGroupUUID
         }
       )
@@ -71,38 +76,41 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.new-timer-form-container {
+  width: 100%;
+  display:flex;
+  justify-content: center;
+  background: $white;
+}
 .new-timer-form {
   width: $app-width;
   max-width: 100%;
   padding: $spacer;
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  border-color: lightgrey;
-  border-style: solid;
-  border-width: 1px 1px 0px 1px;
-  border-radius: 5px 5px 0px 0px;
 }
-.dates {
-  display:flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.from, .to {
+.time-range {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
 }
-label {
-  width: 40px;
+.time-range-input, .create-timer-button {
   margin: $spacer;
-  text-align: right;
+  padding: $spacer $spacer*2;
+  box-sizing: border-box;
+  font-size: $font-size * 1.2;
 }
-button {
-  padding: $spacer;
+.time-range-input {
+  max-width: 90%;
+  text-align: center;
+  background: $green;
+  border-radius: $spacer*3;
+}
+.create-timer-button {
+  background: $green;
+  border-radius: $spacer*3;
 }
 </style>
