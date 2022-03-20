@@ -90,7 +90,7 @@ nav {
   justify-content: center;
   width: 100%;
   background: $white;
-  padding: $spacer;
+  padding: 0 $spacer $spacer $spacer;
   margin-bottom: $spacer;
   font-size: $font-size * 1.2;
 }
