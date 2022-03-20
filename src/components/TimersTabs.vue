@@ -67,7 +67,7 @@ export default defineComponent({
       this.store.commit(
         'createTimerGroup',
         {
-          groupTitle: 'New Group'
+          groupTitle: ''
         }
       )
     },

@@ -6,6 +6,18 @@ import TimerGroup from './types/timerGroup'
 import User from './types/User'
 import { v4 as uuidv4 } from "uuid";
 
+function getNewTimerGroupName () {
+  const defaultTimerGroupNames = [
+    "Holidays",
+    "Anniversaries",
+    "Events",
+    "Birthdays",
+    "Homework",
+    "Deadlines"
+  ]
+  return defaultTimerGroupNames[Math.floor(Math.random() * defaultTimerGroupNames.length)]
+}
+
 export interface State {
   user: User,
   activeTimerGroupUUID: string | undefined
@@ -17,10 +29,10 @@ export const store = createStore<State>({
   state() {
     return {
       user: {
-        timerGroups: [{uuid:'Home',title:'Home',timers:[]}] as Array<TimerGroup>,
+        timerGroups: [{uuid:'Welcome',title:'Welcome',timers:[]}] as Array<TimerGroup>,
         colourTheme: 'system' as ColourTheme
       } as User,
-      activeTimerGroupUUID: 'Home',
+      activeTimerGroupUUID: 'Welcome',
     }
   },
   getters: {
@@ -54,7 +66,7 @@ export const store = createStore<State>({
       }
       state.user.timerGroups.push({
         uuid: uuidv4(),
-        title: "New Group",
+        title: getNewTimerGroupName(),
         timers: [newTimer]
       })
       return
@@ -80,6 +92,9 @@ export const store = createStore<State>({
       }
     },
     async createTimerGroup(state: State, { groupTitle }: { groupTitle: string }): Promise<void> {
+      if (groupTitle === "") {
+        groupTitle = getNewTimerGroupName()
+      }
       const newTimerGroup: TimerGroup = {
         uuid: uuidv4(),
         title: groupTitle,
@@ -96,7 +111,7 @@ export const store = createStore<State>({
     updateTimerGroupTitle(state: State, { targetUUID, newTitle } : { targetUUID: string, targetTitle: string, newTitle: string }): void {
       for (let i = 0; i < state.user.timerGroups.length; i++) {
         if (state.user.timerGroups[i].uuid === targetUUID) {
-          state.user.timerGroups[i].title = newTitle.length > 0 ? newTitle : "Timer Group"
+          state.user.timerGroups[i].title = newTitle.length > 0 ? newTitle : getNewTimerGroupName()
           return
         }
       }
