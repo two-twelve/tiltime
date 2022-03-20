@@ -6,6 +6,7 @@ import TimerGroup from './types/timerGroup'
 import User from './types/User'
 import { v4 as uuidv4 } from "uuid";
 
+var lastTimerGroupNameGenerated = '';
 function getNewTimerGroupName () {
   const defaultTimerGroupNames = [
     "Holidays",
@@ -15,7 +16,11 @@ function getNewTimerGroupName () {
     "Homework",
     "Deadlines"
   ]
-  return defaultTimerGroupNames[Math.floor(Math.random() * defaultTimerGroupNames.length)]
+  var newTimerGroupName = defaultTimerGroupNames.filter(
+    timerGroupName => timerGroupName !== lastTimerGroupNameGenerated
+  )[Math.floor(Math.random() * (defaultTimerGroupNames.length - 1))]
+  lastTimerGroupNameGenerated = newTimerGroupName
+  return newTimerGroupName
 }
 
 export interface State {
