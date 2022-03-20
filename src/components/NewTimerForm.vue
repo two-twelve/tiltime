@@ -3,21 +3,27 @@
     <div class="dates">
       <div class="from">
         <label for="from">From:</label>
-        <Datepicker
-          ref="from" 
-          v-model="from" 
-          :format="'dd/MM/yyyy HH:mm'"
-          class="datepicker" 
-          @click="disableAuto('from')"></Datepicker>
+        <DatePicker v-model="from" mode="dateTime" is24hr>
+          <template #default="{ inputValue, inputEvents }">
+            <input
+              class="bg-white border px-2 py-1 rounded"
+              :value="inputValue"
+              v-on="inputEvents"
+            />
+          </template>
+        </DatePicker>
       </div>
       <div class="to">
         <label for="to">To:</label>
-        <Datepicker
-          ref="to" 
-          v-model="to" 
-          :format="'dd/MM/yyyy HH:mm'"
-          class="datepicker" 
-          @click="disableAuto('to')"></Datepicker>
+        <DatePicker v-model="to" mode="dateTime" is24hr>
+          <template #default="{ inputValue, inputEvents }">
+            <input
+              class="bg-white border px-2 py-1 rounded"
+              :value="inputValue"
+              v-on="inputEvents"
+            />
+          </template>
+        </DatePicker>
       </div>
     </div>
     <button type="button" @click="valid ? createTimer() : null">Create Timer</button>
@@ -27,27 +33,22 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useStore } from '@/store'
-import Datepicker from 'vue3-date-time-picker';
-import 'vue3-date-time-picker/dist/main.css'
+import { DatePicker } from 'v-calendar'
+import 'v-calendar/dist/style.css';
 
 export default defineComponent({
   components: {
-    Datepicker
+    DatePicker
   },
   data() { return {
     store: useStore(),
     from: new Date(),
-    to: new Date(),
-    autoFrom: true,
-    autoTo: true
+    to: new Date()
   }},
   computed: {
     valid(): boolean {
       return this.from < this.to
     }
-  },
-  mounted() {
-    setInterval(this.updateCurrentTime, 1000/30)
   },
   methods: {
     createTimer() {
@@ -60,27 +61,6 @@ export default defineComponent({
           groupUUID: this.store.state.activeTimerGroupUUID
         }
       )
-    },
-    updateCurrentTime() {
-      const newTime = Date.now()
-      if (this.autoFrom) {
-        this.from = new Date(newTime)
-      }
-      if (this.autoTo || this.autoFrom < this.autoTo) {
-        const to = new Date(newTime)
-        to.setDate(to.getDate() + 1)
-        this.to = to
-      }
-    },
-    disableAuto(field: 'from' | 'to') {
-      switch (field) {
-        case 'from':
-          this.autoFrom = false
-          break
-        case 'to':
-          this.autoTo = false
-          break
-      }
     },
   }
 })
@@ -119,18 +99,6 @@ label {
   text-align: right;
 }
 button {
-  margin: $spacer*2 $spacer*4;
-  border: 1px solid lightgrey;
-  border-radius: 4px;
-  text-align: center;
-  white-space: pre;
   padding: $spacer;
-  &:hover, &:focus {
-    border-color: grey;
-  }
-}
-.datepicker {
-  max-width: 300px;
-  margin: $spacer*0.5;
 }
 </style>
