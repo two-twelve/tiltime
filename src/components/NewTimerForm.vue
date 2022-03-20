@@ -11,8 +11,8 @@
           <input
             class="time-range-input"
             readonly
-            :value="inputValue.start + ' - ' + inputValue.end"
-            :size="inputValue.start.length + inputValue.end.length + 3"
+            :value="inputValue.start.split(' ')[0] + ' - ' + inputValue.end.split(' ')[0]"
+            :size="inputValue.start.split(' ')[0].length + inputValue.end.split(' ')[0].length + 3"
             v-on="inputEvents.start"
           />
         </template>
@@ -87,7 +87,6 @@ export default defineComponent({
   max-width: 100%;
   padding: $spacer;
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
 }
@@ -104,7 +103,7 @@ export default defineComponent({
   font-size: $font-size * 1.2;
 }
 .time-range-input {
-  max-width: 90%;
+  max-width: 100%;
   text-align: center;
   background: $green;
   border-radius: $spacer*3;
