@@ -11,7 +11,6 @@ import { defineComponent } from 'vue'
 import TimersTabs from '@/components/TimersTabs.vue'
 import TimersList from '@/components/TimersList.vue'
 import NewTimerForm from '@/components/NewTimerForm.vue'
-import 'vue3-date-time-picker/dist/main.css'
 
 export default defineComponent({
   components: {
