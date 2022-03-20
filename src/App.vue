@@ -30,7 +30,8 @@ export default defineComponent({
         const target = this.$refs.title as HTMLElement
         const titleHighlight = annotate(target, { 
           type: 'highlight',
-          color: '#d0e699'
+          color: '#d0e699',
+          animate: false
         })
         titleHighlight.show()
       }.bind(this)
