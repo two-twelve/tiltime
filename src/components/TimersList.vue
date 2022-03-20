@@ -54,7 +54,7 @@ ul {
 .delete-group-button {
   margin: $spacer * 2;
   padding: $spacer $spacer*2;
-  background: $pink;
+  background: $colour-negative;
   border-radius: $spacer * 4;
   flex-basis: 100%;
   font-size: $font-size * 1.2;

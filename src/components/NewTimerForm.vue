@@ -80,7 +80,7 @@ export default defineComponent({
   width: 100%;
   display:flex;
   justify-content: center;
-  background: $white;
+  background: $background;
 }
 .new-timer-form {
   width: $app-width;
@@ -105,11 +105,11 @@ export default defineComponent({
 .time-range-input {
   max-width: 100%;
   text-align: center;
-  background: $green;
+  background: $colour-positive;
   border-radius: $spacer*3;
 }
 .create-timer-button {
-  background: $green;
+  background: $colour-positive;
   border-radius: $spacer*3;
 }
 </style>

@@ -4,12 +4,12 @@ $font-weight-normal: 600;
 $font-weight-bold: 900;
 $font-size: 14px;
 
-$green: hsl(77, 60%, 75%);
-$blue: hsl(205, 60%, 85%);
-$pink: hsl(334, 60%, 80%);
-$white: #ffffff;
-$dark-red: #dc143c;
-$dark-green: #3df53d;
+$colour-positive: hsl(77, 60%, 75%);
+$colour-neutral: hsl(205, 60%, 85%);
+$colour-negative: hsl(334, 60%, 80%);
+$background: #ffffff;
+$dark-negative: #dc143c;
+$dark-positive: #3df53d;
 
 $app-width: 800px;
 $spacer: 6px;

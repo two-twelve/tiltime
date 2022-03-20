@@ -158,7 +158,7 @@ export default defineComponent({
   margin: $spacer * 2;
   padding: $spacer * 3;
   max-width: 400px;
-  background: $white;
+  background: $background;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -221,14 +221,14 @@ export default defineComponent({
   height: 5px;
 }
 .elapsed-bar {
-  background: $dark-green;
+  background: $dark-positive;
   border-radius: 3px 0px 0px 3px;
 }
   .elapsed-bar[style="flex-basis: 100%;"] {
     border-radius: 3px;    
   }
 .remaining-bar {
-  background: $dark-red;
+  background: $dark-negative;
   border-radius: 0px 3px 3px 0px;
   flex-grow:1;
 }

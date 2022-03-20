@@ -43,11 +43,11 @@ main {
   flex-direction: column;
   align-items: center;
   height: 100vh;
-  background: $blue;
+  background: $colour-neutral;
 }
 .header-container {
   width:100%;
-  background: $white;
+  background: $background;
   display: flex;
   justify-content: center;
 }
