@@ -1,53 +1,57 @@
 <template>
   <li class="timer-container">
-    <h1 class="timer-title">
-      <input
-        v-model="localTitle"
-        class="timer-title-input" 
-        maxlength="20" 
-        @keyup="updateTimerTitle"
-        @change="updateTimerTitle">
-      <font-awesome-icon 
-        class="delete-icon" 
-        :icon="['fas', 'times']" 
-        @click="deleteTimer" />
-    </h1>
+    <article ref="card" class="timer-card">
+      <h1 ref="title" class="timer-title">
+        <input
+          v-model="localTitle"
+          class="timer-title-input" 
+          maxlength="20" 
+          @keyup="updateTimerTitle"
+          @change="updateTimerTitle">
+        <font-awesome-icon 
+          class="delete-icon" 
+          :icon="['fas', 'times']" 
+          @click="deleteTimer" />
+      </h1>
 
-    <div class="start-end-container">
-      <p class="start-container">
-        <font-awesome-icon class="icon" icon="hourglass-start" />
-        {{ from.toLocaleString('en-GB', dateFormatOptions) }}
-      </p>
-      <p class="end-container">
-        <font-awesome-icon class="icon" icon="hourglass-end" />
-        {{ to.toLocaleString('en-GB', dateFormatOptions) }}
-      </p>
-    </div>
-
-    <div class="countdown-container">
-      <span class="countdown">{{ remainingTime }}</span>
-    </div>
-
-    <div class="progress-bar-container">
-      <span class="progress-indicator-container">
-            <div
-              class="progress-indicator"
-              :style="'flex-basis:'+(100-percentageElapsed)+'%'">
-              {{ percentageElapsed }}% elapsed
-            </div>
-      </span>
-      <div class="progress-bar">
-        <span class="elapsed-bar" :style="'flex-basis:'+percentageElapsed+'%'">
-        </span>
-        <span class="remaining-bar"></span>
+      <div class="start-end-container">
+        <p class="start-container">
+          <font-awesome-icon class="icon" icon="hourglass-start" />
+          {{ from.toLocaleString('en-GB', dateFormatOptions) }}
+        </p>
+        <p class="end-container">
+          <font-awesome-icon class="icon" icon="hourglass-end" />
+          {{ to.toLocaleString('en-GB', dateFormatOptions) }}
+        </p>
       </div>
-    </div>
+
+      <div class="countdown-container">
+        <span class="countdown">{{ remainingTime }}</span>
+      </div>
+
+      <div class="progress-bar-container">
+        <span class="progress-indicator-container">
+              <div
+                class="progress-indicator"
+                :style="'flex-basis:'+(100-percentageElapsed)+'%'">
+                {{ percentageElapsed }}% elapsed
+              </div>
+        </span>
+        <div class="progress-bar">
+          <span class="elapsed-bar" :style="'flex-basis:'+percentageElapsed+'%'">
+          </span>
+          <span class="remaining-bar"></span>
+        </div>
+      </div>
+    </article>
   </li>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useStore } from '@/store'
+import { annotate } from 'rough-notation';
+import { deepEqual } from 'assert';
 
 export default defineComponent({
   props: {
@@ -67,7 +71,9 @@ export default defineComponent({
         minute: 'numeric' as 'numeric' | '2-digit'
       },
       store: useStore(),
-      localTitle: this.title
+      localTitle: this.title,
+      crossOutAnnotation: undefined as any,
+      crossedOutOnMount: false,
     }
   },
   computed: {
@@ -100,10 +106,28 @@ export default defineComponent({
   },
   mounted() {
     setInterval(this.updateCurrentTime, 1000/30)
+    if (new Date() > this.to) {
+      this.crossedOutOnMount = true
+      this.crossOutTimer()
+    }
+    this.$watch(
+      ()=>this.store.state.user.timerGroups.filter(
+        timerGroup => timerGroup.uuid === this.store.state.activeTimerGroupUUID
+      )[0].timers.length,
+      () => {
+        if (this.crossOutAnnotation) {
+          this.crossOutAnnotation.show
+        }
+      },
+      { deep: true }
+    )
   },
   methods: {
     updateCurrentTime() {
       this.currentTime = Date.now()
+      if (!this.crossOutAnnotation && new Date() > this.to) {
+        this.crossOutTimer()
+      }
     },
     humanizeDuration(milliseconds: number): string {
       if (Math.ceil(milliseconds / 1000) <= 0) {
@@ -148,6 +172,19 @@ export default defineComponent({
           newTitle: this.localTitle
         }
       )
+    },
+    crossOutTimer() {
+      const target = this.$refs.card as HTMLElement
+      this.crossOutAnnotation = annotate(
+        target, 
+        {
+          type: 'crossed-off',
+          color: 'rgba(220, 20, 60, 0.15)',
+          strokeWidth: 20,
+          animate: !this.crossedOutOnMount
+        }
+      )
+      this.crossOutAnnotation.show()
     }
   },
 })
@@ -156,6 +193,9 @@ export default defineComponent({
 <style lang="scss" scoped>
 .timer-container {
   margin: $spacer * 2;
+  position: relative;
+}
+.timer-card {
   padding: $spacer * 3;
   max-width: 400px;
   background: $background;
@@ -164,7 +204,6 @@ export default defineComponent({
   flex-wrap: wrap;
   border-radius: $spacer * 5;
 }
-
 .timer-title, .progress-bar-container {
   flex-basis: 100%;
 }
@@ -190,7 +229,6 @@ export default defineComponent({
   padding: $spacer;
   font-size: $font-size * 1.4;
 }
-
 .start-container, .end-container {
   display: flex;
   align-items: center;
