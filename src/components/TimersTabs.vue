@@ -90,7 +90,7 @@ nav {
   justify-content: center;
   width: 100%;
   background: $white;
-  padding: 0 $spacer $spacer $spacer;
+  padding: 0 $spacer;
   margin-bottom: $spacer;
   font-size: $font-size * 1.2;
 }
@@ -100,6 +100,7 @@ ol {
   display: flex;
   flex-direction: row;
   overflow-x: auto;
+  overflow-y: hidden;
 }
 li {
   margin: $spacer*2 $spacer;
