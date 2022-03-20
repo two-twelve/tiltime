@@ -79,13 +79,19 @@ export const store = createStore<State>({
         }
       }
     },
-    createTimerGroup(state: State, { groupTitle }: { groupTitle: string }): void {
+    async createTimerGroup(state: State, { groupTitle }: { groupTitle: string }): Promise<void> {
       const newTimerGroup: TimerGroup = {
         uuid: uuidv4(),
         title: groupTitle,
         timers: []
       }
-      state.user.timerGroups.push(newTimerGroup)
+      await state.user.timerGroups.push(newTimerGroup)
+      store.commit(
+        'setActiveTimerGroup',
+        {
+          timerGroupUUID: newTimerGroup.uuid
+        }
+      )
     },
     updateTimerGroupTitle(state: State, { targetUUID, newTitle } : { targetUUID: string, targetTitle: string, newTitle: string }): void {
       for (let i = 0; i < state.user.timerGroups.length; i++) {
