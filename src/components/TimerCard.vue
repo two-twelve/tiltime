@@ -174,9 +174,10 @@ h1, .progress-bar-container {
 
 h1 {
   display:flex;
+  justify-content: space-between;
 }
 input {
-  flex-grow: 1;
+  width: 90%;
   text-align: left;
   font-size: inherit;
   padding: $spacer $spacer;
