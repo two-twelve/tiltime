@@ -4,7 +4,6 @@
       <li 
           v-for="timerGroup of store.state.user.timerGroups" 
           :key="timerGroup.uuid"
-          :ref="timerGroup.uuid"
           :class="timerGroup.uuid == store.state.activeTimerGroupUUID ? 'selected' : ''"
           @click="(e) => { setActiveTimerGroup(e, timerGroup.uuid) }">
         <input
@@ -13,6 +12,7 @@
           :value="timerGroup.title"
           :size="timerGroup.title.length + 1"
           @change="updateTimerGroupTitle">
+        <span :ref="timerGroup.uuid" class="underline"></span>
       </li>
       <li>
         <font-awesome-icon
@@ -105,9 +105,16 @@ li {
   margin: $spacer*2 $spacer;
   display: flex;
   align-items: center;
+  position: relative;
   input {
     text-align: center;
     font-weight: $font-weight-bold;
   }
+}
+.underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 }
 </style>
