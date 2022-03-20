@@ -33,7 +33,7 @@ export const store = createStore<State>({
       return []
     },
     activeGroupDeletable(state: State): boolean {
-      return !(state.activeTimerGroupUUID === 'Home') && store.getters.activeTimers.length == 0
+      return state.user.timerGroups.length > 1 && store.getters.activeTimers.length == 0
     }
   },
   mutations: {
