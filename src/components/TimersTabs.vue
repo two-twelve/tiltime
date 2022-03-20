@@ -5,12 +5,16 @@
           v-for="timerGroup of store.state.user.timerGroups" 
           :key="timerGroup.uuid"
           :class="timerGroup.uuid == store.state.activeTimerGroupUUID ? 'selected' : ''"
-          @click="setActiveTimerGroup(timerGroup.uuid)">
-        <input :value="timerGroup.title" :size="timerGroup.title.length + 1" @change="updateTimerGroupTitle">
+          @click="(e) => { setActiveTimerGroup(e, timerGroup.uuid) }">
+        <input
+          :readonly="!(timerGroup.uuid === store.state.activeTimerGroupUUID)"
+          :value="timerGroup.title"
+          :size="timerGroup.title.length + 1"
+          @change="updateTimerGroupTitle">
       </li>
       <li>
-        <font-awesome-icon 
-          class="delete-icon" 
+        <font-awesome-icon
+          class="delete-icon"
           :icon="['fas', 'plus']"
           @click="createNewTimerGroup" />
       </li>
@@ -27,13 +31,17 @@ export default defineComponent({
     store: useStore()
   }},
   methods: {
-    setActiveTimerGroup(uuid: string) {
+    setActiveTimerGroup(event: MouseEvent, uuid: string) {
+      const oldActiveTimerGroupUUID = this.store.state.activeTimerGroupUUID
       this.store.commit(
         'setActiveTimerGroup',
         {
           timerGroupUUID: uuid
         }
       )
+      if (oldActiveTimerGroupUUID !== this.store.state.activeTimerGroupUUID && event.target) {
+        event.target.blur()
+      }
     },
     createNewTimerGroup() {
       this.store.commit(
