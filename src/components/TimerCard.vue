@@ -172,12 +172,17 @@ h1, .progress-bar-container {
   justify-content: center;
 }
 
+h1 {
+  display:flex;
+}
 input {
-  font-size: inherit
+  flex-grow: 1;
+  text-align: left;
+  font-size: inherit;
+  padding: $spacer $spacer;
 }
 .delete-icon {
-  float: right;
-  padding-top: $spacer;
+  padding: $spacer;
 }
 
 .start-container, .end-container {
@@ -206,6 +211,7 @@ input {
 .progress-indicator {
   font-size: 80%;
   white-space: nowrap;
+  text-align: left;
 }
 .elapsed-bar, .remaining-bar {
   height: 5px;
