@@ -8,6 +8,7 @@ $colour-positive: hsl(77, 60%, 75%);
 $colour-neutral: hsl(205, 60%, 85%);
 $colour-negative: hsl(334, 60%, 80%);
 $background: #ffffff;
+$foreground: #000000;
 $dark-negative: #dc143c;
 $dark-positive: #3df53d;
 
@@ -17,6 +18,7 @@ $spacer: 6px;
 * {
   font-family: 'Vollkorn', serif;
   font-weight: $font-weight-normal;
+  color: $foreground;
 }
 
 html, body {
