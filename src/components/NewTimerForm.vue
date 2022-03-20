@@ -43,7 +43,11 @@ export default defineComponent({
   data() { return {
     store: useStore(),
     from: new Date(),
-    to: new Date()
+    to: (() => { 
+      const to = new Date()
+      to.setHours(new Date().getHours() + 1) 
+      return to
+    })()
   }},
   computed: {
     valid(): boolean {
