@@ -3,6 +3,7 @@
     <div class="header-container">
       <header class="header">
         <h1 ref="title" class="title">TilTi.me</h1>
+        <font-awesome-icon class="user-icon" :icon="['fas', 'user-circle']" />
         <TimersTabs />
       </header>
     </div>
@@ -55,17 +56,24 @@ main {
   justify-content: center;
 }
 .header {
+  padding: $spacer * 2;
   width: $app-width;
   max-width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: space-between;
 }
 .title {
   align-self: flex-start;
-  margin: $spacer*2 $spacer*2 0 $spacer * 2;
+  margin: 0 $spacer*2 $spacer $spacer*2;
   font-size: $font-size * 2.5;
   font-weight: $font-weight-bold;
+}
+.user-icon {
+  padding: $spacer*2;
+  font-size: $font-size * 2.5;
 }
 .timers-tab {
   flex-grow: 1;
