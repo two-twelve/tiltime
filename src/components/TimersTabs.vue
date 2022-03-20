@@ -4,9 +4,11 @@
       <li 
           v-for="timerGroup of store.state.user.timerGroups" 
           :key="timerGroup.uuid"
+          :ref="timerGroup.uuid"
           :class="timerGroup.uuid == store.state.activeTimerGroupUUID ? 'selected' : ''"
           @click="(e) => { setActiveTimerGroup(e, timerGroup.uuid) }">
         <input
+          maxlength="20"
           :readonly="!(timerGroup.uuid === store.state.activeTimerGroupUUID)"
           :value="timerGroup.title"
           :size="timerGroup.title.length + 1"
@@ -25,12 +27,29 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useStore } from '@/store'
+import { annotate } from 'rough-notation';
 
 export default defineComponent({
   data() { return {
-    store: useStore()
+    store: useStore(),
+    currentUnderline: undefined as any
   }},
+  mounted() {
+    this.$watch(
+      ()=>this.store.state.activeTimerGroupUUID, 
+      ()=>{this.createUnderline()}
+    )
+    setTimeout(this.createUnderline, 500)
+  },
   methods: {
+    createUnderline() {
+      if (this.currentUnderline) {
+        this.currentUnderline.remove()
+      }
+      const target = (this.$refs[this.store.state.activeTimerGroupUUID as string] as Array<HTMLElement>)[0]
+      this.currentUnderline = annotate(target, { type: 'underline' })
+      this.currentUnderline.show()
+    },
     setActiveTimerGroup(event: MouseEvent, uuid: string) {
       const oldActiveTimerGroupUUID = this.store.state.activeTimerGroupUUID
       this.store.commit(
@@ -41,6 +60,7 @@ export default defineComponent({
       )
       if (oldActiveTimerGroupUUID !== this.store.state.activeTimerGroupUUID && event.target) {
         event.target.blur()
+        this.createUnderline(event.target as HTMLElement)
       }
     },
     createNewTimerGroup() {
@@ -88,9 +108,6 @@ li {
   input {
     text-align: center;
     font-weight: $font-weight-bold;
-  }
-  &.selected>input {
-    text-decoration: underline;
   }
 }
 </style>
