@@ -8,7 +8,10 @@
       :to="timer.to"
       :uuid="timer.uuid"
     />
-    <li class="delete-group-button" v-if="store.state.activeTimerGroupUUID && store.getters.activeGroupDeletable" @click="deleteActiveTimerGroup">
+    <li 
+      v-if="store.state.activeTimerGroupUUID && store.getters.activeGroupDeletable"
+      class="delete-group-button"
+      @click="deleteActiveTimerGroup">
       Delete Group
     </li>
   </ul>
