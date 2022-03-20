@@ -79,6 +79,7 @@ li {
   align-items: center;
   input {
     text-align: center;
+    font-weight: $font-weight-bold;
   }
   &.selected>input {
     text-decoration: underline;
