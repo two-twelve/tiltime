@@ -14,17 +14,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import TimersTabs from '@/components/TimersTabs.vue'
-import TimersList from '@/components/TimersList.vue'
-import NewTimerForm from '@/components/NewTimerForm.vue'
 import { annotate } from 'rough-notation';
 
 export default defineComponent({
-  components: {
-    TimersTabs,
-    TimersList,
-    NewTimerForm,
-  },
   mounted() {
     const target = this.$refs.title as HTMLElement
     const titleHighlight = annotate(target, { 
