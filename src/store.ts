@@ -41,13 +41,13 @@ export const store = createStore<State>({
     }
   },
   getters: {
-    activeTimerGroup(state: State): Array<Timer> {
+    activeTimerGroup(state: State): TimerGroup | undefined {
       for (const timerGroup of state.user.timerGroups) {
         if (timerGroup.uuid === state.activeTimerGroupUUID) {
           return timerGroup
         }
       }
-      return []
+      return undefined
     },
     activeGroupDeletable(state: State): boolean {
       return state.user.timerGroups.length > 1 && store.getters.activeTimerGroup.timers.length == 0
