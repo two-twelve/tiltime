@@ -51,7 +51,6 @@
 import { defineComponent } from 'vue'
 import { useStore } from '@/store'
 import { annotate } from 'rough-notation';
-import { deepEqual } from 'assert';
 
 export default defineComponent({
   props: {
