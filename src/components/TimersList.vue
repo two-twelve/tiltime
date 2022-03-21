@@ -16,9 +16,9 @@
         Get started by making yourself a timer! You could:
       </p>
       <ul>
-        <li>Keep track of your deadlines. 📚</li>
-        <li>See how long it is until your next birthday. 🎂</li>
-        <li>Check up on your next holiday. 🏖️</li>
+        <li>Keep track of your deadlines 📚</li>
+        <li>See how long it is until your next birthday 🎂</li>
+        <li>Count down to your next holiday 🏖️</li>
       </ul>
       <p>
         If you run into trouble, make an issue on <a href="https://github.com/TheTeaCat/tiltime" target="_blank">GitHub</a>. 
