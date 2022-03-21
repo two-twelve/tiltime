@@ -4,11 +4,9 @@
       <header class="header">
         <h1 ref="title" class="title">TilTi.me</h1>
         <font-awesome-icon class="user-icon" :icon="['fas', 'user-circle']" />
-        <TimersTabs />
       </header>
     </div>
-    <TimersList class="timers-tab" />
-    <NewTimerForm />
+    <router-view />
   </main>
 </template>
 
@@ -52,7 +50,7 @@ main {
   justify-content: center;
 }
 .header {
-  padding: $spacer * 2;
+  padding: $spacer*2 $spacer*2 0 $spacer*2;
   width: $app-width;
   max-width: 100%;
   display: flex;

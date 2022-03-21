@@ -90,11 +90,11 @@ nav {
   justify-content: center;
   width: 100%;
   background: $background;
-  padding: 0 $spacer;
   margin-bottom: $spacer;
   font-size: $font-size * 1.2;
 }
 ol {
+  padding: 0 $spacer*2 $spacer*2 $spacer*2;
   width:$app-width;
   max-width: 100%;
   display: flex;
