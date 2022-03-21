@@ -178,8 +178,7 @@ export default defineComponent({
         target, 
         {
           type: 'crossed-off',
-          color: 'rgba(220, 20, 60, 0.15)',
-          strokeWidth: 20,
+          color: '#000000',
           animate: !this.crossedOutOnMount
         }
       )
