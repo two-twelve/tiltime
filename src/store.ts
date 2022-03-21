@@ -41,16 +41,16 @@ export const store = createStore<State>({
     }
   },
   getters: {
-    activeTimers(state: State): Array<Timer> {
+    activeTimerGroup(state: State): Array<Timer> {
       for (const timerGroup of state.user.timerGroups) {
         if (timerGroup.uuid === state.activeTimerGroupUUID) {
-          return timerGroup.timers
+          return timerGroup
         }
       }
       return []
     },
     activeGroupDeletable(state: State): boolean {
-      return state.user.timerGroups.length > 1 && store.getters.activeTimers.length == 0
+      return state.user.timerGroups.length > 1 && store.getters.activeTimerGroup.timers.length == 0
     }
   },
   mutations: {
