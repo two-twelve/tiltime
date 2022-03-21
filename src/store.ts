@@ -54,6 +54,21 @@ export const store = createStore<State>({
     }
   },
   mutations: {
+		initialiseStore(state) {
+      const localStore = localStorage.getItem('store');
+			if (localStore) {
+        const localState = JSON.parse(localStore)
+        for (const timerGroup of localState.user.timerGroups) {
+          for (const timer of timerGroup.timers) {
+            timer.from = new Date(timer.from)
+            timer.to = new Date(timer.to)
+          }
+        }
+				this.replaceState(
+					Object.assign(state, localState)
+				);
+			}
+		},    
     createTimer(state: State, { timerTitle, from, to, groupUUID }: { timerTitle: string, from: Date, to: Date, groupUUID: string | undefined}): void {
       const newTimer: Timer = {
         uuid: uuidv4(),
@@ -149,6 +164,10 @@ export const store = createStore<State>({
     }
   },
 })
+
+store.subscribe((_, state) => {
+	localStorage.setItem('store', JSON.stringify(state));
+});
 
 export function useStore() {
   return baseUseStore(key)
