@@ -61,7 +61,8 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .timers-list {
-  max-width: 100%;
+  width: 100%;
+  background: $colour-neutral;
   display: flex;
   flex-direction: row;
   justify-content: center;

@@ -35,7 +35,7 @@ main {
   flex-direction: column;
   align-items: center;
   height: 100vh;
-  background: $colour-neutral;
+  background: $background;
 }
 .header-container {
   width:100%;
