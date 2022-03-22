@@ -1,6 +1,6 @@
 <template>
   <div class="title-container">
-    <router-link class="home-link" to="Home">
+    <router-link class="home-link" to="home">
       <font-awesome-icon class="icon" :icon="['fas','arrow-alt-circle-left']" />
       Back To My Timers
     </router-link>

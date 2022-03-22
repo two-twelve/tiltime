@@ -1,21 +1,21 @@
 import { createWebHistory, createRouter } from "vue-router";
 import HomeView from "@/views/HomeView.vue";
-import SettingsView from "@/views/SettingsView.vue";
+import SettingsView from "@/views/settingsView.vue";
 
 const routes = [
   {
     path: "/",
-    name: "Home",
+    name: "home",
     component: HomeView,
   },
   {
     path: "/settings",
-    name: "Settings",
+    name: "settings",
     component: SettingsView,
   },
   {
     path: "/:catchAll(.*)",
-    redirect: { name: "Home" }
+    redirect: { name: "home" }
   }
 ];
 
