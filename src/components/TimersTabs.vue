@@ -89,7 +89,6 @@ nav {
   display: flex;
   justify-content: center;
   width: 100%;
-  background: $background;
   margin-bottom: $spacer;
   font-size: $font-size * 1.2;
 }

@@ -80,7 +80,6 @@ export default defineComponent({
   width: 100%;
   display:flex;
   justify-content: center;
-  background: $background;
 }
 .new-timer-form {
   width: $app-width;

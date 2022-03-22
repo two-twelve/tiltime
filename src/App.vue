@@ -39,7 +39,6 @@ main {
 }
 .header-container {
   width:100%;
-  background: $background;
   display: flex;
   justify-content: center;
 }
