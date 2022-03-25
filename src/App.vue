@@ -3,9 +3,7 @@
     <div class="header-container">
       <header class="header">
         <h1 ref="title" class="title">TilTi.me</h1>
-        <router-link to="settings">
-          <font-awesome-icon class="user-icon" :icon="['fas', 'user-circle']" />
-        </router-link>
+        <font-awesome-icon class="user-icon" :icon="['fas', 'user-circle']" />
       </header>
     </div>
     <router-view />

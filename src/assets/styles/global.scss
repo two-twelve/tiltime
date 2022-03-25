@@ -25,3 +25,8 @@ $spacer: 6px;
 html, body {
   min-height: 100vh;
 }
+
+a {
+  color: $foreground-alt;
+  text-decoration: underline;
+}
