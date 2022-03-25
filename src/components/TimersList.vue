@@ -109,5 +109,8 @@ export default defineComponent({
       margin-left: $spacer*4;
     }
   }
+  a {
+    text-decoration: underline;
+  }
 }
 </style>
