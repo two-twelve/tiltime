@@ -7,8 +7,10 @@
   </nav>
   <article class="settings">
     <h1 class="settings-title">
-      Settings
-      <font-awesome-icon class="icon" :icon="['fas','cogs']" />
+      <span ref="titleBrackets" class="title-brackets">
+        Settings
+        <font-awesome-icon class="icon" :icon="['fas','cogs']" />
+      </span>
     </h1>
     <section class="settings-group">
       <h2 class="section-title">Push Notifications</h2>
@@ -66,8 +68,18 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { annotate } from 'rough-notation';
 
 export default defineComponent({
+  mounted() {
+    annotate(
+      this.$refs.titleBrackets as HTMLElement,
+      {
+        type: 'bracket',
+        brackets: ['left', 'right']
+      }
+    ).show()
+  }
 })
 </script>
 
@@ -95,8 +107,11 @@ nav {
     justify-content: center;
     font-size: $font-size * 2;
     font-weight: $font-weight-bold;
+    .title-brackets {
+      padding: 0 $spacer*2; 
+    }
     .icon {
-      margin-left: $spacer*1.5;
+      margin-left: $spacer;
       margin-bottom: $spacer;
     }
   }
