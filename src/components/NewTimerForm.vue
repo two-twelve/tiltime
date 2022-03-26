@@ -110,5 +110,6 @@ export default defineComponent({
 .create-timer-button {
   background: $colour-positive;
   border-radius: $spacer*3;
+  text-align: center;
 }
 </style>
