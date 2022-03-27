@@ -32,7 +32,7 @@
       <h2 class="section-title">About</h2>
       <p>
         This app is open source! You can find it on 
-        <a class="github-link" href="">
+        <a class="github-link" href="https://github.com/TheTeaCat/tiltime" target="_blank">
           GitHub<font-awesome-icon class="icon" :icon="['fab','github']" />
         </a>
       </p>
