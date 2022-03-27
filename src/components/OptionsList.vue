@@ -4,15 +4,15 @@
       v-for="[optionIndex, option] of options.entries()"
       :key="optionIndex"
       class="option"
+      @click="
+        () => {
+          handleClick(optionIndex)
+        }
+      "
     >
       <font-awesome-icon
         class="icon"
         :icon="option.selected ? checkedIcon : ['far', 'circle']"
-        @click="
-          () => {
-            handleClick(optionIndex)
-          }
-        "
       />
       {{ option.name }}
     </li>
