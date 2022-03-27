@@ -18,7 +18,7 @@
         class="options-list"
         :mode="'checkbox'"
         :options="notificationOptions"
-        @change="(newNotificationOptions)=>{ notificationOptions = newNotificationOptions }" />
+        @change="updateNotifications" />
     </section>
     <section class="settings-group colour-themes">
       <h2 class="section-title">Colour Themes</h2>
@@ -26,7 +26,7 @@
         class="options-list"
         :mode="'radio'"
         :options="colourThemeOptions"
-        @change="(newColourThemeOptions)=>{ colourThemeOptions = newColourThemeOptions }" />
+        @change="setColourTheme" />
     </section>
     <section class="settings-group about">
       <h2 class="section-title">About</h2>
@@ -54,6 +54,8 @@
 import { defineComponent } from 'vue'
 import { annotate } from 'rough-notation';
 import { useStore } from '@/store'
+import NotificationType from '@/types/NotificationType'
+import ColourTheme from '@/types/ColourTheme'
 import OptionsList from '@/components/OptionsList.vue'
 
 export default defineComponent({
@@ -62,18 +64,24 @@ export default defineComponent({
   },
   data() { return {
     store: useStore(),
-    notificationOptions: [
-      { name: 'When a timer ends', value: 'end', selected: true },
-      { name: 'When a timer has one hour remaining', value: '1h-before', selected: true },
-      { name: 'The day before a timer ends', value: 'day-before', selected: false },
-    ],
-    colourThemeOptions: [
-      { name: 'Light Theme', value: 'light', selected: false },
-      { name: 'Dark Theme', value: 'dark', selected: false },
-      { name: 'System Theme', value: 'system', selected: true },
-    ],
     deleteUserDataConfirmState: false
   }},
+  computed: {
+    notificationOptions(): Array<{ name: string, value: any, selected: boolean }> {
+      return [
+        { name: 'When a timer ends', value: NotificationType.end, selected: this.store.state.user.notifications.includes(NotificationType.end) },
+        { name: 'When a timer has one hour remaining', value: NotificationType.hourBefore, selected: this.store.state.user.notifications.includes(NotificationType.hourBefore) },
+        { name: 'The day before a timer ends', value: NotificationType.dayBefore, selected: this.store.state.user.notifications.includes(NotificationType.dayBefore) },
+      ]
+    },
+    colourThemeOptions(): Array<{ name: string, value: any, selected: boolean }> {
+      return [
+        { name: 'Light Theme', value: ColourTheme.light, selected: this.store.state.user.colourTheme === ColourTheme.light },
+        { name: 'Dark Theme', value: ColourTheme.dark, selected: this.store.state.user.colourTheme === ColourTheme.dark },
+        { name: 'System Theme', value: ColourTheme.system, selected: this.store.state.user.colourTheme === ColourTheme.system },
+      ]
+    }
+  },
   mounted() {
     annotate(
       this.$refs.titleBrackets as HTMLElement,
@@ -89,6 +97,22 @@ export default defineComponent({
         this.store.commit('deleteUserData')
       }
       this.deleteUserDataConfirmState = !this.deleteUserDataConfirmState
+    },
+    updateNotifications(newNotificationOptions: Array<{ name: string, value: any, selected: boolean }>) {
+      this.store.commit(
+        'updateNotifications', 
+        { 
+          newNotifications: newNotificationOptions.filter(option => option.selected).map(option => option.value)
+        }
+      )
+    },
+    setColourTheme(newColourThemeOptions: Array<{ name: string, value: any, selected: boolean}>) {
+      this.store.commit(
+        'setColourTheme',
+        {
+          newColourTheme: newColourThemeOptions.filter(option => option.selected)[0].value
+        }
+      )
     }
   }
 })
