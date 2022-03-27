@@ -17,6 +17,11 @@
       class="welcome-card"
     >
       <h1 class="welcome-title">🎉 Welcome to TilTi.me 🥳</h1>
+      <p class="version-warning">
+        <font-awesome-icon class="icon" :icon="['fas','exclamation-triangle']" />
+        This is an alpha build. Tilti.me is still in early development and your data may be lost.
+        <font-awesome-icon class="icon" :icon="['fas','exclamation-triangle']" />
+      </p>
       <p>Get started by making yourself a timer! You could:</p>
       <ul>
         <li>Keep track of your deadlines 📚</li>
@@ -106,6 +111,13 @@ export default defineComponent({
     font-size: $font-size * 1.8;
     font-weight: $font-weight-bold;
     text-align: center;
+  }
+  .version-warning {
+    color: $dark-negative;
+    text-align: center;
+    .icon {
+      color: $dark-negative;
+    }
   }
   p,
   ul {
