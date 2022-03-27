@@ -16,7 +16,7 @@ import { defineComponent, PropType } from 'vue'
 export default defineComponent({
   props: {
     options: {
-      type: Array as PropType<{ name: string, value: string, selected: boolean }[]>,
+      type: Array as PropType<{ name: string, value: any, selected: boolean }[]>,
       required: true
     },
     mode: {
