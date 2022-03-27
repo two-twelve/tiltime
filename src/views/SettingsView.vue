@@ -197,7 +197,7 @@ nav {
     .github-link {
       text-decoration: underline;
       .icon {
-        margin-left: $spacer/2
+        margin-left: $spacer * 0.5
       }
     }
   }
