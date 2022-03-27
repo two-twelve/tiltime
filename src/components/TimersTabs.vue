@@ -59,8 +59,8 @@ export default defineComponent({
         }
       )
       if (oldActiveTimerGroupUUID !== this.store.state.activeTimerGroupUUID && event.target) {
-        event.target.blur()
-        this.createUnderline(event.target as HTMLElement)
+        (event.target as HTMLElement).blur()
+        this.createUnderline()
       }
     },
     createNewTimerGroup() {
@@ -71,12 +71,15 @@ export default defineComponent({
         }
       )
     },
-    updateTimerGroupTitle(event: { target: { value: string }}) {
+    updateTimerGroupTitle(event: Event) {
+      if (!(event.target  && (event.target as HTMLTextAreaElement).value)) {
+        return;
+      }
       this.store.commit(
         'updateTimerGroupTitle', 
         {
           targetUUID: this.store.state.activeTimerGroupUUID,
-          newTitle: event.target.value
+          newTitle: (event.target as HTMLTextAreaElement).value
         }
       )
     }
