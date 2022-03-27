@@ -12,49 +12,30 @@
         <font-awesome-icon class="icon" :icon="['fas','cogs']" />
       </span>
     </h1>
-    <section class="settings-group">
+    <section class="settings-group push-notifications">
       <h2 class="section-title">Push Notifications</h2>
-      <p>Give me a push notification:</p>
-      <ul>
-        <li>
-          <font-awesome-icon class="checkbox" :icon="['fas','check-circle']" />
-          When a timer ends
-        </li>
-        <li>
-          <font-awesome-icon class="checkbox" :icon="['fas','check-circle']" />
-          When a timer has one hour remaining
-        </li>
-        <li>
-          <font-awesome-icon class="checkbox" :icon="['far','circle']" />
-          The day before a timer ends
-        </li>
-      </ul>
+      <options-list
+        class="options-list"
+        :mode="'checkbox'"
+        :options="notificationOptions"
+        @change="(newNotificationOptions)=>{ notificationOptions = newNotificationOptions }" />
     </section>
-    <section class="settings-group">
+    <section class="settings-group colour-themes">
       <h2 class="section-title">Colour Themes</h2>
-      <ul>
-        <li>
-          <font-awesome-icon class="checkbox" :icon="['far','circle']" />
-          Light Theme
-        </li>
-        <li>
-          <font-awesome-icon class="checkbox" :icon="['far','circle']" />
-          Dark Theme
-        </li>
-        <li>
-          <font-awesome-icon class="checkbox" :icon="['fas','dot-circle']" />
-          System Theme
-        </li>
-      </ul>
+      <options-list
+        class="options-list"
+        :mode="'radio'"
+        :options="colourThemeOptions"
+        @change="(newColourThemeOptions)=>{ colourThemeOptions = newColourThemeOptions }" />
     </section>
-    <section class="settings-group">
+    <section class="settings-group delete-data">
       <h2 class="section-title">Your Data</h2>
       <button class="delete-data-button button">
         <font-awesome-icon class="icon" :icon="['fas','exclamation-circle']" />
         Delete Your Data
       </button>
     </section>
-    <section class="about">
+    <section class="settings-group about">
       <h2 class="section-title">About</h2>
       <p>
         This app is open source! You can find it on 
@@ -69,8 +50,24 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { annotate } from 'rough-notation';
+import OptionsList from '@/components/OptionsList.vue'
 
 export default defineComponent({
+  components: {
+    OptionsList
+  },
+  data() { return {
+    notificationOptions: [
+      { name: 'When a timer ends', value: 'end', selected: true },
+      { name: 'When a timer has one hour remaining', value: '1h-before', selected: true },
+      { name: 'The day before a timer ends', value: 'day-before', selected: false },
+    ],
+    colourThemeOptions: [
+      { name: 'Light Theme', value: 'light', selected: false },
+      { name: 'Dark Theme', value: 'dark', selected: false },
+      { name: 'System Theme', value: 'system', selected: true },
+    ]
+  }},
   mounted() {
     annotate(
       this.$refs.titleBrackets as HTMLElement,
@@ -115,25 +112,20 @@ nav {
       margin-bottom: $spacer;
     }
   }
-  .settings-group, .about {
+  .settings-group {
     margin-bottom: $spacer*6;
     .section-title {
       margin-bottom: $spacer*3;
       font-size: $font-size * 1.4;
       font-weight: $font-weight-bold;
     }
-    p {
-      margin: $spacer;
-    }
-    ul {
+  }
+  .push-notifications, .colour-themes {
+    .options-list {
       margin: $spacer*2.5 $spacer;
-      li {
-        margin: $spacer $spacer*4;
-        .checkbox {
-          margin-right: $spacer * 1.5;
-        }
-      }
     }
+  }
+  .delete-data {
     .delete-data-button {
       margin: 0 $spacer;
       background: $dark-negative;
@@ -142,6 +134,11 @@ nav {
         margin-right: $spacer * 0.5;
         color: $background;
       }
+    }
+  }
+  .about {
+    p {
+      margin: $spacer;
     }
     .github-link {
       text-decoration: underline;
