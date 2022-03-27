@@ -170,6 +170,12 @@ export const store = createStore<State>({
       this.replaceState(
         Object.assign(state, getDefaultState())
       )
+    },
+    setColourTheme(state: State, { newColourTheme }: { newColourTheme: ColourTheme }): void {
+      state.user.colourTheme = newColourTheme
+    },
+    updateNotifications(state: State, { newNotifications }: { newNotifications: Array<NotificationType> }): void {
+      state.user.notifications = newNotifications
     }
   },
 })
