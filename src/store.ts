@@ -3,7 +3,7 @@ import { createStore, useStore as baseUseStore, Store } from 'vuex'
 import NotificationType from './types/NotificationType'
 import ColourTheme from './types/ColourTheme'
 import Timer from './types/Timer'
-import TimerGroup from './types/timerGroup'
+import TimerGroup from './types/TimerGroup'
 import User from './types/User'
 import { v4 as uuidv4 } from "uuid";
 
