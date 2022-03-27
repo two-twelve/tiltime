@@ -49,7 +49,7 @@
     </section>
     <section class="settings-group">
       <h2 class="section-title">Your Data</h2>
-      <button class="delete-data-button">
+      <button class="delete-data-button button">
         <font-awesome-icon class="icon" :icon="['fas','exclamation-circle']" />
         Delete Your Data
       </button>
@@ -136,10 +136,11 @@ nav {
     }
     .delete-data-button {
       margin: 0 $spacer;
-      color: $dark-negative;
+      background: $dark-negative;
+      color: $background;
       .icon {
         margin-right: $spacer * 0.5;
-        color: $dark-negative;     
+        color: $background;
       }
     }
     .github-link {

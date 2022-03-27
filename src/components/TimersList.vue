@@ -26,7 +26,7 @@
     </li>
     <li v-if="store.state.activeTimerGroupUUID && store.getters.activeGroupDeletable" class="delete-group-button-container">
       <button 
-        class="delete-group-button"
+        class="delete-group-button button"
         @click="deleteActiveTimerGroup">
         Delete This Group
       </button>
@@ -77,11 +77,8 @@ export default defineComponent({
 }
 .delete-group-button {
   margin: $spacer * 2;
-  padding: $spacer $spacer*2;
   background: $colour-negative;
-  border-radius: $spacer * 4;
   font-size: $font-size * 1.2;
-  text-align: center;
 }
 .welcome-card {
   margin: $spacer * 2;

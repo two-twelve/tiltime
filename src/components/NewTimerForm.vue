@@ -18,7 +18,7 @@
         </template>
       </DatePicker>
       <button 
-        class="create-timer-button"
+        class="create-timer-button button"
         type="button"
         @click="valid ? createTimer() : null">
         Create Timer
@@ -96,12 +96,11 @@ export default defineComponent({
   justify-content: center;
 }
 .time-range-input, .create-timer-button {
-  margin: $spacer;
-  padding: $spacer $spacer*2;
-  box-sizing: border-box;
   font-size: $font-size * 1.2;
 }
 .time-range-input {
+  margin: $spacer;
+  padding: $spacer $spacer*2;
   max-width: 100%;
   text-align: center;
   background: $colour-positive;
