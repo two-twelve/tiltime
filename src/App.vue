@@ -15,6 +15,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { annotate } from 'rough-notation'
+import { useRegisterSW } from "virtual:pwa-register/vue"
 
 export default defineComponent({
   mounted() {
@@ -25,6 +26,11 @@ export default defineComponent({
       animate: false,
     })
     titleHighlight.show()
+
+    const { needRefresh, updateServiceWorker } = useRegisterSW()
+    if (needRefresh.value) {
+      updateServiceWorker(false)
+    }
   },
 })
 </script>
