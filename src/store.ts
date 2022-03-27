@@ -28,17 +28,19 @@ export interface State {
   activeTimerGroupUUID: string | undefined
 }
 
+const getDefaultState = () => { return {
+  user: {
+    timerGroups: [{uuid:'Welcome',title:'Welcome',timers:[]}] as Array<TimerGroup>,
+    colourTheme: 'system' as ColourTheme
+  } as User,
+  activeTimerGroupUUID: 'Welcome',
+}}
+
 export const key: InjectionKey<Store<State>> = Symbol()
 
 export const store = createStore<State>({
   state() {
-    return {
-      user: {
-        timerGroups: [{uuid:'Welcome',title:'Welcome',timers:[]}] as Array<TimerGroup>,
-        colourTheme: 'system' as ColourTheme
-      } as User,
-      activeTimerGroupUUID: 'Welcome',
-    }
+    return getDefaultState()
   },
   getters: {
     activeTimerGroup(state: State): TimerGroup | undefined {
@@ -54,7 +56,7 @@ export const store = createStore<State>({
     }
   },
   mutations: {
-		initialiseStore(state) {
+		initialiseStore(state: State) {
       const localStore = localStorage.getItem('store');
 			if (localStore) {
         const localState = JSON.parse(localStore)
@@ -161,11 +163,16 @@ export const store = createStore<State>({
     },
     setActiveTimerGroup(state: State, { timerGroupUUID }: { timerGroupUUID: string }): void {
       state.activeTimerGroupUUID = timerGroupUUID
+    },
+    deleteUserData(state: State): void {
+      this.replaceState(
+        Object.assign(state, getDefaultState())
+      )
     }
   },
 })
 
-store.subscribe((_, state) => {
+store.subscribe((_: any, state: any) => {
 	localStorage.setItem('store', JSON.stringify(state));
 });
 
