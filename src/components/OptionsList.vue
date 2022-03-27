@@ -1,10 +1,19 @@
 <template>
   <ul>
-    <li v-for="[optionIndex, option] of options.entries()" :key="optionIndex" class="option">
-      <font-awesome-icon 
-        class="icon" 
-        :icon="option.selected ? checkedIcon : ['far','circle']"
-        @click="() => { handleClick(optionIndex) }" />
+    <li
+      v-for="[optionIndex, option] of options.entries()"
+      :key="optionIndex"
+      class="option"
+    >
+      <font-awesome-icon
+        class="icon"
+        :icon="option.selected ? checkedIcon : ['far', 'circle']"
+        @click="
+          () => {
+            handleClick(optionIndex)
+          }
+        "
+      />
       {{ option.name }}
     </li>
   </ul>
@@ -16,13 +25,15 @@ import { defineComponent, PropType } from 'vue'
 export default defineComponent({
   props: {
     options: {
-      type: Array as PropType<{ name: string, value: any, selected: boolean }[]>,
-      required: true
+      type: Array as PropType<
+        { name: string; value: any; selected: boolean }[]
+      >,
+      required: true,
     },
     mode: {
       type: String as PropType<'checkbox' | 'radio'>,
-      required: true
-    }
+      required: true,
+    },
   },
   emits: ['change'],
   computed: {
@@ -41,7 +52,9 @@ export default defineComponent({
   },
   methods: {
     handleClick(targetIndex: number) {
-      const newValues = this.options.map((option) => { return { ... option } })
+      const newValues = this.options.map((option) => {
+        return { ...option }
+      })
       switch (this.mode) {
         case 'checkbox':
           newValues[targetIndex].selected = !newValues[targetIndex].selected
@@ -54,14 +67,14 @@ export default defineComponent({
           break
       }
       this.$emit('change', newValues)
-    }
-  }
+    },
+  },
 })
 </script>
 
 <style lang="scss" scoped>
 .option {
-  margin: $spacer $spacer*4;
+  margin: $spacer $spacer * 4;
   .icon {
     margin-right: $spacer * 1.5;
   }

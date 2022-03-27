@@ -1,27 +1,27 @@
-import { createWebHistory, createRouter } from "vue-router";
-import HomeView from "@/views/HomeView.vue";
-import SettingsView from "@/views/SettingsView.vue";
+import { createWebHistory, createRouter } from 'vue-router'
+import HomeView from '@/views/HomeView.vue'
+import SettingsView from '@/views/SettingsView.vue'
 
 const routes = [
   {
-    path: "/",
-    name: "home",
+    path: '/',
+    name: 'home',
     component: HomeView,
   },
   {
-    path: "/settings",
-    name: "settings",
+    path: '/settings',
+    name: 'settings',
     component: SettingsView,
   },
   {
-    path: "/:catchAll(.*)",
-    redirect: { name: "home" }
-  }
-];
+    path: '/:catchAll(.*)',
+    redirect: { name: 'home' },
+  },
+]
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
-});
+})
 
-export default router;
+export default router

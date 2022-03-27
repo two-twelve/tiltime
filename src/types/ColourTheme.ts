@@ -3,7 +3,7 @@ enum ColourTheme {
   'light',
   'dark',
   'pink',
-  'green'
+  'green',
 }
 
 export default ColourTheme

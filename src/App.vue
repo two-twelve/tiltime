@@ -14,18 +14,18 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { annotate } from 'rough-notation';
+import { annotate } from 'rough-notation'
 
 export default defineComponent({
   mounted() {
     const target = this.$refs.title as HTMLElement
-    const titleHighlight = annotate(target, { 
+    const titleHighlight = annotate(target, {
       type: 'highlight',
       color: '#d0e699',
-      animate: false
+      animate: false,
     })
     titleHighlight.show()
-  }
+  },
 })
 </script>
 
@@ -38,12 +38,12 @@ main {
   background: $background;
 }
 .header-container {
-  width:100%;
+  width: 100%;
   display: flex;
   justify-content: center;
 }
 .header {
-  padding: $spacer*2 $spacer*2 0 $spacer*2;
+  padding: $spacer * 2 $spacer * 2 0 $spacer * 2;
   width: $app-width;
   max-width: 100%;
   display: flex;
@@ -54,12 +54,12 @@ main {
 }
 .title {
   align-self: flex-start;
-  margin: 0 $spacer*2 $spacer $spacer*2;
+  margin: 0 $spacer * 2 $spacer $spacer * 2;
   font-size: $font-size * 2.5;
   font-weight: $font-weight-bold;
 }
 .user-icon {
-  padding: $spacer*2;
+  padding: $spacer * 2;
   font-size: $font-size * 2.5;
 }
 .timers-tab {

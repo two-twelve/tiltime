@@ -23,7 +23,8 @@
   Remove list styles (bullets/numbers)
   in case you use it with normalize.css
 */
-ol, ul {
+ol,
+ul {
   list-style: none;
 }
 

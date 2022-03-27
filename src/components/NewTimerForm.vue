@@ -1,26 +1,37 @@
 <template>
   <section class="new-timer-form-container">
     <form class="new-timer-form">
-      <DatePicker 
+      <DatePicker
         v-model="range"
         class="time-range"
         mode="dateTime"
         color="pink"
-        is24hr is-range>
+        is24hr
+        is-range
+      >
         <template #default="{ inputValue, inputEvents }">
           <input
             class="time-range-input"
             readonly
-            :value="inputValue.start.split(' ')[0] + ' - ' + inputValue.end.split(' ')[0]"
-            :size="inputValue.start.split(' ')[0].length + inputValue.end.split(' ')[0].length + 3"
+            :value="
+              inputValue.start.split(' ')[0] +
+              ' - ' +
+              inputValue.end.split(' ')[0]
+            "
+            :size="
+              inputValue.start.split(' ')[0].length +
+              inputValue.end.split(' ')[0].length +
+              3
+            "
             v-on="inputEvents.start"
           />
         </template>
       </DatePicker>
-      <button 
+      <button
         class="create-timer-button button"
         type="button"
-        @click="valid ? createTimer() : null">
+        @click="valid ? createTimer() : null"
+      >
         Create Timer
       </button>
     </form>
@@ -31,54 +42,53 @@
 import { defineComponent } from 'vue'
 import { useStore } from '@/store'
 import { DatePicker } from 'v-calendar'
-import 'v-calendar/dist/style.css';
+import 'v-calendar/dist/style.css'
 
 export default defineComponent({
   components: {
-    DatePicker
+    DatePicker,
   },
-  data() { return {
-    store: useStore(),
-    from: new Date(),
-    to: (() => { 
-      const to = new Date()
-      to.setHours(new Date().getHours() + 1) 
-      return to
-    })(),
-    range: {
-      start: new Date(),
-      end: (() => { 
+  data() {
+    return {
+      store: useStore(),
+      from: new Date(),
+      to: (() => {
         const to = new Date()
-        to.setHours(new Date().getHours() + 1) 
+        to.setHours(new Date().getHours() + 1)
         return to
-      })()
+      })(),
+      range: {
+        start: new Date(),
+        end: (() => {
+          const to = new Date()
+          to.setHours(new Date().getHours() + 1)
+          return to
+        })(),
+      },
     }
-  }},
+  },
   computed: {
     valid(): boolean {
       return this.from < this.to
-    }
+    },
   },
   methods: {
     createTimer() {
-      this.store.commit(
-        'createTimer',
-        {
-          timerTitle: 'New Timer',
-          from: this.range.start,
-          to: this.range.end,
-          groupUUID: this.store.state.activeTimerGroupUUID
-        }
-      )
+      this.store.commit('createTimer', {
+        timerTitle: 'New Timer',
+        from: this.range.start,
+        to: this.range.end,
+        groupUUID: this.store.state.activeTimerGroupUUID,
+      })
     },
-  }
+  },
 })
 </script>
 
 <style lang="scss" scoped>
 .new-timer-form-container {
   width: 100%;
-  display:flex;
+  display: flex;
   justify-content: center;
 }
 .new-timer-form {
@@ -95,20 +105,21 @@ export default defineComponent({
   align-items: center;
   justify-content: center;
 }
-.time-range-input, .create-timer-button {
+.time-range-input,
+.create-timer-button {
   font-size: $font-size * 1.2;
 }
 .time-range-input {
   margin: $spacer;
-  padding: $spacer $spacer*2;
+  padding: $spacer $spacer * 2;
   max-width: 100%;
   text-align: center;
   background: $colour-positive;
-  border-radius: $spacer*3;
+  border-radius: $spacer * 3;
 }
 .create-timer-button {
   background: $colour-positive;
-  border-radius: $spacer*3;
+  border-radius: $spacer * 3;
   text-align: center;
 }
 </style>

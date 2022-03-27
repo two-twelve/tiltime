@@ -9,25 +9,36 @@
       :uuid="timer.uuid"
     />
     <li
-      v-if="store.getters.activeTimerGroup.timers.length == 0 && (store.getters.activeTimerGroup.title === 'Welcome' || store.state.user.timerGroups.length == 1)"
-      class="welcome-card">
+      v-if="
+        store.getters.activeTimerGroup.timers.length == 0 &&
+        (store.getters.activeTimerGroup.title === 'Welcome' ||
+          store.state.user.timerGroups.length == 1)
+      "
+      class="welcome-card"
+    >
       <h1 class="welcome-title">🎉 Welcome to TilTi.me 🥳</h1>
-      <p>
-        Get started by making yourself a timer! You could:
-      </p>
+      <p>Get started by making yourself a timer! You could:</p>
       <ul>
         <li>Keep track of your deadlines 📚</li>
         <li>See how long it is until your next birthday 🎂</li>
         <li>Count down to your next holiday 🏖️</li>
       </ul>
       <p>
-        If you run into trouble, make an issue on <a href="https://github.com/TheTeaCat/tiltime" target="_blank">GitHub</a>. 
+        If you run into trouble, make an issue on
+        <a href="https://github.com/TheTeaCat/tiltime" target="_blank">GitHub</a
+        >.
       </p>
     </li>
-    <li v-if="store.state.activeTimerGroupUUID && store.getters.activeGroupDeletable" class="delete-group-button-container">
-      <button 
+    <li
+      v-if="
+        store.state.activeTimerGroupUUID && store.getters.activeGroupDeletable
+      "
+      class="delete-group-button-container"
+    >
+      <button
         class="delete-group-button button"
-        @click="deleteActiveTimerGroup">
+        @click="deleteActiveTimerGroup"
+      >
         Delete This Group
       </button>
     </li>
@@ -43,19 +54,18 @@ export default defineComponent({
   components: {
     TimerCard,
   },
-  data() { return {
-    store: useStore()
-  }},
+  data() {
+    return {
+      store: useStore(),
+    }
+  },
   methods: {
     deleteActiveTimerGroup() {
-      this.store.commit(
-        'deleteTimerGroup',
-        {
-          targetUUID: this.store.state.activeTimerGroupUUID
-        }
-      )
-    }
-  }
+      this.store.commit('deleteTimerGroup', {
+        targetUUID: this.store.state.activeTimerGroupUUID,
+      })
+    },
+  },
 })
 </script>
 
@@ -83,7 +93,7 @@ export default defineComponent({
 .welcome-card {
   margin: $spacer * 2;
   margin-bottom: 0;
-  padding: $spacer*2 $spacer*4;
+  padding: $spacer * 2 $spacer * 4;
   width: 500px;
   max-width: 100%;
   background: $background;
@@ -92,18 +102,19 @@ export default defineComponent({
   flex-direction: column;
   align-items: stretch;
   .welcome-title {
-    margin: $spacer 0 $spacer*2 0;
+    margin: $spacer 0 $spacer * 2 0;
     font-size: $font-size * 1.8;
     font-weight: $font-weight-bold;
     text-align: center;
   }
-  p, ul {
+  p,
+  ul {
     margin: $spacer 0;
   }
   ul {
     list-style: disc;
     li {
-      margin-left: $spacer*4;
+      margin-left: $spacer * 4;
     }
   }
   a {

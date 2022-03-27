@@ -15,7 +15,7 @@ export default defineComponent({
     TimersTabs,
     TimersList,
     NewTimerForm,
-  }
+  },
 })
 </script>
 

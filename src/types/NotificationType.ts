@@ -1,7 +1,7 @@
 enum NotificationType {
   'end',
   'hourBefore',
-  'dayBefore'
+  'dayBefore',
 }
 
 export default NotificationType

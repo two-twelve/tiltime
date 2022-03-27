@@ -1,7 +1,10 @@
 <template>
   <nav>
     <router-link class="home-link" to="home">
-      <font-awesome-icon class="back-icon" :icon="['fas','arrow-circle-left']" />
+      <font-awesome-icon
+        class="back-icon"
+        :icon="['fas', 'arrow-circle-left']"
+      />
       Back To My Timers
     </router-link>
   </nav>
@@ -9,7 +12,7 @@
     <h1 class="settings-title">
       <span ref="titleBrackets" class="title-brackets">
         Settings
-        <font-awesome-icon class="icon" :icon="['fas','cogs']" />
+        <font-awesome-icon class="icon" :icon="['fas', 'cogs']" />
       </span>
     </h1>
     <section class="settings-group push-notifications">
@@ -18,7 +21,8 @@
         class="options-list"
         :mode="'checkbox'"
         :options="notificationOptions"
-        @change="updateNotifications" />
+        @change="updateNotifications"
+      />
     </section>
     <section class="settings-group colour-themes">
       <h2 class="section-title">Colour Themes</h2>
@@ -26,25 +30,39 @@
         class="options-list"
         :mode="'radio'"
         :options="colourThemeOptions"
-        @change="setColourTheme" />
+        @change="setColourTheme"
+      />
     </section>
     <section class="settings-group about">
       <h2 class="section-title">About</h2>
       <p>
-        This app is open source! You can find it on 
-        <a class="github-link" href="https://github.com/TheTeaCat/tiltime" target="_blank">
-          GitHub<font-awesome-icon class="icon" :icon="['fab','github']" />
+        This app is open source! You can find it on
+        <a
+          class="github-link"
+          href="https://github.com/TheTeaCat/tiltime"
+          target="_blank"
+        >
+          GitHub<font-awesome-icon class="icon" :icon="['fab', 'github']" />
         </a>
       </p>
     </section>
     <section class="settings-group delete-data">
       <h2 class="section-title">Your Data</h2>
       <form class="delete-data-form">
-        <button class="delete-data-button button" type="button" @click="deleteUserData">
-          <font-awesome-icon class="icon" :icon="['fas','exclamation-circle']" />
-          {{ deleteUserDataConfirmState ? "Confirm" : "Delete Your Data" }}
+        <button
+          class="delete-data-button button"
+          type="button"
+          @click="deleteUserData"
+        >
+          <font-awesome-icon
+            class="icon"
+            :icon="['fas', 'exclamation-circle']"
+          />
+          {{ deleteUserDataConfirmState ? 'Confirm' : 'Delete Your Data' }}
         </button>
-        <span v-if="deleteUserDataConfirmState" class="warning-message"> Are you sure? All of your timers will be lost forever!</span>
+        <span v-if="deleteUserDataConfirmState" class="warning-message">
+          Are you sure? All of your timers will be lost forever!</span
+        >
       </form>
     </section>
   </article>
@@ -52,7 +70,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { annotate } from 'rough-notation';
+import { annotate } from 'rough-notation'
 import { useStore } from '@/store'
 import NotificationType from '@/types/NotificationType'
 import ColourTheme from '@/types/ColourTheme'
@@ -60,36 +78,73 @@ import OptionsList from '@/components/OptionsList.vue'
 
 export default defineComponent({
   components: {
-    OptionsList
+    OptionsList,
   },
-  data() { return {
-    store: useStore(),
-    deleteUserDataConfirmState: false
-  }},
-  computed: {
-    notificationOptions(): Array<{ name: string, value: any, selected: boolean }> {
-      return [
-        { name: 'When a timer ends', value: NotificationType.end, selected: this.store.state.user.notifications.includes(NotificationType.end) },
-        { name: 'When a timer has one hour remaining', value: NotificationType.hourBefore, selected: this.store.state.user.notifications.includes(NotificationType.hourBefore) },
-        { name: 'The day before a timer ends', value: NotificationType.dayBefore, selected: this.store.state.user.notifications.includes(NotificationType.dayBefore) },
-      ]
-    },
-    colourThemeOptions(): Array<{ name: string, value: any, selected: boolean }> {
-      return [
-        { name: 'Light Theme', value: ColourTheme.light, selected: this.store.state.user.colourTheme === ColourTheme.light },
-        { name: 'Dark Theme', value: ColourTheme.dark, selected: this.store.state.user.colourTheme === ColourTheme.dark },
-        { name: 'System Theme', value: ColourTheme.system, selected: this.store.state.user.colourTheme === ColourTheme.system },
-      ]
+  data() {
+    return {
+      store: useStore(),
+      deleteUserDataConfirmState: false,
     }
   },
+  computed: {
+    notificationOptions(): Array<{
+      name: string
+      value: any
+      selected: boolean
+    }> {
+      return [
+        {
+          name: 'When a timer ends',
+          value: NotificationType.end,
+          selected: this.store.state.user.notifications.includes(
+            NotificationType.end
+          ),
+        },
+        {
+          name: 'When a timer has one hour remaining',
+          value: NotificationType.hourBefore,
+          selected: this.store.state.user.notifications.includes(
+            NotificationType.hourBefore
+          ),
+        },
+        {
+          name: 'The day before a timer ends',
+          value: NotificationType.dayBefore,
+          selected: this.store.state.user.notifications.includes(
+            NotificationType.dayBefore
+          ),
+        },
+      ]
+    },
+    colourThemeOptions(): Array<{
+      name: string
+      value: any
+      selected: boolean
+    }> {
+      return [
+        {
+          name: 'Light Theme',
+          value: ColourTheme.light,
+          selected: this.store.state.user.colourTheme === ColourTheme.light,
+        },
+        {
+          name: 'Dark Theme',
+          value: ColourTheme.dark,
+          selected: this.store.state.user.colourTheme === ColourTheme.dark,
+        },
+        {
+          name: 'System Theme',
+          value: ColourTheme.system,
+          selected: this.store.state.user.colourTheme === ColourTheme.system,
+        },
+      ]
+    },
+  },
   mounted() {
-    annotate(
-      this.$refs.titleBrackets as HTMLElement,
-      {
-        type: 'bracket',
-        brackets: ['left', 'right']
-      }
-    ).show()
+    annotate(this.$refs.titleBrackets as HTMLElement, {
+      type: 'bracket',
+      brackets: ['left', 'right'],
+    }).show()
   },
   methods: {
     deleteUserData() {
@@ -98,23 +153,33 @@ export default defineComponent({
       }
       this.deleteUserDataConfirmState = !this.deleteUserDataConfirmState
     },
-    updateNotifications(newNotificationOptions: Array<{ name: string, value: any, selected: boolean }>) {
-      this.store.commit(
-        'updateNotifications', 
-        { 
-          newNotifications: newNotificationOptions.filter(option => option.selected).map(option => option.value)
-        }
-      )
+    updateNotifications(
+      newNotificationOptions: Array<{
+        name: string
+        value: any
+        selected: boolean
+      }>
+    ) {
+      this.store.commit('updateNotifications', {
+        newNotifications: newNotificationOptions
+          .filter((option) => option.selected)
+          .map((option) => option.value),
+      })
     },
-    setColourTheme(newColourThemeOptions: Array<{ name: string, value: any, selected: boolean}>) {
-      this.store.commit(
-        'setColourTheme',
-        {
-          newColourTheme: newColourThemeOptions.filter(option => option.selected)[0].value
-        }
-      )
-    }
-  }
+    setColourTheme(
+      newColourThemeOptions: Array<{
+        name: string
+        value: any
+        selected: boolean
+      }>
+    ) {
+      this.store.commit('setColourTheme', {
+        newColourTheme: newColourThemeOptions.filter(
+          (option) => option.selected
+        )[0].value,
+      })
+    },
+  },
 })
 </script>
 
@@ -122,9 +187,9 @@ export default defineComponent({
 nav {
   width: $app-width;
   max-width: 100%;
-  padding: $spacer*2 $spacer*4;
+  padding: $spacer * 2 $spacer * 4;
   .home-link {
-    font-size: $font-size*1.2;
+    font-size: $font-size * 1.2;
     font-weight: $font-weight-bold;
     .back-icon {
       margin-right: $spacer * 0.5;
@@ -134,16 +199,16 @@ nav {
 .settings {
   width: $app-width * 0.75;
   max-width: 100%;
-  padding: $spacer*3;
+  padding: $spacer * 3;
   .settings-title {
-    margin: $spacer*1.5 0 $spacer*6 0;
-    display:flex;
+    margin: $spacer * 1.5 0 $spacer * 6 0;
+    display: flex;
     align-items: center;
     justify-content: center;
     font-size: $font-size * 2;
     font-weight: $font-weight-bold;
     .title-brackets {
-      padding: 0 $spacer*2; 
+      padding: 0 $spacer * 2;
     }
     .icon {
       margin-left: $spacer;
@@ -151,16 +216,17 @@ nav {
     }
   }
   .settings-group {
-    margin-bottom: $spacer*6;
+    margin-bottom: $spacer * 6;
     .section-title {
-      margin-bottom: $spacer*3;
+      margin-bottom: $spacer * 3;
       font-size: $font-size * 1.4;
       font-weight: $font-weight-bold;
     }
   }
-  .push-notifications, .colour-themes {
+  .push-notifications,
+  .colour-themes {
     .options-list {
-      margin: $spacer*2.5 $spacer;
+      margin: $spacer * 2.5 $spacer;
     }
   }
   .delete-data {
@@ -180,11 +246,11 @@ nav {
       .warning-message {
         margin-left: $spacer;
       }
-      @media(max-width:960px) {
+      @media (max-width: 960px) {
         flex-direction: column;
         .warning-message {
           margin-left: 0;
-          margin-top: $spacer*2;
+          margin-top: $spacer * 2;
           text-align: center;
         }
       }
@@ -197,7 +263,7 @@ nav {
     .github-link {
       text-decoration: underline;
       .icon {
-        margin-left: $spacer * 0.5
+        margin-left: $spacer * 0.5;
       }
     }
   }

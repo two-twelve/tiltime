@@ -5,38 +5,45 @@ import ColourTheme from './types/ColourTheme'
 import Timer from './types/Timer'
 import TimerGroup from './types/TimerGroup'
 import User from './types/User'
-import { v4 as uuidv4 } from "uuid";
+import { v4 as uuidv4 } from 'uuid'
 
-var lastTimerGroupNameGenerated = '';
-function getNewTimerGroupName () {
+var lastTimerGroupNameGenerated = ''
+function getNewTimerGroupName() {
   const defaultTimerGroupNames = [
-    "Holidays",
-    "Anniversaries",
-    "Events",
-    "Birthdays",
-    "Homework",
-    "Deadlines"
+    'Holidays',
+    'Anniversaries',
+    'Events',
+    'Birthdays',
+    'Homework',
+    'Deadlines',
   ]
   var newTimerGroupName = defaultTimerGroupNames.filter(
-    timerGroupName => timerGroupName !== lastTimerGroupNameGenerated
+    (timerGroupName) => timerGroupName !== lastTimerGroupNameGenerated
   )[Math.floor(Math.random() * (defaultTimerGroupNames.length - 1))]
   lastTimerGroupNameGenerated = newTimerGroupName
   return newTimerGroupName
 }
 
 export interface State {
-  user: User,
+  user: User
   activeTimerGroupUUID: string | undefined
 }
 
-const getDefaultState = () => { return {
-  user: {
-    timerGroups: [{uuid:'Welcome',title:'Welcome',timers:[]}] as Array<TimerGroup>,
-    notifications: [NotificationType.end, NotificationType.hourBefore] as Array<NotificationType>,
-    colourTheme: ColourTheme.system as ColourTheme
-  } as User,
-  activeTimerGroupUUID: 'Welcome',
-}}
+const getDefaultState = () => {
+  return {
+    user: {
+      timerGroups: [
+        { uuid: 'Welcome', title: 'Welcome', timers: [] },
+      ] as Array<TimerGroup>,
+      notifications: [
+        NotificationType.end,
+        NotificationType.hourBefore,
+      ] as Array<NotificationType>,
+      colourTheme: ColourTheme.system as ColourTheme,
+    } as User,
+    activeTimerGroupUUID: 'Welcome',
+  }
+}
 
 export const key: InjectionKey<Store<State>> = Symbol()
 
@@ -54,13 +61,16 @@ export const store = createStore<State>({
       return undefined
     },
     activeGroupDeletable(state: State): boolean {
-      return state.user.timerGroups.length > 1 && store.getters.activeTimerGroup.timers.length == 0
-    }
+      return (
+        state.user.timerGroups.length > 1 &&
+        store.getters.activeTimerGroup.timers.length == 0
+      )
+    },
   },
   mutations: {
-		initialiseStore(state: State) {
-      const localStore = localStorage.getItem('store');
-			if (localStore) {
+    initialiseStore(state: State) {
+      const localStore = localStorage.getItem('store')
+      if (localStore) {
         const localState = JSON.parse(localStore)
         for (const timerGroup of localState.user.timerGroups) {
           for (const timer of timerGroup.timers) {
@@ -68,17 +78,28 @@ export const store = createStore<State>({
             timer.to = new Date(timer.to)
           }
         }
-				this.replaceState(
-					Object.assign(state, localState)
-				);
-			}
-		},    
-    createTimer(state: State, { timerTitle, from, to, groupUUID }: { timerTitle: string, from: Date, to: Date, groupUUID: string | undefined}): void {
+        this.replaceState(Object.assign(state, localState))
+      }
+    },
+    createTimer(
+      state: State,
+      {
+        timerTitle,
+        from,
+        to,
+        groupUUID,
+      }: {
+        timerTitle: string
+        from: Date
+        to: Date
+        groupUUID: string | undefined
+      }
+    ): void {
       const newTimer: Timer = {
         uuid: uuidv4(),
         title: timerTitle,
         from: from,
-        to: to
+        to: to,
       }
       if (groupUUID) {
         for (let i = 0; i < state.user.timerGroups.length; i++) {
@@ -91,21 +112,27 @@ export const store = createStore<State>({
       state.user.timerGroups.push({
         uuid: uuidv4(),
         title: getNewTimerGroupName(),
-        timers: [newTimer]
+        timers: [newTimer],
       })
       return
     },
-    deleteTimer(state: State, { targetUUID } : { targetUUID: string }): void {
+    deleteTimer(state: State, { targetUUID }: { targetUUID: string }): void {
       for (let i = 0; i < state.user.timerGroups.length; i++) {
         for (let j = 0; j < state.user.timerGroups[i].timers.length; j++) {
           if (state.user.timerGroups[i].timers[j].uuid === targetUUID) {
-            state.user.timerGroups[i].timers.splice(j,1)
+            state.user.timerGroups[i].timers.splice(j, 1)
             return
           }
         }
       }
     },
-    updateTimerTitle(state: State, { targetUUID, newTitle } : { targetUUID: string, targetTitle: string, newTitle: string }): void {
+    updateTimerTitle(
+      state: State,
+      {
+        targetUUID,
+        newTitle,
+      }: { targetUUID: string; targetTitle: string; newTitle: string }
+    ): void {
       for (let i = 0; i < state.user.timerGroups.length; i++) {
         for (let j = 0; j < state.user.timerGroups[i].timers.length; j++) {
           if (state.user.timerGroups[i].timers[j].uuid === targetUUID) {
@@ -115,74 +142,85 @@ export const store = createStore<State>({
         }
       }
     },
-    async createTimerGroup(state: State, { groupTitle }: { groupTitle: string }): Promise<void> {
-      if (groupTitle === "") {
+    async createTimerGroup(
+      state: State,
+      { groupTitle }: { groupTitle: string }
+    ): Promise<void> {
+      if (groupTitle === '') {
         groupTitle = getNewTimerGroupName()
       }
       const newTimerGroup: TimerGroup = {
         uuid: uuidv4(),
         title: groupTitle,
-        timers: []
+        timers: [],
       }
       await state.user.timerGroups.push(newTimerGroup)
-      store.commit(
-        'setActiveTimerGroup',
-        {
-          timerGroupUUID: newTimerGroup.uuid
-        }
-      )
+      store.commit('setActiveTimerGroup', {
+        timerGroupUUID: newTimerGroup.uuid,
+      })
     },
-    updateTimerGroupTitle(state: State, { targetUUID, newTitle } : { targetUUID: string, targetTitle: string, newTitle: string }): void {
+    updateTimerGroupTitle(
+      state: State,
+      {
+        targetUUID,
+        newTitle,
+      }: { targetUUID: string; targetTitle: string; newTitle: string }
+    ): void {
       for (let i = 0; i < state.user.timerGroups.length; i++) {
         if (state.user.timerGroups[i].uuid === targetUUID) {
-          state.user.timerGroups[i].title = newTitle.length > 0 ? newTitle : getNewTimerGroupName()
+          state.user.timerGroups[i].title =
+            newTitle.length > 0 ? newTitle : getNewTimerGroupName()
           return
         }
       }
     },
-    deleteTimerGroup(state: State, { targetUUID } : { targetUUID: string }): void {
+    deleteTimerGroup(
+      state: State,
+      { targetUUID }: { targetUUID: string }
+    ): void {
       for (let i = 0; i < state.user.timerGroups.length; i++) {
         if (state.user.timerGroups[i].uuid == targetUUID) {
-          state.user.timerGroups.splice(i,1)
-          if (state.user.timerGroups[Math.max(i-1, 0)]) {
-            store.commit(
-              'setActiveTimerGroup',
-              {
-                timerGroupUUID: state.user.timerGroups[Math.max(i-1, 0)].uuid
-              }
-            )
+          state.user.timerGroups.splice(i, 1)
+          if (state.user.timerGroups[Math.max(i - 1, 0)]) {
+            store.commit('setActiveTimerGroup', {
+              timerGroupUUID: state.user.timerGroups[Math.max(i - 1, 0)].uuid,
+            })
           } else {
-            store.commit(
-              'setActiveTimerGroup',
-              {
-                timerGroupUUID: undefined
-              }
-            )
+            store.commit('setActiveTimerGroup', {
+              timerGroupUUID: undefined,
+            })
           }
           return
         }
       }
     },
-    setActiveTimerGroup(state: State, { timerGroupUUID }: { timerGroupUUID: string }): void {
+    setActiveTimerGroup(
+      state: State,
+      { timerGroupUUID }: { timerGroupUUID: string }
+    ): void {
       state.activeTimerGroupUUID = timerGroupUUID
     },
     deleteUserData(state: State): void {
-      this.replaceState(
-        Object.assign(state, getDefaultState())
-      )
+      this.replaceState(Object.assign(state, getDefaultState()))
     },
-    setColourTheme(state: State, { newColourTheme }: { newColourTheme: ColourTheme }): void {
+    setColourTheme(
+      state: State,
+      { newColourTheme }: { newColourTheme: ColourTheme }
+    ): void {
       state.user.colourTheme = newColourTheme
     },
-    updateNotifications(state: State, { newNotifications }: { newNotifications: Array<NotificationType> }): void {
+    updateNotifications(
+      state: State,
+      { newNotifications }: { newNotifications: Array<NotificationType> }
+    ): void {
       state.user.notifications = newNotifications
-    }
+    },
   },
 })
 
 store.subscribe((_: any, state: any) => {
-	localStorage.setItem('store', JSON.stringify(state));
-});
+  localStorage.setItem('store', JSON.stringify(state))
+})
 
 export function useStore() {
   return baseUseStore(key)

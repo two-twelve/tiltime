@@ -22,13 +22,14 @@ $spacer: 6px;
   color: $foreground;
 }
 
-html, body {
+html,
+body {
   min-height: 100vh;
 }
 
 .button {
   margin: $spacer;
-  padding: $spacer $spacer*2;
-  border-radius: $spacer*3;
+  padding: $spacer $spacer * 2;
+  border-radius: $spacer * 3;
   text-align: center;
 }
