@@ -28,13 +28,6 @@
         :options="colourThemeOptions"
         @change="(newColourThemeOptions)=>{ colourThemeOptions = newColourThemeOptions }" />
     </section>
-    <section class="settings-group delete-data">
-      <h2 class="section-title">Your Data</h2>
-      <button class="delete-data-button button">
-        <font-awesome-icon class="icon" :icon="['fas','exclamation-circle']" />
-        Delete Your Data
-      </button>
-    </section>
     <section class="settings-group about">
       <h2 class="section-title">About</h2>
       <p>
@@ -44,12 +37,23 @@
         </a>
       </p>
     </section>
+    <section class="settings-group delete-data">
+      <h2 class="section-title">Your Data</h2>
+      <form class="delete-data-form">
+        <button class="delete-data-button button" type="button" @click="deleteUserData">
+          <font-awesome-icon class="icon" :icon="['fas','exclamation-circle']" />
+          {{ deleteUserDataConfirmState ? "Confirm" : "Delete Your Data" }}
+        </button>
+        <span v-if="deleteUserDataConfirmState" class="warning-message"> Are you sure? All of your timers will be lost forever!</span>
+      </form>
+    </section>
   </article>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { annotate } from 'rough-notation';
+import { useStore } from '@/store'
 import OptionsList from '@/components/OptionsList.vue'
 
 export default defineComponent({
@@ -57,6 +61,7 @@ export default defineComponent({
     OptionsList
   },
   data() { return {
+    store: useStore(),
     notificationOptions: [
       { name: 'When a timer ends', value: 'end', selected: true },
       { name: 'When a timer has one hour remaining', value: '1h-before', selected: true },
@@ -66,7 +71,8 @@ export default defineComponent({
       { name: 'Light Theme', value: 'light', selected: false },
       { name: 'Dark Theme', value: 'dark', selected: false },
       { name: 'System Theme', value: 'system', selected: true },
-    ]
+    ],
+    deleteUserDataConfirmState: false
   }},
   mounted() {
     annotate(
@@ -76,6 +82,14 @@ export default defineComponent({
         brackets: ['left', 'right']
       }
     ).show()
+  },
+  methods: {
+    deleteUserData() {
+      if (this.deleteUserDataConfirmState) {
+        this.store.commit('deleteUserData')
+      }
+      this.deleteUserDataConfirmState = !this.deleteUserDataConfirmState
+    }
   }
 })
 </script>
@@ -126,13 +140,29 @@ nav {
     }
   }
   .delete-data {
-    .delete-data-button {
-      margin: 0 $spacer;
-      background: $dark-negative;
-      color: $background;
-      .icon {
-        margin-right: $spacer * 0.5;
+    .delete-data-form {
+      display: flex;
+      align-items: center;
+      .delete-data-button {
+        margin: 0 $spacer;
+        background: $dark-negative;
         color: $background;
+        flex-shrink: 0;
+        .icon {
+          margin-right: $spacer * 0.5;
+          color: $background;
+        }
+      }
+      .warning-message {
+        margin-left: $spacer;
+      }
+      @media(max-width:960px) {
+        flex-direction: column;
+        .warning-message {
+          margin-left: 0;
+          margin-top: $spacer*2;
+          text-align: center;
+        }
       }
     }
   }
