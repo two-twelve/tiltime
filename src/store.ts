@@ -128,15 +128,38 @@ export const store = createStore<State>({
     },
     updateTimerTitle(
       state: State,
-      {
-        targetUUID,
-        newTitle,
-      }: { targetUUID: string; targetTitle: string; newTitle: string }
+      { targetUUID, newTitle }: { targetUUID: string; newTitle: string }
     ): void {
       for (let i = 0; i < state.user.timerGroups.length; i++) {
         for (let j = 0; j < state.user.timerGroups[i].timers.length; j++) {
           if (state.user.timerGroups[i].timers[j].uuid === targetUUID) {
             state.user.timerGroups[i].timers[j].title = newTitle
+            return
+          }
+        }
+      }
+    },
+    updateTimerFrom(
+      state: State,
+      { targetUUID, newFrom }: { targetUUID: string; newFrom: Date }
+    ): void {
+      for (let i = 0; i < state.user.timerGroups.length; i++) {
+        for (let j = 0; j < state.user.timerGroups[i].timers.length; j++) {
+          if (state.user.timerGroups[i].timers[j].uuid === targetUUID) {
+            state.user.timerGroups[i].timers[j].from = newFrom
+            return
+          }
+        }
+      }
+    },
+    updateTimerTo(
+      state: State,
+      { targetUUID, newTo }: { targetUUID: string; newTo: Date }
+    ): void {
+      for (let i = 0; i < state.user.timerGroups.length; i++) {
+        for (let j = 0; j < state.user.timerGroups[i].timers.length; j++) {
+          if (state.user.timerGroups[i].timers[j].uuid === targetUUID) {
+            state.user.timerGroups[i].timers[j].to = newTo
             return
           }
         }
