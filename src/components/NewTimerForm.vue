@@ -2,35 +2,28 @@
   <section class="new-timer-form-container">
     <form class="new-timer-form">
       <DatePicker
-        v-model="range"
-        class="time-range"
+        v-model="to"
+        :timezone="''"
+        :min-date="new Date()"
+        class="dateTime"
         mode="dateTime"
         color="pink"
         is24hr
-        is-range
       >
         <template #default="{ inputValue, inputEvents }">
           <input
             class="time-range-input"
             readonly
-            :value="
-              inputValue.start.split(' ')[0] +
-              ' - ' +
-              inputValue.end.split(' ')[0]
-            "
-            :size="
-              inputValue.start.split(' ')[0].length +
-              inputValue.end.split(' ')[0].length +
-              3
-            "
-            v-on="inputEvents.start"
+            :value="inputValue.toLocaleString()"
+            :size="Math.max(inputValue.toLocaleString().length, 1)"
+            v-on="inputEvents"
           />
         </template>
       </DatePicker>
       <button
         class="create-timer-button button"
         type="button"
-        @click="valid ? createTimer() : null"
+        @click="createTimer"
       >
         Create Timer
       </button>
@@ -55,29 +48,19 @@ export default defineComponent({
       to: (() => {
         const to = new Date()
         to.setHours(new Date().getHours() + 1)
+        to.setMinutes(0)
+        to.setSeconds(0)
         return to
       })(),
-      range: {
-        start: new Date(),
-        end: (() => {
-          const to = new Date()
-          to.setHours(new Date().getHours() + 1)
-          return to
-        })(),
-      },
     }
-  },
-  computed: {
-    valid(): boolean {
-      return this.from < this.to
-    },
   },
   methods: {
     createTimer() {
+      const from = new Date()
       this.store.commit('createTimer', {
         timerTitle: 'New Timer',
-        from: this.range.start,
-        to: this.range.end,
+        from: from,
+        to: this.to,
         groupUUID: this.store.state.activeTimerGroupUUID,
       })
     },
