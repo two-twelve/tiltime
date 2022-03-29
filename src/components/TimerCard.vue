@@ -278,7 +278,6 @@ export default defineComponent({
 }
 .start-end-container,
 .countdown-container {
-  flex-basis: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -308,6 +307,7 @@ export default defineComponent({
   margin-right: $spacer;
 }
 .countdown-container {
+  flex-grow: 1;
   text-align: right;
 }
 .countdown {
