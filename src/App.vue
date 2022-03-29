@@ -15,7 +15,7 @@
           <router-link to="settings">
             <font-awesome-icon
               class="user-icon"
-              :icon="['fas', 'user-circle']"
+              :icon="$router.currentRoute.value.name === 'settings' ? ['far', 'user-circle'] : ['fas', 'user-circle']"
             />
           </router-link>
         </nav>
