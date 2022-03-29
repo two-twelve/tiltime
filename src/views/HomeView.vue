@@ -1,6 +1,7 @@
 <template>
   <TimersTabs />
   <TimersList class="timers-tab" />
+  <NewTimerForm />
 </template>
 
 <script lang="ts">

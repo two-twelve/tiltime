@@ -112,7 +112,7 @@ export default defineComponent({
       store: useStore(),
       localTitle: this.title,
       crossOutAnnotation: undefined as any,
-      wasUnfinished: true,
+      crossedOutOnMount: false,
       localFrom: this.from,
       localTo: this.to,
     }
@@ -147,7 +147,7 @@ export default defineComponent({
   mounted() {
     setInterval(this.updateCurrentTime, 1000 / 30)
     if (new Date() > this.to) {
-      this.wasUnfinished = false
+      this.crossedOutOnMount = true
       this.crossOutTimer()
     }
     this.$watch(
@@ -185,13 +185,7 @@ export default defineComponent({
   methods: {
     updateCurrentTime() {
       this.currentTime = Date.now()
-      if (new Date() < this.to) {
-        this.wasUnfinished = true
-        if (this.crossOutAnnotation) {
-          this.crossOutAnnotation.remove()
-          this.crossOutAnnotation = undefined
-        }
-      } else if (!this.crossOutAnnotation || !this.crossOutAnnotation.isShowing()) {
+      if (!this.crossOutAnnotation && new Date() > this.to) {
         this.crossOutTimer()
       }
     },
@@ -252,14 +246,12 @@ export default defineComponent({
       })
     },
     crossOutTimer() {
-      if (!this.crossOutAnnotation) {
-        const target = this.$refs.card as HTMLElement
-        this.crossOutAnnotation = annotate(target, {
-          type: 'crossed-off',
-          color: '#000000',
-          animate: this.wasUnfinished,
-        })
-      }
+      const target = this.$refs.card as HTMLElement
+      this.crossOutAnnotation = annotate(target, {
+        type: 'crossed-off',
+        color: '#000000',
+        animate: !this.crossedOutOnMount,
+      })
       this.crossOutAnnotation.show()
     },
   },
