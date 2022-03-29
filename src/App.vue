@@ -6,13 +6,17 @@
           <h1 ref="title" class="title">TilTi.me</h1>
         </router-link>
         <nav class="button-group">
-          <font-awesome-icon 
+          <font-awesome-icon
             v-if="installPromptEvent"
             class="download-icon"
-            :icon="['fas','download']" 
-            @click="installPWA" />
+            :icon="['fas', 'download']"
+            @click="installPWA"
+          />
           <router-link to="settings">
-            <font-awesome-icon class="user-icon" :icon="['fas', 'user-circle']" />
+            <font-awesome-icon
+              class="user-icon"
+              :icon="['fas', 'user-circle']"
+            />
           </router-link>
         </nav>
       </header>
@@ -24,12 +28,14 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { annotate } from 'rough-notation'
-import { useRegisterSW } from "virtual:pwa-register/vue"
+import { useRegisterSW } from 'virtual:pwa-register/vue'
 
 export default defineComponent({
-  data(){return{
-    installPromptEvent: null as any
-  }},
+  data() {
+    return {
+      installPromptEvent: null as any,
+    }
+  },
   mounted() {
     const target = this.$refs.title as HTMLElement
     const titleHighlight = annotate(target, {
@@ -42,22 +48,18 @@ export default defineComponent({
     if (needRefresh.value) {
       updateServiceWorker(false)
     }
-    window.addEventListener(
-      'beforeinstallprompt', 
-      (event) => {
-        event.preventDefault()
-        this.installPromptEvent = event
-      }
-    )
+    window.addEventListener('beforeinstallprompt', (event) => {
+      event.preventDefault()
+      this.installPromptEvent = event
+    })
   },
   methods: {
     installPWA() {
       this.installPromptEvent.prompt()
-      this.installPromptEvent.userChoice.then(
-        () => {
-          this.installPromptEvent = null
+      this.installPromptEvent.userChoice.then(() => {
+        this.installPromptEvent = null
       })
-    }
+    },
   },
 })
 </script>
@@ -94,7 +96,8 @@ main {
 .button-group {
   display: flex;
   align-items: center;
-  .download-icon, .user-icon {
+  .download-icon,
+  .user-icon {
     padding: $spacer * 2;
   }
   .download-icon {
