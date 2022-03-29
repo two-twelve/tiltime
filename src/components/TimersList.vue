@@ -43,11 +43,18 @@
     </li>
     <li
       v-if="
-        store.state.activeTimerGroupUUID && store.getters.activeGroupDeletable
+        store.state.activeTimerGroupUUID
       "
       class="delete-group-button-container"
     >
       <button
+        class="create-timer-button button"
+        @click="createTimer"
+      >
+        Create A Timer
+      </button>
+      <button
+        v-if="store.getters.activeGroupDeletable"
         class="delete-group-button button"
         @click="deleteActiveTimerGroup"
       >
@@ -72,6 +79,14 @@ export default defineComponent({
     }
   },
   methods: {
+    createTimer() {
+      this.store.commit('createTimer', {
+        timerTitle: 'New Timer',
+        from: new Date(),
+        to: (() => { var to = new Date(); to.setHours(to.getHours()+1); return to })(),
+        groupUUID: this.store.state.activeTimerGroupUUID,
+      })
+    },
     deleteActiveTimerGroup() {
       this.store.commit('deleteTimerGroup', {
         targetUUID: this.store.state.activeTimerGroupUUID,
@@ -84,6 +99,7 @@ export default defineComponent({
 <style scoped lang="scss">
 .timers-list {
   width: 100%;
+  padding-top: $spacer;
   background: $colour-neutral;
   display: flex;
   flex-direction: row;
@@ -97,14 +113,17 @@ export default defineComponent({
   display: flex;
   justify-content: center;
 }
-.delete-group-button {
+.create-timer-button, .delete-group-button {
   margin: $spacer * 2;
+}
+.create-timer-button {
+  background: $colour-positive;
+}
+.delete-group-button {
   background: $colour-negative;
-  font-size: $font-size * 1.2;
 }
 .welcome-card {
   margin: $spacer * 2;
-  margin-bottom: 0;
   padding: $spacer * 2 $spacer * 4;
   width: 500px;
   max-width: 100%;
