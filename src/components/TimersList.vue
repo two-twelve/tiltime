@@ -99,7 +99,8 @@ export default defineComponent({
 <style scoped lang="scss">
 .timers-list {
   width: 100%;
-  padding-top: $spacer;
+  padding: 0 $spacer;
+  padding-top: $spacer*2;
   background: $colour-neutral;
   display: flex;
   flex-direction: row;
