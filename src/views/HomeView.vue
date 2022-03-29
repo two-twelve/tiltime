@@ -8,11 +8,13 @@
 import { defineComponent } from 'vue'
 import TimersTabs from '@/components/TimersTabs.vue'
 import TimersList from '@/components/TimersList.vue'
+import NewTimerForm from '@/components/NewTimerForm.vue'
 
 export default defineComponent({
   components: {
     TimersTabs,
-    TimersList
+    TimersList,
+    NewTimerForm,
   },
 })
 </script>
