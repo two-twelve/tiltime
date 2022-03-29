@@ -2,7 +2,9 @@
   <main>
     <div class="header-container">
       <header class="header">
-        <h1 ref="title" class="title">TilTi.me</h1>
+        <router-link to="home">
+          <h1 ref="title" class="title">TilTi.me</h1>
+        </router-link>
         <nav class="button-group">
           <font-awesome-icon 
             v-if="installPromptEvent"
