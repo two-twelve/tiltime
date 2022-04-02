@@ -90,7 +90,6 @@ export default defineComponent({
 }
 .welcome-card {
   margin: $spacer * 2;
-  margin-bottom: 0;
   padding: $spacer * 2 $spacer * 4;
   width: 500px;
   max-width: 100%;
