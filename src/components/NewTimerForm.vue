@@ -1,25 +1,50 @@
 <template>
   <section class="new-timer-form-container">
     <form class="new-timer-form">
-      <DatePicker
-        v-model="to"
-        :timezone="''"
-        :min-date="new Date()"
-        class="dateTime"
-        mode="dateTime"
-        color="pink"
-        is24hr
-      >
-        <template #default="{ inputValue, inputEvents }">
-          <input
-            class="time-range-input"
-            readonly
-            :value="inputValue.toLocaleString()"
-            :size="Math.max(inputValue.toLocaleString().length, 1)"
-            v-on="inputEvents"
-          />
-        </template>
-      </DatePicker>
+      <div class="datetime-inputs-container">
+        <DatePicker
+          v-model="from"
+          :timezone="''"
+          :max-date="to"
+          class="dateTime"
+          mode="dateTime"
+          color="pink"
+          is24hr
+        >
+          <template #default="{ inputValue, inputEvents }">
+            <div class="datetime-input-container">
+              <font-awesome-icon class="icon" icon="hourglass-start" />
+              <input
+                class="datetime-input"
+                readonly
+                :value="inputValue.toLocaleString()"
+                v-on="inputEvents"
+              />
+            </div>
+          </template>
+        </DatePicker>
+        <DatePicker
+          v-model="to"
+          :timezone="''"
+          :min-date="new Date()"
+          class="dateTime"
+          mode="dateTime"
+          color="pink"
+          is24hr
+        >
+          <template #default="{ inputValue, inputEvents }">
+            <div class="datetime-input-container">
+              <font-awesome-icon class="icon" icon="hourglass-end" />
+              <input
+                class="datetime-input"
+                readonly
+                :value="inputValue.toLocaleString()"
+                v-on="inputEvents"
+              />
+            </div>
+          </template>
+        </DatePicker>
+      </div>
       <button
         class="create-timer-button button"
         type="button"
@@ -79,6 +104,7 @@ export default defineComponent({
   max-width: 100%;
   padding: $spacer;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
 }
@@ -92,13 +118,25 @@ export default defineComponent({
 .create-timer-button {
   font-size: $font-size * 1.2;
 }
-.time-range-input {
+.datetime-inputs-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.datetime-input-container {
   margin: $spacer;
-  padding: $spacer $spacer * 2;
+  display: flex;
+  align-items: center;
   max-width: 100%;
   text-align: center;
-  background: $colour-positive;
-  border-radius: $spacer * 3;
+  .datetime-input {
+    margin-left: $spacer;
+    padding: $spacer $spacer * 2;
+    width: 16ch;
+    text-align:center;
+    border-radius: $spacer * 3;
+    background: $colour-positive;
+  }
 }
 .create-timer-button {
   background: $colour-positive;
