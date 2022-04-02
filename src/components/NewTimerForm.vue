@@ -79,6 +79,16 @@ export default defineComponent({
       })(),
     }
   },
+  mounted() {
+    this.$watch(
+      ()=>this.to,
+      ()=>{
+        if (this.from > this.to) {
+          this.from = this.to;
+        }
+      }
+    )
+  },
   methods: {
     createTimer() {
       const from = new Date()
@@ -89,7 +99,7 @@ export default defineComponent({
         groupUUID: this.store.state.activeTimerGroupUUID,
       })
     },
-  },
+  }
 })
 </script>
 
