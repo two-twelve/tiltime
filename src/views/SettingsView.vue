@@ -1,10 +1,7 @@
 <template>
   <nav>
     <router-link class="home-link" to="home">
-      <font-awesome-icon
-        class="back-icon"
-        :icon="['fas', 'arrow-circle-left']"
-      />
+      <font-awesome-icon class="back-icon" :icon="['fas', 'arrow-circle-left']" />
       Back To My Timers
     </router-link>
   </nav>
@@ -26,22 +23,13 @@
     </section>
     <section class="settings-group colour-themes">
       <h2 class="section-title">Colour Themes</h2>
-      <options-list
-        class="options-list"
-        :mode="'radio'"
-        :options="colourThemeOptions"
-        @change="setColourTheme"
-      />
+      <options-list class="options-list" :mode="'radio'" :options="colourThemeOptions" @change="setColourTheme" />
     </section>
     <section class="settings-group about">
       <h2 class="section-title">About</h2>
       <p>
         This app is open source! You can find it on
-        <a
-          class="github-link"
-          href="https://github.com/TheTeaCat/tiltime"
-          target="_blank"
-        >
+        <a class="github-link" href="https://github.com/TheTeaCat/tiltime" target="_blank">
           GitHub<font-awesome-icon class="icon" :icon="['fab', 'github']" />
         </a>
       </p>
@@ -49,15 +37,8 @@
     <section class="settings-group delete-data">
       <h2 class="section-title">Your Data</h2>
       <form class="delete-data-form">
-        <button
-          class="delete-data-button button"
-          type="button"
-          @click="deleteUserData"
-        >
-          <font-awesome-icon
-            class="icon"
-            :icon="['fas', 'exclamation-circle']"
-          />
+        <button class="delete-data-button button" type="button" @click="deleteUserData">
+          <font-awesome-icon class="icon" :icon="['fas', 'exclamation-circle']" />
           {{ deleteUserDataConfirmState ? 'Confirm' : 'Delete Your Data' }}
         </button>
         <span v-if="deleteUserDataConfirmState" class="warning-message">
@@ -96,23 +77,17 @@ export default defineComponent({
         {
           name: 'When a timer ends',
           value: NotificationType.end,
-          selected: this.store.state.user.notifications.includes(
-            NotificationType.end
-          ),
+          selected: this.store.state.user.notifications.includes(NotificationType.end),
         },
         {
           name: 'When a timer has one hour remaining',
           value: NotificationType.hourBefore,
-          selected: this.store.state.user.notifications.includes(
-            NotificationType.hourBefore
-          ),
+          selected: this.store.state.user.notifications.includes(NotificationType.hourBefore),
         },
         {
           name: 'The day before a timer ends',
           value: NotificationType.dayBefore,
-          selected: this.store.state.user.notifications.includes(
-            NotificationType.dayBefore
-          ),
+          selected: this.store.state.user.notifications.includes(NotificationType.dayBefore),
         },
       ]
     },
@@ -161,9 +136,7 @@ export default defineComponent({
       }>
     ) {
       this.store.commit('updateNotifications', {
-        newNotifications: newNotificationOptions
-          .filter((option) => option.selected)
-          .map((option) => option.value),
+        newNotifications: newNotificationOptions.filter((option) => option.selected).map((option) => option.value),
       })
     },
     setColourTheme(
@@ -174,9 +147,7 @@ export default defineComponent({
       }>
     ) {
       this.store.commit('setColourTheme', {
-        newColourTheme: newColourThemeOptions.filter(
-          (option) => option.selected
-        )[0].value,
+        newColourTheme: newColourThemeOptions.filter((option) => option.selected)[0].value,
       })
     },
   },

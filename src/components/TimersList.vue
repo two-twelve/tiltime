@@ -11,23 +11,15 @@
     <li
       v-if="
         store.getters.activeTimerGroup.timers.length == 0 &&
-        (store.getters.activeTimerGroup.title === 'Welcome' ||
-          store.state.user.timerGroups.length == 1)
+        (store.getters.activeTimerGroup.title === 'Welcome' || store.state.user.timerGroups.length == 1)
       "
       class="welcome-card"
     >
       <h1 class="welcome-title">🎉 Welcome to TilTi.me 🥳</h1>
       <p class="version-warning">
-        <font-awesome-icon
-          class="icon"
-          :icon="['fas', 'exclamation-triangle']"
-        />
-        This is an alpha build. Tilti.me is still in early development and your
-        data may be lost.
-        <font-awesome-icon
-          class="icon"
-          :icon="['fas', 'exclamation-triangle']"
-        />
+        <font-awesome-icon class="icon" :icon="['fas', 'exclamation-triangle']" />
+        This is an alpha build. Tilti.me is still in early development and your data may be lost.
+        <font-awesome-icon class="icon" :icon="['fas', 'exclamation-triangle']" />
       </p>
       <p>Get started by making yourself a timer! You could:</p>
       <ul>
@@ -37,22 +29,14 @@
       </ul>
       <p>
         If you run into trouble, make an issue on
-        <a href="https://github.com/TheTeaCat/tiltime" target="_blank">GitHub</a
-        >.
+        <a href="https://github.com/TheTeaCat/tiltime" target="_blank">GitHub</a>.
       </p>
     </li>
     <li
-      v-if="
-        store.state.activeTimerGroupUUID && store.getters.activeGroupDeletable
-      "
+      v-if="store.state.activeTimerGroupUUID && store.getters.activeGroupDeletable"
       class="delete-group-button-container"
     >
-      <button
-        class="delete-group-button button"
-        @click="deleteActiveTimerGroup"
-      >
-        Delete This Group
-      </button>
+      <button class="delete-group-button button" @click="deleteActiveTimerGroup">Delete This Group</button>
     </li>
   </ul>
 </template>
@@ -85,7 +69,7 @@ export default defineComponent({
 .timers-list {
   width: 100%;
   padding: 0 $spacer;
-  padding-top: $spacer*2;
+  padding-top: $spacer * 2;
   background: $colour-neutral;
   display: flex;
   flex-direction: row;

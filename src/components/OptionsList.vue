@@ -10,10 +10,7 @@
         }
       "
     >
-      <font-awesome-icon
-        class="icon"
-        :icon="option.selected ? checkedIcon : ['far', 'circle']"
-      />
+      <font-awesome-icon class="icon" :icon="option.selected ? checkedIcon : ['far', 'circle']" />
       {{ option.name }}
     </li>
   </ul>
@@ -25,9 +22,7 @@ import { defineComponent, PropType } from 'vue'
 export default defineComponent({
   props: {
     options: {
-      type: Array as PropType<
-        { name: string; value: any; selected: boolean }[]
-      >,
+      type: Array as PropType<{ name: string; value: any; selected: boolean }[]>,
       required: true,
     },
     mode: {

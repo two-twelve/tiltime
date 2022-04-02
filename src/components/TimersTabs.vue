@@ -4,9 +4,7 @@
       <li
         v-for="timerGroup of store.state.user.timerGroups"
         :key="timerGroup.uuid"
-        :class="
-          timerGroup.uuid == store.state.activeTimerGroupUUID ? 'selected' : ''
-        "
+        :class="timerGroup.uuid == store.state.activeTimerGroupUUID ? 'selected' : ''"
         @click="
           (e) => {
             setActiveTimerGroup(e, timerGroup.uuid)
@@ -23,11 +21,7 @@
         <span :ref="timerGroup.uuid" class="underline"></span>
       </li>
       <li>
-        <font-awesome-icon
-          class="delete-icon"
-          :icon="['fas', 'plus']"
-          @click="createNewTimerGroup"
-        />
+        <font-awesome-icon class="delete-icon" :icon="['fas', 'plus']" @click="createNewTimerGroup" />
       </li>
     </ol>
   </nav>
@@ -59,11 +53,7 @@ export default defineComponent({
       if (this.currentUnderline) {
         this.currentUnderline.remove()
       }
-      const target = (
-        this.$refs[
-          this.store.state.activeTimerGroupUUID as string
-        ] as Array<HTMLElement>
-      )[0]
+      const target = (this.$refs[this.store.state.activeTimerGroupUUID as string] as Array<HTMLElement>)[0]
       this.currentUnderline = annotate(target, { type: 'underline' })
       this.currentUnderline.show()
     },
@@ -72,10 +62,7 @@ export default defineComponent({
       this.store.commit('setActiveTimerGroup', {
         timerGroupUUID: uuid,
       })
-      if (
-        oldActiveTimerGroupUUID !== this.store.state.activeTimerGroupUUID &&
-        event.target
-      ) {
+      if (oldActiveTimerGroupUUID !== this.store.state.activeTimerGroupUUID && event.target) {
         ;(event.target as HTMLElement).blur()
         this.createUnderline()
       }

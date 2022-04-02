@@ -9,11 +9,7 @@
           @keyup="updateTimerTitle"
           @change="updateTimerTitle"
         />
-        <font-awesome-icon
-          class="delete-icon"
-          :icon="['fas', 'times']"
-          @click="deleteTimer"
-        />
+        <font-awesome-icon class="delete-icon" :icon="['fas', 'times']" @click="deleteTimer" />
       </h1>
 
       <div class="start-end-container">
@@ -33,19 +29,12 @@
 
       <div class="progress-bar-container">
         <span class="progress-indicator-container">
-          <div
-            class="progress-indicator"
-            :style="'flex-basis:' + (100 - percentageElapsed) + '%'"
-          >
+          <div class="progress-indicator" :style="'flex-basis:' + (100 - percentageElapsed) + '%'">
             {{ percentageElapsed }}% elapsed
           </div>
         </span>
         <div class="progress-bar">
-          <span
-            class="elapsed-bar"
-            :style="'flex-basis:' + percentageElapsed + '%'"
-          >
-          </span>
+          <span class="elapsed-bar" :style="'flex-basis:' + percentageElapsed + '%'"> </span>
           <span class="remaining-bar"></span>
         </div>
       </div>
@@ -98,9 +87,7 @@ export default defineComponent({
       }
       return Math.min(
         Math.round(
-          (((this.currentTime - this.from.getTime()) /
-            (this.to.getTime() - this.from.getTime())) *
-            100 +
+          (((this.currentTime - this.from.getTime()) / (this.to.getTime() - this.from.getTime())) * 100 +
             Number.EPSILON) *
             100
         ) / 100,
@@ -117,8 +104,7 @@ export default defineComponent({
     this.$watch(
       () =>
         this.store.state.user.timerGroups.filter(
-          (timerGroup) =>
-            timerGroup.uuid === this.store.state.activeTimerGroupUUID
+          (timerGroup) => timerGroup.uuid === this.store.state.activeTimerGroupUUID
         )[0].timers.length,
       () => {
         if (this.crossOutAnnotation) {

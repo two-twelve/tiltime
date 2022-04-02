@@ -2,24 +2,11 @@
   <section class="new-timer-form-container">
     <form class="new-timer-form">
       <div class="datetime-inputs-container">
-        <DatePicker
-          v-model="from"
-          :timezone="''"
-          :max-date="to"
-          class="dateTime"
-          mode="dateTime"
-          color="pink"
-          is24hr
-        >
+        <DatePicker v-model="from" :timezone="''" :max-date="to" class="dateTime" mode="dateTime" color="pink" is24hr>
           <template #default="{ inputValue, inputEvents }">
             <div class="datetime-input-container">
               <font-awesome-icon class="icon" icon="hourglass-start" />
-              <input
-                class="datetime-input"
-                readonly
-                :value="inputValue.toLocaleString()"
-                v-on="inputEvents"
-              />
+              <input class="datetime-input" readonly :value="inputValue.toLocaleString()" v-on="inputEvents" />
             </div>
           </template>
         </DatePicker>
@@ -35,23 +22,12 @@
           <template #default="{ inputValue, inputEvents }">
             <div class="datetime-input-container">
               <font-awesome-icon class="icon" icon="hourglass-end" />
-              <input
-                class="datetime-input"
-                readonly
-                :value="inputValue.toLocaleString()"
-                v-on="inputEvents"
-              />
+              <input class="datetime-input" readonly :value="inputValue.toLocaleString()" v-on="inputEvents" />
             </div>
           </template>
         </DatePicker>
       </div>
-      <button
-        class="create-timer-button button"
-        type="button"
-        @click="createTimer"
-      >
-        Create Timer
-      </button>
+      <button class="create-timer-button button" type="button" @click="createTimer">Create Timer</button>
     </form>
   </section>
 </template>
@@ -81,10 +57,10 @@ export default defineComponent({
   },
   mounted() {
     this.$watch(
-      ()=>this.to,
-      ()=>{
+      () => this.to,
+      () => {
         if (this.from > this.to) {
-          this.from = this.to;
+          this.from = this.to
         }
       }
     )
@@ -99,7 +75,7 @@ export default defineComponent({
         groupUUID: this.store.state.activeTimerGroupUUID,
       })
     },
-  }
+  },
 })
 </script>
 
@@ -143,7 +119,7 @@ export default defineComponent({
     margin-left: $spacer;
     padding: $spacer $spacer * 2;
     width: 16ch;
-    text-align:center;
+    text-align: center;
     border-radius: $spacer * 3;
     background: $colour-positive;
   }
