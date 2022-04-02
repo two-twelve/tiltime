@@ -17,46 +17,14 @@
       </h1>
 
       <div class="start-end-container">
-        <DatePicker
-          v-model="localFrom"
-          :timezone="''"
-          :max-date="localTo"
-          mode="dateTime"
-          color="pink"
-          is24hr
-        >
-          <template #default="{ inputValue, inputEvents }">
-            <p class="start-container">
-              <font-awesome-icon class="icon" icon="hourglass-start" />
-              <input
-                readonly
-                :value="inputValue.toLocaleString()"
-                :size="Math.max(inputValue.toLocaleString().length, 1)"
-                v-on="inputEvents"
-              />
-            </p>
-          </template>
-        </DatePicker>
-        <DatePicker
-          v-model="localTo"
-          :timezone="''"
-          :min-date="localFrom"
-          mode="dateTime"
-          color="pink"
-          is24hr
-        >
-          <template #default="{ inputValue, inputEvents }">
-            <p class="end-container">
-              <font-awesome-icon class="icon" icon="hourglass-start" />
-              <input
-                readonly
-                :value="inputValue.toLocaleString()"
-                :size="Math.max(inputValue.toLocaleString().length, 1)"
-                v-on="inputEvents"
-              />
-            </p>
-          </template>
-        </DatePicker>
+        <p class="start-container">
+          <font-awesome-icon class="icon" icon="hourglass-start" />
+          {{ from.toLocaleString('en-GB', dateFormatOptions) }}
+        </p>
+        <p class="end-container">
+          <font-awesome-icon class="icon" icon="hourglass-end" />
+          {{ to.toLocaleString('en-GB', dateFormatOptions) }}
+        </p>
       </div>
 
       <div class="countdown-container">
@@ -89,10 +57,8 @@
 import { defineComponent } from 'vue'
 import { useStore } from '@/store'
 import { annotate } from 'rough-notation'
-import { DatePicker } from 'v-calendar'
 
 export default defineComponent({
-  components: { DatePicker },
   props: {
     uuid: { type: String, required: true },
     title: { type: String, required: true },
@@ -113,8 +79,6 @@ export default defineComponent({
       localTitle: this.title,
       crossOutAnnotation: undefined as any,
       crossedOutOnMount: false,
-      localFrom: this.from,
-      localTo: this.to,
     }
   },
   computed: {
@@ -162,24 +126,6 @@ export default defineComponent({
         }
       },
       { deep: true }
-    )
-    this.$watch(
-      () => this.localFrom,
-      () => {
-        this.store.commit('updateTimerFrom', {
-          targetUUID: this.uuid,
-          newFrom: this.localFrom,
-        })
-      }
-    )
-    this.$watch(
-      () => this.localTo,
-      () => {
-        this.store.commit('updateTimerTo', {
-          targetUUID: this.uuid,
-          newTo: this.localTo,
-        })
-      }
     )
   },
   methods: {
