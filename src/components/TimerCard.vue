@@ -10,7 +10,7 @@
           @keyup="updateTimerTitle"
           @change="updateTimerTitle"
         />
-        <div class="timer-buttons">
+        <div class="timer-buttons" v-if="uuid !== ''">
           <p v-if="justCopiedShareLink" class="copied-notif">Copied!</p>
           <font-awesome-icon class="share-icon" :icon="['fas', 'arrow-up']" :transform="{ rotate: 45 }" @click="shareTimer"/>
           <font-awesome-icon class="delete-icon" :icon="['fas', 'times']" @click="deleteTimer" />
