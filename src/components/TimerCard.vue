@@ -6,6 +6,7 @@
           v-model="localTitle"
           class="timer-title-input"
           maxlength="20"
+          :disabled="uuid === ''"
           @keyup="updateTimerTitle"
           @change="updateTimerTitle"
         />
@@ -49,7 +50,7 @@ import { annotate } from 'rough-notation'
 
 export default defineComponent({
   props: {
-    uuid: { type: String, required: true },
+    uuid: { type: String, default: '' },
     title: { type: String, required: true },
     from: { type: Date, required: true },
     to: { type: Date, required: true },
@@ -165,12 +166,18 @@ export default defineComponent({
       }
     },
     deleteTimer() {
+      if (this.uuid === '') {
+        return
+      }
       this.store.commit('deleteTimer', {
         targetUUID: this.uuid,
         targetTitle: this.title,
       })
     },
     updateTimerTitle() {
+      if (this.uuid === '') {
+        return
+      }
       this.store.commit('updateTimerTitle', {
         targetUUID: this.uuid,
         targetTitle: this.title,
