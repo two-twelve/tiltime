@@ -107,7 +107,6 @@ export default defineComponent({
     },
     shareLink(): string {
       return encodeURIComponent(
-        window.location.host +
           this.$router.currentRoute.value.fullPath +
           'add-timer?title=' +
           this.title +
@@ -223,7 +222,7 @@ export default defineComponent({
           url: this.shareLink,
         })
       } else {
-        navigator.clipboard.writeText(this.shareLink).then(() => {
+        navigator.clipboard.writeText(window.location.host + this.shareLink).then(() => {
           this.justCopiedShareLink = true
           setTimeout(() => (this.justCopiedShareLink = false), 1000)
         })
