@@ -10,9 +10,14 @@
           @keyup="updateTimerTitle"
           @change="updateTimerTitle"
         />
-        <div class="timer-buttons" v-if="uuid !== ''">
+        <div v-if="uuid !== ''" class="timer-buttons">
           <p v-if="justCopiedShareLink" class="copied-notif">Copied!</p>
-          <font-awesome-icon class="share-icon" :icon="['fas', 'arrow-up']" :transform="{ rotate: 45 }" @click="shareTimer"/>
+          <font-awesome-icon
+            class="share-icon"
+            :icon="['fas', 'arrow-up']"
+            :transform="{ rotate: 45 }"
+            @click="shareTimer"
+          />
           <font-awesome-icon class="delete-icon" :icon="['fas', 'times']" @click="deleteTimer" />
         </div>
       </h1>
@@ -101,8 +106,17 @@ export default defineComponent({
       )
     },
     shareLink(): string {
-      return window.location.host + this.$router.currentRoute.value.fullPath + "add-timer?title=" + this.title + "&from=" + Math.ceil(this.from.getTime()/1000) + "&to=" + Math.ceil(this.to.getTime()/1000)
-    }
+      return (
+        window.location.host +
+        this.$router.currentRoute.value.fullPath +
+        'add-timer?title=' +
+        this.title +
+        '&from=' +
+        Math.ceil(this.from.getTime() / 1000) +
+        '&to=' +
+        Math.ceil(this.to.getTime() / 1000)
+      )
+    },
   },
   mounted() {
     setInterval(this.updateCurrentTime, 1000 / 30)
@@ -204,19 +218,17 @@ export default defineComponent({
     shareTimer() {
       if ((navigator as any).canShare) {
         navigator.share({
-          title: "TilTi.me",
+          title: 'TilTi.me',
           text: this.title,
-          url: this.shareLink
-        });
+          url: this.shareLink,
+        })
       } else {
-        navigator.clipboard
-          .writeText(this.shareLink)
-          .then(() => {
-            this.justCopiedShareLink = true;
-            setTimeout(() => (this.justCopiedShareLink = false), 1000);
-          });
-      }  
-    }
+        navigator.clipboard.writeText(this.shareLink).then(() => {
+          this.justCopiedShareLink = true
+          setTimeout(() => (this.justCopiedShareLink = false), 1000)
+        })
+      }
+    },
   },
 })
 </script>
@@ -267,10 +279,11 @@ export default defineComponent({
           left: 50%;
           transform: translateX(-50%);
           background: $colour-positive;
-          padding: $spacer $spacer*2;
-          border-radius: $spacer*3;
+          padding: $spacer $spacer * 2;
+          border-radius: $spacer * 3;
         }
-        .delete-icon, .share-icon {
+        .delete-icon,
+        .share-icon {
           margin-left: $spacer;
         }
         .share-icon {

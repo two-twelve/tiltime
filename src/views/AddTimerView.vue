@@ -9,7 +9,16 @@
   <div class="groups-list-container">
     <h1 class="title">Add This Timer To:</h1>
     <ul class="groups-list">
-      <li v-for="timerGroup of store.state.user.timerGroups" :key="timerGroup.uuid" class="groups-list-item" @click="()=>{createTimer(timerGroup.uuid)}">
+      <li
+        v-for="timerGroup of store.state.user.timerGroups"
+        :key="timerGroup.uuid"
+        class="groups-list-item"
+        @click="
+          () => {
+            createTimer(timerGroup.uuid)
+          }
+        "
+      >
         {{ timerGroup.title }}
         <font-awesome-icon class="icon" :icon="['fas', 'arrow-circle-right']" />
       </li>
@@ -57,8 +66,8 @@ export default defineComponent({
         groupUUID: groupUUID,
       })
       this.$router.push('home')
-    }
-  }
+    },
+  },
 })
 </script>
 
