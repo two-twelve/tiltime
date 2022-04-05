@@ -10,7 +10,11 @@
           @keyup="updateTimerTitle"
           @change="updateTimerTitle"
         />
-        <font-awesome-icon class="delete-icon" :icon="['fas', 'times']" @click="deleteTimer" />
+        <div class="timer-buttons">
+          <p v-if="justCopiedShareLink" class="copied-notif">Copied!</p>
+          <font-awesome-icon class="share-icon" :icon="['fas', 'arrow-up']" :transform="{ rotate: 45 }" @click="shareTimer"/>
+          <font-awesome-icon class="delete-icon" :icon="['fas', 'times']" @click="deleteTimer" />
+        </div>
       </h1>
 
       <div class="start-end-container">
@@ -69,6 +73,7 @@ export default defineComponent({
       localTitle: this.title,
       crossOutAnnotation: undefined as any,
       crossedOutOnMount: false,
+      justCopiedShareLink: false,
     }
   },
   computed: {
@@ -95,6 +100,9 @@ export default defineComponent({
         99.99
       )
     },
+    shareLink(): string {
+      return window.location.host + this.$router.currentRoute.value.fullPath + "add-timer?title=" + this.title + "&from=" + Math.ceil(this.from.getTime()/1000) + "&to=" + Math.ceil(this.to.getTime()/1000)
+    }
   },
   mounted() {
     setInterval(this.updateCurrentTime, 1000 / 30)
@@ -193,6 +201,22 @@ export default defineComponent({
       })
       this.crossOutAnnotation.show()
     },
+    shareTimer() {
+      if ((navigator as any).canShare) {
+        navigator.share({
+          title: "TilTi.me",
+          text: this.title,
+          url: this.shareLink
+        });
+      } else {
+        navigator.clipboard
+          .writeText(this.shareLink)
+          .then(() => {
+            this.justCopiedShareLink = true;
+            setTimeout(() => (this.justCopiedShareLink = false), 1000);
+          });
+      }  
+    }
   },
 })
 </script>
@@ -201,84 +225,108 @@ export default defineComponent({
 .timer-container {
   margin: $spacer * 2;
   position: relative;
-}
-.timer-card {
-  padding: $spacer * 3;
-  max-width: 400px;
-  background: $background;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  border-radius: $spacer * 5;
-}
-.timer-title,
-.progress-bar-container {
-  flex-basis: 100%;
-}
-.start-end-container,
-.countdown-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.timer-title {
-  font-size: $font-size * 1.8;
-  display: flex;
-  justify-content: space-between;
-}
-.timer-title-input {
-  padding: $spacer $spacer;
-  width: 90%;
-  font-size: inherit;
-  font-weight: $font-weight-bold;
-  text-align: left;
-}
-.delete-icon {
-  padding: $spacer;
-  font-size: $font-size * 1.4;
-}
-.start-container,
-.end-container {
-  display: flex;
-  align-items: center;
-}
-.icon {
-  margin-right: $spacer;
-}
-.countdown-container {
-  flex-grow: 1;
-  text-align: right;
-}
-.countdown {
-  white-space: pre-line;
-}
-.progress-bar {
-  display: flex;
-}
-.progress-indicator-container {
-  margin-top: $spacer;
-  display: flex;
-  flex-direction: row-reverse;
-}
-.progress-indicator {
-  font-size: $font-size * 0.8;
-  text-align: left;
-  white-space: nowrap;
-}
-.elapsed-bar,
-.remaining-bar {
-  height: 5px;
-}
-.elapsed-bar {
-  background: $dark-positive;
-  border-radius: 3px 0px 0px 3px;
-}
-.elapsed-bar[style='flex-basis: 100%;'] {
-  border-radius: 3px;
-}
-.remaining-bar {
-  background: $dark-negative;
-  border-radius: 0px 3px 3px 0px;
-  flex-grow: 1;
+  .timer-card {
+    padding: $spacer * 3;
+    max-width: 400px;
+    background: $background;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-radius: $spacer * 5;
+    .timer-title,
+    .progress-bar-container {
+      flex-basis: 100%;
+    }
+    .start-end-container,
+    .countdown-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .timer-title {
+      font-size: $font-size * 1.8;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      .timer-title-input {
+        padding: $spacer $spacer;
+        width: 90%;
+        font-size: inherit;
+        font-weight: $font-weight-bold;
+        text-align: left;
+      }
+      .timer-buttons {
+        display: flex;
+        align-items: center;
+        padding: $spacer;
+        position: relative;
+        .copied-notif {
+          position: absolute;
+          font-size: $font-size * 1.2;
+          bottom: 100%;
+          left: 50%;
+          transform: translateX(-50%);
+          background: $colour-positive;
+          padding: $spacer $spacer*2;
+          border-radius: $spacer*3;
+        }
+        .delete-icon, .share-icon {
+          margin-left: $spacer;
+        }
+        .share-icon {
+          font-size: $font-size * 1.4;
+        }
+        .delete-icon {
+          font-size: $font-size * 1.4;
+        }
+      }
+    }
+    .start-container,
+    .end-container {
+      display: flex;
+      align-items: center;
+      .icon {
+        margin-right: $spacer;
+      }
+    }
+    .countdown-container {
+      flex-grow: 1;
+      text-align: right;
+      .countdown {
+        white-space: pre-line;
+      }
+    }
+    .progress-bar-container {
+      .progress-indicator-container {
+        margin-top: $spacer;
+        display: flex;
+        flex-direction: row-reverse;
+        .progress-indicator {
+          font-size: $font-size * 0.8;
+          text-align: left;
+          white-space: nowrap;
+        }
+      }
+      .progress-bar {
+        display: flex;
+        .elapsed-bar,
+        .remaining-bar {
+          height: 5px;
+        }
+        .elapsed-bar {
+          background: $dark-positive;
+          border-radius: 3px 0px 0px 3px;
+        }
+        .elapsed-bar[style='flex-basis: 100%;'] {
+          border-radius: 3px;
+        }
+        .remaining-bar {
+          background: $dark-negative;
+          border-radius: 0px 3px 3px 0px;
+          flex-grow: 1;
+        }
+      }
+    }
+  }
 }
 </style>
