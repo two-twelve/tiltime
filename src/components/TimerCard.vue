@@ -115,13 +115,13 @@ export default defineComponent({
     },
     shareLink(): string {
       return (
-          this.$router.currentRoute.value.fullPath +
-          'add-timer?title=' +
-          encodeURIComponent(this.title) +
-          '&from=' +
-          Math.ceil(this.from.getTime() / 1000) +
-          '&to=' +
-          Math.ceil(this.to.getTime() / 1000)
+        this.$router.currentRoute.value.fullPath +
+        'add-timer?title=' +
+        encodeURIComponent(this.title) +
+        '&from=' +
+        Math.ceil(this.from.getTime() / 1000) +
+        '&to=' +
+        Math.ceil(this.to.getTime() / 1000)
       )
     },
   },
