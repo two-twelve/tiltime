@@ -82,10 +82,10 @@ export default defineComponent({
   flex-basis: 100%;
   display: flex;
   justify-content: center;
-}
-.delete-group-button {
-  margin: $spacer * 2;
-  background: $colour-negative;
+  .delete-group-button {
+    margin: $spacer * 2;
+    background: $colour-negative;
+  }
 }
 .welcome-card {
   margin: $spacer * 2;

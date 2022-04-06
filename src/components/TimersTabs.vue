@@ -91,30 +91,30 @@ nav {
   justify-content: center;
   width: 100%;
   margin-bottom: $spacer;
-}
-ol {
-  padding: 0 $spacer * 2 $spacer * 2 $spacer * 2;
-  width: $app-width;
-  max-width: 100%;
-  display: flex;
-  flex-direction: row;
-  overflow-x: auto;
-  overflow-y: hidden;
-}
-li {
-  margin: $spacer * 2 $spacer;
-  display: flex;
-  align-items: center;
-  position: relative;
-  input {
-    text-align: center;
-    font-weight: $font-weight-bold;
+  ol {
+    padding: 0 $spacer * 2 $spacer * 2 $spacer * 2;
+    width: $app-width;
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    li {
+      margin: $spacer * 2 $spacer;
+      display: flex;
+      align-items: center;
+      position: relative;
+      input {
+        text-align: center;
+        font-weight: $font-weight-bold;
+      }
+      .underline {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+      }      
+    }
   }
-}
-.underline {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
 }
 </style>

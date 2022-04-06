@@ -94,13 +94,6 @@ export default defineComponent({
   align-items: center;
   justify-content: center;
 }
-.time-range {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-}
-.time-range-input,
 .create-timer-button {
   font-size: $font-size-m;
 }

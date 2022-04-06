@@ -107,7 +107,4 @@ main {
     font-size: $font-size-xxl;
   }
 }
-.timers-tab {
-  flex-grow: 1;
-}
 </style>

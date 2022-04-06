@@ -118,11 +118,13 @@ export default defineComponent({
     },
   },
   mounted() {
-    setInterval(this.updateCurrentTime, 1000 / 30)
     if (new Date() > this.to) {
       this.crossedOutOnMount = true
       this.crossOutTimer()
+    } else {
+      setInterval(this.checkIfTimerShouldBeCrossedOut, 1000 / 30)
     }
+    setInterval(this.updateCurrentTime, 1000 / 30)
     this.$watch(
       () =>
         this.store.state.user.timerGroups.filter(
@@ -139,8 +141,52 @@ export default defineComponent({
   methods: {
     updateCurrentTime() {
       this.currentTime = Date.now()
+    },
+    checkIfTimerShouldBeCrossedOut() {
       if (!this.crossOutAnnotation && new Date() > this.to) {
         this.crossOutTimer()
+      }
+    },
+    crossOutTimer() {
+      const target = this.$refs.card as HTMLElement
+      this.crossOutAnnotation = annotate(target, {
+        type: 'crossed-off',
+        color: '#000000',
+        animate: !this.crossedOutOnMount,
+      })
+      this.crossOutAnnotation.show()
+    },
+    deleteTimer() {
+      if (this.uuid === '') {
+        return
+      }
+      this.store.commit('deleteTimer', {
+        targetUUID: this.uuid,
+        targetTitle: this.title,
+      })
+    },
+    updateTimerTitle() {
+      if (this.uuid === '') {
+        return
+      }
+      this.store.commit('updateTimerTitle', {
+        targetUUID: this.uuid,
+        targetTitle: this.title,
+        newTitle: this.localTitle,
+      })
+    },
+    shareTimer() {
+      if ((navigator as any).canShare) {
+        navigator.share({
+          title: 'TilTi.me',
+          text: this.title,
+          url: this.shareLink,
+        })
+      } else {
+        navigator.clipboard.writeText(window.location.host + this.shareLink).then(() => {
+          this.justCopiedShareLink = true
+          setTimeout(() => (this.justCopiedShareLink = false), 1000)
+        })
       }
     },
     humanizeDuration(milliseconds: number): string {
@@ -184,48 +230,6 @@ export default defineComponent({
           seconds +
           (seconds == 1 ? ' second.' : ' seconds.')
         )
-      }
-    },
-    deleteTimer() {
-      if (this.uuid === '') {
-        return
-      }
-      this.store.commit('deleteTimer', {
-        targetUUID: this.uuid,
-        targetTitle: this.title,
-      })
-    },
-    updateTimerTitle() {
-      if (this.uuid === '') {
-        return
-      }
-      this.store.commit('updateTimerTitle', {
-        targetUUID: this.uuid,
-        targetTitle: this.title,
-        newTitle: this.localTitle,
-      })
-    },
-    crossOutTimer() {
-      const target = this.$refs.card as HTMLElement
-      this.crossOutAnnotation = annotate(target, {
-        type: 'crossed-off',
-        color: '#000000',
-        animate: !this.crossedOutOnMount,
-      })
-      this.crossOutAnnotation.show()
-    },
-    shareTimer() {
-      if ((navigator as any).canShare) {
-        navigator.share({
-          title: 'TilTi.me',
-          text: this.title,
-          url: this.shareLink,
-        })
-      } else {
-        navigator.clipboard.writeText(window.location.host + this.shareLink).then(() => {
-          this.justCopiedShareLink = true
-          setTimeout(() => (this.justCopiedShareLink = false), 1000)
-        })
       }
     },
   },
