@@ -333,14 +333,14 @@ export default defineComponent({
           height: 5px;
         }
         .elapsed-bar {
-          background: $dark-positive;
+          background: $colour-dark-positive;
           border-radius: 3px 0px 0px 3px;
         }
         .elapsed-bar[style='flex-basis: 100%;'] {
           border-radius: 3px;
         }
         .remaining-bar {
-          background: $dark-negative;
+          background: $colour-dark-negative;
           border-radius: 0px 3px 3px 0px;
           flex-grow: 1;
         }

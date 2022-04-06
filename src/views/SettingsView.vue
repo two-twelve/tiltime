@@ -161,7 +161,7 @@ nav {
       align-items: center;
       .delete-data-button {
         margin: 0 $spacer;
-        background: $dark-negative;
+        background: $colour-dark-negative;
         color: $background;
         flex-shrink: 0;
         .icon {

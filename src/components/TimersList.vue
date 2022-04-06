@@ -104,10 +104,10 @@ export default defineComponent({
     text-align: center;
   }
   .version-warning {
-    color: $dark-negative;
+    color: $colour-dark-negative;
     text-align: center;
     .icon {
-      color: $dark-negative;
+      color: $colour-dark-negative;
     }
   }
   p,

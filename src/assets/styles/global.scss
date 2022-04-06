@@ -9,14 +9,13 @@ $font-size-l: 22px;
 $font-size-m: 16px;
 $font-size-s: 11px;
 
+$background: #ffffff;
+$foreground: #000000;
 $colour-positive: hsl(77, 60%, 75%);
 $colour-neutral: hsl(205, 60%, 85%);
 $colour-negative: hsl(334, 60%, 80%);
-$background: #ffffff;
-$foreground: #000000;
-$foreground-alt: #4a5d18;
-$dark-negative: #e8005e;
-$dark-positive: #8dea32;
+$colour-dark-negative: hsl(334, 100%, 45%);
+$colour-dark-positive: hsl(77, 80%, 50%);
 
 $app-width: 800px;
 $spacer: 6px;
