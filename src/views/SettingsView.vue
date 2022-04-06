@@ -172,7 +172,7 @@ nav {
       .warning-message {
         margin-left: $spacer;
       }
-      @media (max-width: 960px) {
+      @media (max-width: $app-width) {
         flex-direction: column;
         .warning-message {
           margin-left: 0;
