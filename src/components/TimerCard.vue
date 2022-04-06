@@ -106,10 +106,10 @@ export default defineComponent({
       )
     },
     shareLink(): string {
-      return encodeURIComponent(
+      return (
           this.$router.currentRoute.value.fullPath +
           'add-timer?title=' +
-          this.title +
+          encodeURIComponent(this.title) +
           '&from=' +
           Math.ceil(this.from.getTime() / 1000) +
           '&to=' +
