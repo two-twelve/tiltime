@@ -3,8 +3,14 @@
     <li
       v-for="[optionIndex, option] of options.entries()"
       :key="optionIndex"
+      tabindex="0"
       class="option"
       @click="
+        () => {
+          handleClick(optionIndex)
+        }
+      "
+      @keyup.enter="
         () => {
           handleClick(optionIndex)
         }

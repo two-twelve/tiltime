@@ -13,7 +13,13 @@
         v-for="timerGroup of store.state.user.timerGroups"
         :key="timerGroup.uuid"
         class="groups-list-item"
+        tabindex="0"
         @click="
+          () => {
+            createTimer(timerGroup.uuid)
+          }
+        "
+        @keyup.enter="
           () => {
             createTimer(timerGroup.uuid)
           }

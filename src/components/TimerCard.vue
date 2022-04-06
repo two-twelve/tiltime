@@ -16,9 +16,17 @@
             class="share-icon"
             :icon="['fas', 'arrow-up']"
             :transform="{ rotate: 45 }"
+            tabindex="0"
             @click="shareTimer"
+            @keyup.enter="shareTimer"
           />
-          <font-awesome-icon class="delete-icon" :icon="['fas', 'times']" @click="deleteTimer" />
+          <font-awesome-icon
+            class="delete-icon"
+            :icon="['fas', 'times']"
+            tabindex="0"
+            @click="deleteTimer"
+            @keyup.enter="deleteTimer"
+          />
         </div>
       </h1>
 

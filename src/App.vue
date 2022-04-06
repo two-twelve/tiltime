@@ -2,7 +2,7 @@
   <main>
     <div class="header-container">
       <header class="header">
-        <router-link to="home">
+        <router-link to="home" tabindex="-1">
           <h1 ref="title" class="title">TilTi.me</h1>
         </router-link>
         <nav class="button-group">

@@ -27,7 +27,7 @@
           </template>
         </DatePicker>
       </div>
-      <button class="create-timer-button button" type="button" @click="createTimer">Create Timer</button>
+      <button class="create-timer-button button" type="button" tabindex="0" @click="createTimer">Create Timer</button>
     </form>
   </section>
 </template>
