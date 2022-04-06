@@ -1,6 +1,5 @@
 import { InjectionKey } from 'vue'
 import { createStore, useStore as baseUseStore, Store } from 'vuex'
-import NotificationType from './types/NotificationType'
 import ColourTheme from './types/ColourTheme'
 import Timer from './types/Timer'
 import TimerGroup from './types/TimerGroup'
@@ -26,7 +25,6 @@ const getDefaultState = () => {
   return {
     user: {
       timerGroups: [{ uuid: 'Welcome', title: 'Welcome', timers: [] }] as Array<TimerGroup>,
-      notifications: [NotificationType.end, NotificationType.hourBefore] as Array<NotificationType>,
       colourTheme: ColourTheme.system as ColourTheme,
     } as User,
     activeTimerGroupUUID: 'Welcome',
@@ -191,9 +189,6 @@ export const store = createStore<State>({
     },
     setColourTheme(state: State, { newColourTheme }: { newColourTheme: ColourTheme }): void {
       state.user.colourTheme = newColourTheme
-    },
-    updateNotifications(state: State, { newNotifications }: { newNotifications: Array<NotificationType> }): void {
-      state.user.notifications = newNotifications
     },
   },
 })

@@ -12,15 +12,6 @@
         <font-awesome-icon class="icon" :icon="['fas', 'cogs']" />
       </span>
     </h1>
-    <section class="settings-group push-notifications">
-      <h2 class="section-title">Push Notifications</h2>
-      <options-list
-        class="options-list"
-        :mode="'checkbox'"
-        :options="notificationOptions"
-        @change="updateNotifications"
-      />
-    </section>
     <section class="settings-group colour-themes">
       <h2 class="section-title">Colour Themes</h2>
       <options-list class="options-list" :mode="'radio'" :options="colourThemeOptions" @change="setColourTheme" />
@@ -53,7 +44,6 @@
 import { defineComponent } from 'vue'
 import { annotate } from 'rough-notation'
 import { useStore } from '@/store'
-import NotificationType from '@/types/NotificationType'
 import ColourTheme from '@/types/ColourTheme'
 import OptionsList from '@/components/OptionsList.vue'
 
@@ -68,29 +58,6 @@ export default defineComponent({
     }
   },
   computed: {
-    notificationOptions(): Array<{
-      name: string
-      value: any
-      selected: boolean
-    }> {
-      return [
-        {
-          name: 'When a timer ends',
-          value: NotificationType.end,
-          selected: this.store.state.user.notifications.includes(NotificationType.end),
-        },
-        {
-          name: 'When a timer has one hour remaining',
-          value: NotificationType.hourBefore,
-          selected: this.store.state.user.notifications.includes(NotificationType.hourBefore),
-        },
-        {
-          name: 'The day before a timer ends',
-          value: NotificationType.dayBefore,
-          selected: this.store.state.user.notifications.includes(NotificationType.dayBefore),
-        },
-      ]
-    },
     colourThemeOptions(): Array<{
       name: string
       value: any
@@ -127,17 +94,6 @@ export default defineComponent({
         this.store.commit('deleteUserData')
       }
       this.deleteUserDataConfirmState = !this.deleteUserDataConfirmState
-    },
-    updateNotifications(
-      newNotificationOptions: Array<{
-        name: string
-        value: any
-        selected: boolean
-      }>
-    ) {
-      this.store.commit('updateNotifications', {
-        newNotifications: newNotificationOptions.filter((option) => option.selected).map((option) => option.value),
-      })
     },
     setColourTheme(
       newColourThemeOptions: Array<{
@@ -194,7 +150,6 @@ nav {
       font-weight: $font-weight-bold;
     }
   }
-  .push-notifications,
   .colour-themes {
     .options-list {
       margin: $spacer * 2.5 $spacer;
