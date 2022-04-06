@@ -102,7 +102,7 @@ export default defineComponent({
 }
 .time-range-input,
 .create-timer-button {
-  font-size: $font-size * 1.2;
+  font-size: $font-size-m;
 }
 .datetime-inputs-container {
   display: flex;

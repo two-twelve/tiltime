@@ -116,7 +116,7 @@ nav {
   max-width: 100%;
   padding: $spacer * 2 $spacer * 4;
   .home-link {
-    font-size: $font-size * 1.2;
+    font-size: $font-size-m;
     font-weight: $font-weight-bold;
     .back-icon {
       margin-right: $spacer * 0.5;
@@ -132,7 +132,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: $font-size * 2;
+    font-size: $font-size-xl;
     font-weight: $font-weight-bold;
     .title-brackets {
       padding: 0 $spacer * 2;
@@ -146,7 +146,7 @@ nav {
     margin-bottom: $spacer * 6;
     .section-title {
       margin-bottom: $spacer * 3;
-      font-size: $font-size * 1.4;
+      font-size: $font-size-l;
       font-weight: $font-weight-bold;
     }
   }

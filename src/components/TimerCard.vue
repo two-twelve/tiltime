@@ -255,7 +255,7 @@ export default defineComponent({
       justify-content: center;
     }
     .timer-title {
-      font-size: $font-size * 1.8;
+      font-size: $font-size-xl;
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
@@ -273,7 +273,7 @@ export default defineComponent({
         position: relative;
         .copied-notif {
           position: absolute;
-          font-size: $font-size * 1.2;
+          font-size: $font-size-m;
           bottom: 100%;
           left: 50%;
           transform: translateX(-50%);
@@ -284,12 +284,7 @@ export default defineComponent({
         .delete-icon,
         .share-icon {
           margin-left: $spacer;
-        }
-        .share-icon {
-          font-size: $font-size * 1.4;
-        }
-        .delete-icon {
-          font-size: $font-size * 1.4;
+          font-size: $font-size-l;
         }
       }
     }
@@ -314,7 +309,7 @@ export default defineComponent({
         display: flex;
         flex-direction: row-reverse;
         .progress-indicator {
-          font-size: $font-size * 0.8;
+          font-size: $font-size-s;
           text-align: left;
           white-space: nowrap;
         }

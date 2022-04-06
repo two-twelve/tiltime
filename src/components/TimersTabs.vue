@@ -91,7 +91,6 @@ nav {
   justify-content: center;
   width: 100%;
   margin-bottom: $spacer;
-  font-size: $font-size * 1.2;
 }
 ol {
   padding: 0 $spacer * 2 $spacer * 2 $spacer * 2;

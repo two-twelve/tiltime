@@ -77,7 +77,7 @@ nav {
   max-width: 100%;
   padding: $spacer * 2 $spacer * 4 $spacer * 3 $spacer * 4;
   .home-link {
-    font-size: $font-size * 1.2;
+    font-size: $font-size-m;
     font-weight: $font-weight-bold;
     .back-icon {
       margin-right: $spacer * 0.5;
@@ -102,7 +102,7 @@ nav {
   .title {
     margin-right: $spacer;
     margin-bottom: $spacer;
-    font-size: $font-size * 1.6;
+    font-size: $font-size-l;
     font-weight: $font-weight-bold;
     text-align: center;
     flex-grow: 1;
@@ -115,7 +115,7 @@ nav {
     .groups-list-item {
       display: flex;
       margin: $spacer;
-      font-size: $font-size * 1.2;
+      font-size: $font-size-m;
       .icon {
         margin-left: $spacer;
       }

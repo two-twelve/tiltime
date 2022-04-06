@@ -86,7 +86,6 @@ export default defineComponent({
 .delete-group-button {
   margin: $spacer * 2;
   background: $colour-negative;
-  font-size: $font-size * 1.2;
 }
 .welcome-card {
   margin: $spacer * 2;
@@ -100,7 +99,7 @@ export default defineComponent({
   align-items: stretch;
   .welcome-title {
     margin: $spacer 0 $spacer * 2 0;
-    font-size: $font-size * 1.8;
+    font-size: $font-size-l;
     font-weight: $font-weight-bold;
     text-align: center;
   }

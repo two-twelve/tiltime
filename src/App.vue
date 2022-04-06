@@ -90,7 +90,7 @@ main {
 .title {
   align-self: flex-start;
   margin: 0 $spacer * 2 $spacer $spacer * 2;
-  font-size: $font-size * 2.5;
+  font-size: $font-size-xxl;
   font-weight: $font-weight-bold;
 }
 .button-group {
@@ -101,10 +101,10 @@ main {
     padding: $spacer * 2;
   }
   .download-icon {
-    font-size: $font-size * 1.5;
+    font-size: $font-size-l;
   }
   .user-icon {
-    font-size: $font-size * 2.5;
+    font-size: $font-size-xxl;
   }
 }
 .timers-tab {
