@@ -65,6 +65,9 @@ export default defineComponent({
         to: this.to,
         groupUUID: groupUUID,
       })
+      this.store.commit('setActiveTimerGroup', {
+        timerGroupUUID: groupUUID,
+      })
       this.$router.push('home')
     },
   },
