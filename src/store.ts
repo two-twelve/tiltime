@@ -189,6 +189,16 @@ export const store = createStore<State>({
       state.user.timerGroups[targetIndex1] = state.user.timerGroups[targetIndex2]
       state.user.timerGroups[targetIndex1] = target1
     },
+    swapOrderOfTimers(state: State, { targetTimerGroupUUID, targetIndex1, targetIndex2 }: { targetTimerGroupUUID: string, targetIndex1: number, targetIndex2: number }): void {
+      for (const timerGroup of state.user.timerGroups) {
+        if (timerGroup.uuid === targetTimerGroupUUID) {
+          const target1 = timerGroup.timers[targetIndex1]
+          timerGroup.timers[targetIndex1] = timerGroup.timers[targetIndex2]
+          timerGroup.timers[targetIndex1] = target1
+          return
+        }
+      }
+    },
     deleteUserData(state: State): void {
       this.replaceState(Object.assign(state, getDefaultState()))
     },
