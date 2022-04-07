@@ -19,7 +19,7 @@
             :icon="['fas', 'arrow-up']"
             :transform="{ rotate: 45 }"
             tabindex="0"
-            @click="shareTimer"
+            @pointerdown="shareTimer"
             @keyup.enter="shareTimer"
           />
           <font-awesome-icon
@@ -27,7 +27,7 @@
             aria-label="Delete This Timer"
             :icon="['fas', 'times']"
             tabindex="0"
-            @click="deleteTimer"
+            @pointerdown="deleteTimer"
             @keyup.enter="deleteTimer"
           />
         </div>
@@ -300,6 +300,7 @@ export default defineComponent({
         .share-icon {
           margin-left: $spacer;
           font-size: $font-size-l;
+          width: 16px;
         }
       }
     }
