@@ -1,38 +1,41 @@
 <template>
   <nav>
-    <ol>
-      <li
-        v-for="timerGroup of store.state.user.timerGroups"
-        :key="timerGroup.uuid"
-        :aria-label="'Go To Timer Group \'' + timerGroup.title + '\''"
-        :class="timerGroup.uuid == store.state.activeTimerGroupUUID ? 'selected' : ''"
-        @click="
-          (e) => {
-            setActiveTimerGroup(e, timerGroup.uuid)
-          }
-        "
-        @keyup.enter="
-          (e) => {
-            if (timerGroup.uuid === store.state.activeTimerGroupUUID) {
-              return
+    <ol class="timer-groups-list">
+      <VueDraggableNext class="timer-groups-list-draggable-section" :list="store.state.user.timerGroups" @change="updateTimerGroupOrder">
+        <li
+          v-for="timerGroup of store.state.user.timerGroups"
+          :key="timerGroup.uuid"
+          :aria-label="'Go To Timer Group \'' + timerGroup.title + '\''"
+          :class="(timerGroup.uuid == store.state.activeTimerGroupUUID ? 'selected' : '') + ' timer-groups-list-item'"
+          @pointerup="
+            (e) => {
+              setActiveTimerGroup(e, timerGroup.uuid)
             }
-            setActiveTimerGroup(e, timerGroup.uuid)
-          }
-        "
-      >
-        <input
-          maxlength="20"
-          aria-label="Current Timer Group Title"
-          :readonly="!(timerGroup.uuid === store.state.activeTimerGroupUUID)"
-          :value="timerGroup.title"
-          :size="timerGroup.title.length + 1"
-          @change="updateTimerGroupTitle"
-        />
-        <span :ref="timerGroup.uuid" class="underline"></span>
-      </li>
+          "
+          @keyup.enter="
+            (e) => {
+              if (timerGroup.uuid === store.state.activeTimerGroupUUID) {
+                return
+              }
+              setActiveTimerGroup(e, timerGroup.uuid)
+            }
+          "
+        >
+          <input
+            maxlength="20"
+            aria-label="Current Timer Group Title"
+            class="timer-group-title-input"
+            :readonly="!(timerGroup.uuid === store.state.activeTimerGroupUUID)"
+            :value="timerGroup.title"
+            :size="timerGroup.title.length + 1"
+            @change="updateTimerGroupTitle"
+          />
+          <span :ref="timerGroup.uuid" class="underline"></span>
+        </li>
+      </VueDraggableNext>
       <li>
         <font-awesome-icon
-          class="delete-icon"
+          class="delete-icon timer-groups-list-item"
           aria-label="Create A New Timer Group"
           :icon="['fas', 'plus']"
           @click="createNewTimerGroup"
@@ -46,8 +49,12 @@
 import { defineComponent } from 'vue'
 import { useStore } from '@/store'
 import { annotate } from 'rough-notation'
+import { VueDraggableNext } from 'vue-draggable-next'
 
 export default defineComponent({
+  components: {
+    VueDraggableNext
+  },
   data() {
     return {
       store: useStore(),
@@ -96,6 +103,12 @@ export default defineComponent({
         newTitle: (event.target as HTMLTextAreaElement).value,
       })
     },
+    updateTimerGroupOrder(event: { moved: { oldIndex: number, newIndex: number }}) {
+      this.store.commit('swapOrderOfTimerGroups', {
+        targetIndex1: event.moved.oldIndex,
+        targetIndex2: event.moved.newIndex
+      });
+    }
   },
 })
 </script>
@@ -106,20 +119,27 @@ nav {
   justify-content: center;
   width: 100%;
   margin-bottom: $spacer;
-  ol {
-    padding: 0 $spacer * 2 $spacer * 2 $spacer * 2;
+  .timer-groups-list {
     width: $app-width;
     max-width: 100%;
+    padding: 0 $spacer * 2 $spacer * 2 $spacer * 2;
     display: flex;
     flex-direction: row;
     overflow-x: auto;
     overflow-y: hidden;
-    li {
+    list-style: none;
+    .timer-groups-list-draggable-section {
+      display: flex;
+      flex-direction: row;
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+    .timer-groups-list-item {
       margin: $spacer * 2 $spacer;
       display: flex;
       align-items: center;
       position: relative;
-      input {
+      .timer-group-title-input {
         text-align: center;
         font-weight: $font-weight-bold;
       }
