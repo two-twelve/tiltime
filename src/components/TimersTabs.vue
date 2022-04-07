@@ -1,7 +1,7 @@
 <template>
   <nav>
     <ol class="timer-groups-list">
-      <VueDraggableNext class="timer-groups-list-draggable-section" :list="store.state.user.timerGroups" @change="updateTimerGroupOrder">
+      <VueDraggableNext class="timer-groups-list-draggable-section" :list="store.state.user.timerGroups" @change="updateTimerGroupsOrder">
         <li
           v-for="timerGroup of store.state.user.timerGroups"
           :key="timerGroup.uuid"
@@ -103,7 +103,7 @@ export default defineComponent({
         newTitle: (event.target as HTMLTextAreaElement).value,
       })
     },
-    updateTimerGroupOrder(event: { moved: { oldIndex: number, newIndex: number }}) {
+    updateTimerGroupsOrder(event: { moved: { oldIndex: number, newIndex: number }}) {
       this.store.commit('swapOrderOfTimerGroups', {
         targetIndex1: event.moved.oldIndex,
         targetIndex2: event.moved.newIndex
