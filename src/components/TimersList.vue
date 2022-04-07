@@ -1,13 +1,15 @@
 <template>
   <ul class="timers-list">
-    <TimerCard
-      v-for="timer of store.getters.activeTimerGroup.timers"
-      :key="timer.uuid"
-      :title="timer.title"
-      :from="timer.from"
-      :to="timer.to"
-      :uuid="timer.uuid"
-    />
+    <VueDraggableNext class="timers-list-draggable-section" :list="store.getters.activeTimerGroup.timers" @change="updateTimersOrder">
+      <TimerCard
+        v-for="timer of store.getters.activeTimerGroup.timers"
+        :key="timer.uuid"
+        :title="timer.title"
+        :from="timer.from"
+        :to="timer.to"
+        :uuid="timer.uuid"
+      />
+    </VueDraggableNext>
     <li
       v-if="
         store.getters.activeTimerGroup.timers.length == 0 &&
@@ -47,10 +49,12 @@
 import { defineComponent } from 'vue'
 import { useStore } from '@/store'
 import TimerCard from '@/components/TimerCard.vue'
+import { VueDraggableNext } from 'vue-draggable-next'
 
 export default defineComponent({
   components: {
     TimerCard,
+    VueDraggableNext,
   },
   data() {
     return {
@@ -63,6 +67,13 @@ export default defineComponent({
         targetUUID: this.store.state.activeTimerGroupUUID,
       })
     },
+    updateTimersOrder(event: { moved: { oldIndex: number, newIndex: number }}) {
+      this.store.commit('swapOrderOfTimers', {
+        targetTimerGroupUUID: this.store.state.activeTimerGroupUUID,
+        targetIndex1: event.moved.oldIndex,
+        targetIndex2: event.moved.newIndex
+      });
+    }
   },
 })
 </script>
@@ -79,51 +90,58 @@ export default defineComponent({
   align-content: flex-start;
   flex-wrap: wrap;
   overflow-y: scroll;
-}
-.delete-group-button-container {
-  flex-basis: 100%;
-  display: flex;
-  justify-content: center;
-  .delete-group-button {
+  .timers-list-draggable-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: flex-start;
+    flex-wrap: wrap;
+  }
+  .delete-group-button-container {
+    flex-basis: 100%;
+    display: flex;
+    justify-content: center;
+    .delete-group-button {
+      margin: $spacer * 2;
+      background: $colour-negative;
+    }
+  }
+  .welcome-card {
     margin: $spacer * 2;
-    background: $colour-negative;
-  }
-}
-.welcome-card {
-  margin: $spacer * 2;
-  padding: $spacer * 2 $spacer * 4;
-  width: 500px;
-  max-width: 100%;
-  background: $background;
-  border-radius: $spacer * 4;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  .welcome-title {
-    margin: $spacer 0 $spacer * 2 0;
-    font-size: $font-size-l;
-    font-weight: $font-weight-bold;
-    text-align: center;
-  }
-  .version-warning {
-    color: $colour-dark-negative;
-    text-align: center;
-    .icon {
+    padding: $spacer * 2 $spacer * 4;
+    width: 500px;
+    max-width: 100%;
+    background: $background;
+    border-radius: $spacer * 4;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    .welcome-title {
+      margin: $spacer 0 $spacer * 2 0;
+      font-size: $font-size-l;
+      font-weight: $font-weight-bold;
+      text-align: center;
+    }
+    .version-warning {
       color: $colour-dark-negative;
+      text-align: center;
+      .icon {
+        color: $colour-dark-negative;
+      }
     }
-  }
-  p,
-  ul {
-    margin: $spacer 0;
-  }
-  ul {
-    list-style: disc;
-    li {
-      margin-left: $spacer * 4;
+    p,
+    ul {
+      margin: $spacer 0;
     }
-  }
-  a {
-    text-decoration: underline;
+    ul {
+      list-style: disc;
+      li {
+        margin-left: $spacer * 4;
+      }
+    }
+    a {
+      text-decoration: underline;
+    }
   }
 }
 </style>
