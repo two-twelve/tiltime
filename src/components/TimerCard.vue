@@ -162,7 +162,7 @@ export default defineComponent({
       const target = this.$refs.card as HTMLElement
       this.crossOutAnnotation = annotate(target, {
         type: 'crossed-off',
-        color: '#000000',
+        color: getComputedStyle(document.body).getPropertyValue('--foreground'),
         animate: !this.crossedOutOnMount,
       })
       this.crossOutAnnotation.show()
@@ -254,7 +254,7 @@ export default defineComponent({
   .timer-card {
     padding: $spacer * 3;
     max-width: 400px;
-    background: $background;
+    background: var(--background);
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -292,7 +292,7 @@ export default defineComponent({
           bottom: 100%;
           left: 50%;
           transform: translateX(-50%);
-          background: $colour-positive;
+          background: var(--colour-positive);
           padding: $spacer $spacer * 2;
           border-radius: $spacer * 3;
         }
@@ -337,14 +337,14 @@ export default defineComponent({
           height: 5px;
         }
         .elapsed-bar {
-          background: $colour-dark-positive;
+          background: var(--colour-dark-positive);
           border-radius: 3px 0px 0px 3px;
         }
         .elapsed-bar[style='flex-basis: 100%;'] {
           border-radius: 3px;
         }
         .remaining-bar {
-          background: $colour-dark-negative;
+          background: var(--colour-dark-negative);
           border-radius: 0px 3px 3px 0px;
           flex-grow: 1;
         }

@@ -87,7 +87,7 @@ export default defineComponent({
   width: 100%;
   padding: 0 $spacer;
   padding-top: $spacer * 2;
-  background: $colour-neutral;
+  background: var(--colour-neutral);
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -107,7 +107,7 @@ export default defineComponent({
     justify-content: center;
     .delete-group-button {
       margin: $spacer * 2;
-      background: $colour-negative;
+      background: var(--colour-negative);
     }
   }
   .welcome-card {
@@ -115,7 +115,7 @@ export default defineComponent({
     padding: $spacer * 2 $spacer * 4;
     width: 500px;
     max-width: 100%;
-    background: $background;
+    background: var(--background);
     border-radius: $spacer * 4;
     display: flex;
     flex-direction: column;
@@ -127,10 +127,10 @@ export default defineComponent({
       text-align: center;
     }
     .version-warning {
-      color: $colour-dark-negative;
+      color: var(--colour-dark-negative);
       text-align: center;
       .icon {
-        color: $colour-dark-negative;
+        color: var(--colour-dark-negative);
       }
     }
     p,

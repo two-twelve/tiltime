@@ -166,12 +166,12 @@ nav {
       align-items: center;
       .delete-data-button {
         margin: 0 $spacer;
-        background: $colour-dark-negative;
-        color: $background;
+        background: var(--colour-dark-negative);
+        color: var(--background);
         flex-shrink: 0;
         .icon {
           margin-right: $spacer * 0.5;
-          color: $background;
+          color: var(--background);
         }
       }
       .warning-message {

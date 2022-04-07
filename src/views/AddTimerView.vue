@@ -100,7 +100,7 @@ nav {
   padding: $spacer * 4;
   width: 100%;
   list-style: none;
-  background: $colour-neutral;
+  background: var(--colour-neutral);
 }
 .groups-list-container {
   padding: $spacer * 3 $spacer * 4;

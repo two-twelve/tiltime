@@ -41,7 +41,7 @@ export default defineComponent({
     const target = this.$refs.title as HTMLElement
     const titleHighlight = annotate(target, {
       type: 'highlight',
-      color: '#d0e699',
+      color: getComputedStyle(document.body).getPropertyValue('--colour-positive'),
       animate: false,
     })
     titleHighlight.show()
@@ -71,7 +71,7 @@ main {
   flex-direction: column;
   align-items: center;
   height: 100vh;
-  background: $background;
+  background: var(--background);
 }
 .header-container {
   width: 100%;
