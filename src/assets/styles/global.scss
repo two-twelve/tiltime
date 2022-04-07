@@ -14,8 +14,9 @@ $foreground: #000000;
 $colour-positive: hsl(77, 60%, 75%);
 $colour-neutral: hsl(205, 60%, 85%);
 $colour-negative: hsl(334, 60%, 80%);
-$colour-dark-negative: hsl(334, 100%, 42%);
 $colour-dark-positive: hsl(77, 55%, 60%);
+$colour-dark-neutral: hsl(205, 51%, 57%);
+$colour-dark-negative: hsl(334, 100%, 42%);
 
 $app-width: 800px;
 $spacer: 6px;
@@ -36,4 +37,11 @@ body {
   padding: $spacer $spacer * 2;
   border-radius: $spacer * 3;
   text-align: center;
+}
+
+a, .button, .focusable {
+  border: 2px solid rgba(255,255,255,0);
+  &:focus {
+    border-color: $colour-dark-neutral;
+  }
 }

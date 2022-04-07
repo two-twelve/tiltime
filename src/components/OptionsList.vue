@@ -4,7 +4,7 @@
       v-for="[optionIndex, option] of options.entries()"
       :key="optionIndex"
       tabindex="0"
-      class="option"
+      class="option focusable"
       @click="
         () => {
           handleClick(optionIndex)

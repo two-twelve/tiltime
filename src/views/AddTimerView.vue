@@ -12,7 +12,7 @@
       <li
         v-for="timerGroup of store.state.user.timerGroups"
         :key="timerGroup.uuid"
-        class="groups-list-item"
+        class="groups-list-item focusable"
         tabindex="0"
         @click="
           () => {
