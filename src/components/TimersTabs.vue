@@ -10,6 +10,14 @@
             setActiveTimerGroup(e, timerGroup.uuid)
           }
         "
+        @keyup.enter="
+          (e) => {
+            if (timerGroup.uuid === store.state.activeTimerGroupUUID) {
+              return
+            }
+            setActiveTimerGroup(e, timerGroup.uuid)
+          }
+        "
       >
         <input
           maxlength="20"
