@@ -79,7 +79,7 @@ export default defineComponent({
       this.currentUnderline = annotate(target, { type: 'underline' })
       this.currentUnderline.show()
     },
-    setActiveTimerGroup(event: MouseEvent, uuid: string) {
+    setActiveTimerGroup(event: MouseEvent | KeyboardEvent, uuid: string) {
       const oldActiveTimerGroupUUID = this.store.state.activeTimerGroupUUID
       this.store.commit('setActiveTimerGroup', {
         timerGroupUUID: uuid,
