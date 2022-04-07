@@ -36,7 +36,9 @@
       v-if="store.state.activeTimerGroupUUID && store.getters.activeGroupDeletable"
       class="delete-group-button-container"
     >
-      <button class="delete-group-button button" @click="deleteActiveTimerGroup">Delete This Group</button>
+      <button class="delete-group-button button" aria-label="Delete This Group" @click="deleteActiveTimerGroup">
+        Delete This Group
+      </button>
     </li>
   </ul>
 </template>

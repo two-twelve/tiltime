@@ -6,6 +6,7 @@
           v-model="localTitle"
           class="timer-title-input"
           maxlength="20"
+          aria-label="Timer Title"
           :disabled="uuid === ''"
           @keyup="updateTimerTitle"
           @change="updateTimerTitle"
@@ -14,6 +15,7 @@
           <p v-if="justCopiedShareLink" class="copied-notif">Copied!</p>
           <font-awesome-icon
             class="share-icon"
+            aria-label="Share This Timer"
             :icon="['fas', 'arrow-up']"
             :transform="{ rotate: 45 }"
             tabindex="0"
@@ -22,6 +24,7 @@
           />
           <font-awesome-icon
             class="delete-icon"
+            aria-label="Delete This Timer"
             :icon="['fas', 'times']"
             tabindex="0"
             @click="deleteTimer"

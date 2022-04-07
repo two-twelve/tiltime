@@ -12,6 +12,7 @@
       <li
         v-for="timerGroup of store.state.user.timerGroups"
         :key="timerGroup.uuid"
+        :aria-label="'Add This Timer To Timer Group \'' + timerGroup.title + '\''"
         class="groups-list-item focusable"
         tabindex="0"
         @click="

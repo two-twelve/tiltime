@@ -4,6 +4,7 @@
       <li
         v-for="timerGroup of store.state.user.timerGroups"
         :key="timerGroup.uuid"
+        :aria-label="'Go To Timer Group \'' + timerGroup.title + '\''"
         :class="timerGroup.uuid == store.state.activeTimerGroupUUID ? 'selected' : ''"
         @click="
           (e) => {
@@ -21,6 +22,7 @@
       >
         <input
           maxlength="20"
+          aria-label="Current Timer Group Title"
           :readonly="!(timerGroup.uuid === store.state.activeTimerGroupUUID)"
           :value="timerGroup.title"
           :size="timerGroup.title.length + 1"
@@ -29,7 +31,12 @@
         <span :ref="timerGroup.uuid" class="underline"></span>
       </li>
       <li>
-        <font-awesome-icon class="delete-icon" :icon="['fas', 'plus']" @click="createNewTimerGroup" />
+        <font-awesome-icon
+          class="delete-icon"
+          aria-label="Create A New Timer Group"
+          :icon="['fas', 'plus']"
+          @click="createNewTimerGroup"
+        />
       </li>
     </ol>
   </nav>

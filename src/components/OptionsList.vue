@@ -4,6 +4,7 @@
       v-for="[optionIndex, option] of options.entries()"
       :key="optionIndex"
       tabindex="0"
+      :aria-label="option.name"
       class="option focusable"
       @click="
         () => {

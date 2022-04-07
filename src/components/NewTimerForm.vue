@@ -6,7 +6,13 @@
           <template #default="{ inputValue, inputEvents }">
             <div class="datetime-input-container">
               <font-awesome-icon class="icon" icon="hourglass-start" />
-              <input class="datetime-input" readonly :value="inputValue.toLocaleString()" v-on="inputEvents" />
+              <input
+                class="datetime-input"
+                readonly
+                :value="inputValue.toLocaleString()"
+                aria-label="Timer End Datetime"
+                v-on="inputEvents"
+              />
             </div>
           </template>
         </DatePicker>
@@ -22,12 +28,26 @@
           <template #default="{ inputValue, inputEvents }">
             <div class="datetime-input-container">
               <font-awesome-icon class="icon" icon="hourglass-end" />
-              <input class="datetime-input" readonly :value="inputValue.toLocaleString()" v-on="inputEvents" />
+              <input
+                class="datetime-input"
+                readonly
+                :value="inputValue.toLocaleString()"
+                aria-label="Timer End Datetime"
+                v-on="inputEvents"
+              />
             </div>
           </template>
         </DatePicker>
       </div>
-      <button class="create-timer-button button" type="button" tabindex="0" @click="createTimer">Create Timer</button>
+      <button
+        class="create-timer-button button"
+        type="button"
+        aria-label="Create Timer"
+        tabindex="0"
+        @click="createTimer"
+      >
+        Create Timer
+      </button>
     </form>
   </section>
 </template>

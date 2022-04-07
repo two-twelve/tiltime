@@ -28,7 +28,12 @@
     <section class="settings-group delete-data">
       <h2 class="section-title">Your Data</h2>
       <form class="delete-data-form">
-        <button class="delete-data-button button" type="button" @click="deleteUserData">
+        <button
+          class="delete-data-button button"
+          type="button"
+          :aria-label="deleteUserDataConfirmState ? 'Confirm' : 'Delete Your Data'"
+          @click="deleteUserData"
+        >
           <font-awesome-icon class="icon" :icon="['fas', 'exclamation-circle']" />
           {{ deleteUserDataConfirmState ? 'Confirm' : 'Delete Your Data' }}
         </button>

@@ -9,6 +9,7 @@
           <font-awesome-icon
             v-if="installPromptEvent"
             class="download-icon"
+            aria-label="Install TilTi.me As A Progressive Web App"
             :icon="['fas', 'download']"
             @click="installPWA"
           />
