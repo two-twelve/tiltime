@@ -1,6 +1,10 @@
 <template>
   <ul class="timers-list">
-    <VueDraggableNext class="timers-list-draggable-section" :list="store.getters.activeTimerGroup.timers" @change="updateTimersOrder">
+    <VueDraggableNext
+      class="timers-list-draggable-section"
+      :list="store.getters.activeTimerGroup.timers"
+      @change="updateTimersOrder"
+    >
       <TimerCard
         v-for="timer of store.getters.activeTimerGroup.timers"
         :key="timer.uuid"
@@ -67,13 +71,13 @@ export default defineComponent({
         targetUUID: this.store.state.activeTimerGroupUUID,
       })
     },
-    updateTimersOrder(event: { moved: { oldIndex: number, newIndex: number }}) {
+    updateTimersOrder(event: { moved: { oldIndex: number; newIndex: number } }) {
       this.store.commit('swapOrderOfTimers', {
         targetTimerGroupUUID: this.store.state.activeTimerGroupUUID,
         targetIndex1: event.moved.oldIndex,
-        targetIndex2: event.moved.newIndex
-      });
-    }
+        targetIndex2: event.moved.newIndex,
+      })
+    },
   },
 })
 </script>
