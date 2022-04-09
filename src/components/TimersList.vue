@@ -122,7 +122,7 @@ export default defineComponent({
   .welcome-card {
     margin: $spacer * 2;
     padding: $spacer * 2 $spacer * 4;
-    width: 500px;
+    width: fit-content;
     max-width: 100%;
     background: var(--background);
     border-radius: $spacer * 4;
