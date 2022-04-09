@@ -15,8 +15,8 @@
           />
           <font-awesome-icon
             v-if="needRefresh"
-            class="download-icon"
-            aria-label="Install TilTi.me As A Progressive Web App"
+            :class="['update-icon', updating ? 'updating' : '']"
+            :aria-label="updating? 'Updating TilTi.me...' : 'Update TilTi.me'"
             :icon="['fas', 'sync-alt']"
             @click="updateServiceWorker"
           />
@@ -49,7 +49,8 @@ export default defineComponent({
     return {
       installPromptEvent: null as any,
       store: useStore(),
-      titleHighlight: null as null | RoughAnnotation
+      titleHighlight: null as null | RoughAnnotation,
+      updating: false
     }
   },
   mounted() {
@@ -69,6 +70,10 @@ export default defineComponent({
       this.installPromptEvent.userChoice.then(() => {
         this.installPromptEvent = null
       })
+    },
+    updatePWA() {
+      this.updating = true
+      this.updateServiceWorker()
     },
     updateColourTheme() {
       const theme = this.store.state.user.colourTheme
@@ -126,14 +131,28 @@ main {
   display: flex;
   align-items: center;
   .download-icon,
+  .update-icon,
   .user-icon {
     padding: $spacer * 2;
   }
-  .download-icon {
+  .download-icon, .update-icon {
     font-size: $font-size-l;
+  }
+  .update-icon {
+    &.updating {
+      animation-name: spin;
+      animation-duration: 2000ms;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;      
+    }
   }
   .user-icon {
     font-size: $font-size-xxl;
   }
+}
+
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
 }
 </style>
