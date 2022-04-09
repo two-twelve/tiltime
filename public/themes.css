@@ -11,13 +11,13 @@
 }
 
 :root.dark {
-  --background: hsl(205, 50%, 10%);
+  --background: #0d1c26;
   --foreground: #ffffff;
   --foreground-alt: #ffffff;
   --colour-blue: hsl(205, 50%, 20%);
-  --colour-green: hsl(150, 52%, 41%);
-  --colour-red: hsl(349, 65%, 66%);
-  --colour-green-alt: hsl(77, 55%, 60%);
+  --colour-green: hsl(125, 45%, 46%);
+  --colour-red: hsl(341, 89%, 58%);
+  --colour-green: hsl(125, 45%, 46%);
   --colour-blue-alt: hsl(205, 51%, 57%);
-  --colour-red-alt: hsl(338, 77%, 50%);
+  --colour-red-alt: hsl(341, 89%, 58%);
 }
