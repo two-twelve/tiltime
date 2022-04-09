@@ -17,9 +17,9 @@
   --colour-blue: hsl(205, 50%, 20%);
   --colour-green: hsl(125, 45%, 46%);
   --colour-red: hsl(341, 89%, 58%);
-  --colour-green: hsl(125, 45%, 46%);
+  --colour-green-alt: hsl(77, 55%, 60%);
   --colour-blue-alt: hsl(205, 51%, 57%);
-  --colour-red-alt: hsl(341, 89%, 58%);
+  --colour-red-alt: #d6005d;
 }
 
 :root.green {
@@ -41,7 +41,7 @@
   --colour-green: hsl(311, 100%, 75%);
   --colour-blue: hsl(322, 100%, 90%);
   --colour-red: hsl(352, 100%, 70%);
-  --colour-green-alt: hsl(154, 90%, 45%);
+  --colour-green-alt: hsl(77, 55%, 60%);
   --colour-blue-alt: hsl(205, 51%, 57%);
-  --colour-red-alt: hsl(350, 100%, 46%);
+  --colour-red-alt: hsl(334, 100%, 42%);
 }
