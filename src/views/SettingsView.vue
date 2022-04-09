@@ -80,6 +80,16 @@ export default defineComponent({
           selected: this.store.state.user.colourTheme === ColourTheme.dark,
         },
         {
+          name: 'Pink Theme',
+          value: ColourTheme.pink,
+          selected: this.store.state.user.colourTheme === ColourTheme.pink,
+        },
+        {
+          name: 'Green Theme',
+          value: ColourTheme.green,
+          selected: this.store.state.user.colourTheme === ColourTheme.green,
+        },
+        {
           name: 'System Theme',
           value: ColourTheme.system,
           selected: this.store.state.user.colourTheme === ColourTheme.system,

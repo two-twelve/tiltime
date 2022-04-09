@@ -21,3 +21,27 @@
   --colour-blue-alt: hsl(205, 51%, 57%);
   --colour-red-alt: hsl(341, 89%, 58%);
 }
+
+:root.green {
+  --background: #ffffff;
+  --foreground: #000000;
+  --foreground-alt: #ffffff;
+  --colour-green: hsl(77, 60%, 75%);
+  --colour-blue: hsl(77, 60%, 85%);
+  --colour-red: hsl(334, 60%, 80%);
+  --colour-green-alt: hsl(77, 55%, 60%);
+  --colour-blue-alt: hsl(205, 51%, 57%);
+  --colour-red-alt: hsl(334, 100%, 42%);
+}
+
+:root.pink {
+  --background: #ffffff;
+  --foreground: #000000;
+  --foreground-alt: #ffffff;
+  --colour-green: hsl(311, 100%, 75%);
+  --colour-blue: hsl(322, 100%, 90%);
+  --colour-red: hsl(352, 100%, 70%);
+  --colour-green-alt: hsl(154, 90%, 45%);
+  --colour-blue-alt: hsl(205, 51%, 57%);
+  --colour-red-alt: hsl(350, 100%, 46%);
+}
