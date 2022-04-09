@@ -39,6 +39,7 @@ import { annotate } from 'rough-notation'
 import { useRegisterSW } from 'virtual:pwa-register/vue'
 import { useStore } from '@/store'
 import { RoughAnnotation } from 'rough-notation/lib/model'
+import ColourTheme from './types/ColourTheme'
 
 export default defineComponent({
   setup() {
@@ -76,7 +77,10 @@ export default defineComponent({
       this.updateServiceWorker()
     },
     updateColourTheme() {
-      const theme = this.store.state.user.colourTheme
+      var theme = this.store.state.user.colourTheme
+      if (theme === ColourTheme.system) {
+        theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? ColourTheme.dark : ColourTheme.light
+      }
       document.getElementsByTagName("html")[0].setAttribute("class", theme)
       this.highlightTitle()
     },
