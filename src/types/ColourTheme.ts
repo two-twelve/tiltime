@@ -1,9 +1,9 @@
 enum ColourTheme {
-  'system',
-  'light',
-  'dark',
-  'pink',
-  'green',
+  system = 'system',
+  light = 'light',
+  dark = 'dark',
+  pink = 'pink',
+  green = 'green',
 }
 
 export default ColourTheme

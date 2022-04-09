@@ -37,6 +37,8 @@
 import { defineComponent } from 'vue'
 import { annotate } from 'rough-notation'
 import { useRegisterSW } from 'virtual:pwa-register/vue'
+import { useStore } from '@/store'
+import { RoughAnnotation } from 'rough-notation/lib/model'
 
 export default defineComponent({
   setup() {
@@ -45,17 +47,17 @@ export default defineComponent({
   },
   data() {
     return {
-      installPromptEvent: null as any
+      installPromptEvent: null as any,
+      store: useStore(),
+      titleHighlight: null as null | RoughAnnotation
     }
   },
   mounted() {
-    const target = this.$refs.title as HTMLElement
-    const titleHighlight = annotate(target, {
-      type: 'highlight',
-      color: getComputedStyle(document.body).getPropertyValue('--colour-positive'),
-      animate: false,
-    })
-    titleHighlight.show()
+    this.updateColourTheme()
+    this.$watch(
+      () => this.store.state.user.colourTheme,
+      this.updateColourTheme
+    )
     window.addEventListener('beforeinstallprompt', (event) => {
       event.preventDefault()
       this.installPromptEvent = event
@@ -68,6 +70,25 @@ export default defineComponent({
         this.installPromptEvent = null
       })
     },
+    updateColourTheme() {
+      const theme = this.store.state.user.colourTheme
+      document.getElementsByTagName("html")[0].setAttribute("class", theme)
+      this.highlightTitle()
+    },
+    highlightTitle() {
+      const target = this.$refs.title as HTMLElement
+      var wasAlreadyHighlighted = false
+      if (this.titleHighlight) {
+        this.titleHighlight.remove()
+        wasAlreadyHighlighted = true
+      }
+      this.titleHighlight = annotate(target, {
+        type: 'highlight',
+        color: getComputedStyle(document.body).getPropertyValue('--colour-green'),
+        animate: wasAlreadyHighlighted,
+      })
+      this.titleHighlight.show()
+    }
   },
 })
 </script>

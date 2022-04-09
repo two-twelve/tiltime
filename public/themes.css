@@ -1,10 +1,23 @@
 :root {
   --background: #ffffff;
   --foreground: #000000;
-  --colour-positive: hsl(77, 60%, 75%);
-  --colour-neutral: hsl(205, 60%, 85%);
-  --colour-negative: hsl(334, 60%, 80%);
-  --colour-dark-positive: hsl(77, 55%, 60%);
-  --colour-dark-neutral: hsl(205, 51%, 57%);
-  --colour-dark-negative: hsl(334, 100%, 42%);
+  --foreground-alt: #ffffff;
+  --colour-green: hsl(77, 60%, 75%);
+  --colour-blue: hsl(205, 60%, 85%);
+  --colour-red: hsl(334, 60%, 80%);
+  --colour-green-alt: hsl(77, 55%, 60%);
+  --colour-blue-alt: hsl(205, 51%, 57%);
+  --colour-red-alt: hsl(334, 100%, 42%);
+}
+
+:root.dark {
+  --background: hsl(205, 50%, 10%);
+  --foreground: #ffffff;
+  --foreground-alt: #ffffff;
+  --colour-blue: hsl(205, 50%, 20%);
+  --colour-green: hsl(150, 52%, 41%);
+  --colour-red: hsl(349, 65%, 66%);
+  --colour-green-alt: hsl(77, 55%, 60%);
+  --colour-blue-alt: hsl(205, 51%, 57%);
+  --colour-red-alt: hsl(338, 77%, 50%);
 }

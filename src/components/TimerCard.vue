@@ -292,7 +292,7 @@ export default defineComponent({
           bottom: 100%;
           left: 50%;
           transform: translateX(-50%);
-          background: var(--colour-positive);
+          background: var(--colour-green);
           padding: $spacer $spacer * 2;
           border-radius: $spacer * 3;
         }
@@ -337,14 +337,14 @@ export default defineComponent({
           height: 5px;
         }
         .elapsed-bar {
-          background: var(--colour-dark-positive);
+          background: var(--colour-green-alt);
           border-radius: 3px 0px 0px 3px;
         }
         .elapsed-bar[style='flex-basis: 100%;'] {
           border-radius: 3px;
         }
         .remaining-bar {
-          background: var(--colour-dark-negative);
+          background: var(--colour-red-alt);
           border-radius: 0px 3px 3px 0px;
           flex-grow: 1;
         }

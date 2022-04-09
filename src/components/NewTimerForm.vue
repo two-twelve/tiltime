@@ -133,11 +133,11 @@ export default defineComponent({
     width: 16ch;
     text-align: center;
     border-radius: $spacer * 3;
-    background: var(--colour-positive);
+    background: var(--colour-green);
   }
 }
 .create-timer-button {
-  background: var(--colour-positive);
+  background: var(--colour-green);
   border-radius: $spacer * 3;
   text-align: center;
 }
