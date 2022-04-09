@@ -87,10 +87,9 @@ export default defineComponent({
   },
   methods: {
     createTimer() {
-      const from = new Date()
       this.store.commit('createTimer', {
         timerTitle: 'New Timer',
-        from: from,
+        from: this.from,
         to: this.to,
         groupUUID: this.store.state.activeTimerGroupUUID,
       })
