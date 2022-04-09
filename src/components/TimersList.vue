@@ -29,8 +29,7 @@
         <li>Count down to your next holiday 🏖️</li>
       </ul>
       <p>
-        If you run into trouble, make an issue on
-        <a href="https://github.com/TheTeaCat/tiltime" target="_blank">GitHub</a>.
+        If you run into trouble, <a href="https://joshuarainbow.co.uk/about/">contact me.</a> {{ signoffEmoji }}
       </p>
     </li>
     <li
@@ -49,6 +48,7 @@ import { defineComponent } from 'vue'
 import { useStore } from '@/store'
 import TimerCard from '@/components/TimerCard.vue'
 import { VueDraggableNext } from 'vue-draggable-next'
+import ColourTheme from '@/types/ColourTheme'
 
 export default defineComponent({
   components: {
@@ -58,6 +58,20 @@ export default defineComponent({
   data() {
     return {
       store: useStore(),
+    }
+  },
+  computed: {
+    signoffEmoji(): string {
+      switch (this.store.state.user.colourTheme) {
+        case ColourTheme.dark:
+          return '😎'
+        case ColourTheme.pink:
+          return '💖'
+        case ColourTheme.green:
+          return '🌿'
+        default:
+          return '👋'
+      }
     }
   },
   methods: {
@@ -73,7 +87,7 @@ export default defineComponent({
         targetIndex2: event.moved.newIndex,
       })
     },
-  },
+  }
 })
 </script>
 
