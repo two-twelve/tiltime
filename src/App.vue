@@ -13,6 +13,13 @@
             :icon="['fas', 'download']"
             @click="installPWA"
           />
+          <font-awesome-icon
+            v-if="needRefresh"
+            class="download-icon"
+            aria-label="Install TilTi.me As A Progressive Web App"
+            :icon="['fas', 'sync-alt']"
+            @click="updateServiceWorker"
+          />
           <router-link to="settings">
             <font-awesome-icon
               class="user-icon"
@@ -32,9 +39,13 @@ import { annotate } from 'rough-notation'
 import { useRegisterSW } from 'virtual:pwa-register/vue'
 
 export default defineComponent({
+  setup() {
+    const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW();
+    return { offlineReady, needRefresh, updateServiceWorker };
+  },
   data() {
     return {
-      installPromptEvent: null as any,
+      installPromptEvent: null as any
     }
   },
   mounted() {
@@ -45,10 +56,6 @@ export default defineComponent({
       animate: false,
     })
     titleHighlight.show()
-    const { needRefresh, updateServiceWorker } = useRegisterSW()
-    if (needRefresh.value) {
-      updateServiceWorker(false)
-    }
     window.addEventListener('beforeinstallprompt', (event) => {
       event.preventDefault()
       this.installPromptEvent = event
