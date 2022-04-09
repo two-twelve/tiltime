@@ -18,7 +18,7 @@
             :class="['update-icon', updating ? 'updating' : '']"
             :aria-label="updating? 'Updating TilTi.me...' : 'Update TilTi.me'"
             :icon="['fas', 'sync-alt']"
-            @click="updateServiceWorker"
+            @click="updatePWA"
           />
           <router-link to="settings">
             <font-awesome-icon
