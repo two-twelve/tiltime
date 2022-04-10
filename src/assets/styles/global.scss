@@ -15,6 +15,7 @@ $spacer: 6px;
 * {
   font-family: 'Vollkorn', serif;
   font-weight: $font-weight-normal;
+  font-variant-numeric: tabular-nums;
   color: var(--foreground);
 }
 
