@@ -16,8 +16,7 @@
           <font-awesome-icon
             class="share-icon"
             aria-label="Share This Timer"
-            :icon="['fas', 'arrow-up']"
-            :transform="{ rotate: 45 }"
+            :icon="['fas', 'share-nodes']"
             tabindex="0"
             @pointerdown="shareTimer"
             @keyup.enter="shareTimer"
