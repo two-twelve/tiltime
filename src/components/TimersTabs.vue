@@ -68,7 +68,6 @@ export default defineComponent({
     setTimeout(this.createUnderline, 500)
     Sortable.create(this.$refs.timerGroupsList, {
       delay: 100,
-      delayOnTouchOnly: true,
       touchStartThreshold: 32,
       animation: 200,
       draggable: '.draggable',

@@ -69,7 +69,6 @@ export default defineComponent({
   mounted() {
     Sortable.create(this.$refs.timersList, {
       delay: 100,
-      delayOnTouchOnly: true,
       touchStartThreshold: 32,
       animation: 200,
       draggable: '.draggable',
