@@ -1,42 +1,36 @@
 <template>
   <nav>
-    <ol class="timer-groups-list">
-      <VueDraggableNext
-        class="timer-groups-list-draggable-section"
-        :list="store.state.user.timerGroups"
-        @change="updateTimerGroupsOrder"
+    <ol ref="timerGroupsList" class="timer-groups-list">
+      <li
+        v-for="timerGroup of store.state.user.timerGroups"
+        :key="timerGroup.uuid"
+        :aria-label="'Go To Timer Group \'' + timerGroup.title + '\''"
+        :class="(timerGroup.uuid == store.state.activeTimerGroupUUID ? 'selected' : '') + ' timer-groups-list-item draggable'"
+        @pointerup="
+          (e) => {
+            setActiveTimerGroup(e, timerGroup.uuid)
+          }
+        "
+        @keyup.enter="
+          (e) => {
+            if (timerGroup.uuid === store.state.activeTimerGroupUUID) {
+              return
+            }
+            setActiveTimerGroup(e, timerGroup.uuid)
+          }
+        "
       >
-        <li
-          v-for="timerGroup of store.state.user.timerGroups"
-          :key="timerGroup.uuid"
-          :aria-label="'Go To Timer Group \'' + timerGroup.title + '\''"
-          :class="(timerGroup.uuid == store.state.activeTimerGroupUUID ? 'selected' : '') + ' timer-groups-list-item'"
-          @pointerup="
-            (e) => {
-              setActiveTimerGroup(e, timerGroup.uuid)
-            }
-          "
-          @keyup.enter="
-            (e) => {
-              if (timerGroup.uuid === store.state.activeTimerGroupUUID) {
-                return
-              }
-              setActiveTimerGroup(e, timerGroup.uuid)
-            }
-          "
-        >
-          <input
-            maxlength="20"
-            aria-label="Current Timer Group Title"
-            class="timer-group-title-input"
-            :readonly="!(timerGroup.uuid === store.state.activeTimerGroupUUID)"
-            :value="timerGroup.title"
-            :size="timerGroup.title.length + 1"
-            @change="updateTimerGroupTitle"
-          />
-          <span :ref="timerGroup.uuid" class="underline"></span>
-        </li>
-      </VueDraggableNext>
+        <input
+          maxlength="20"
+          aria-label="Current Timer Group Title"
+          class="timer-group-title-input"
+          :readonly="!(timerGroup.uuid === store.state.activeTimerGroupUUID)"
+          :value="timerGroup.title"
+          :size="timerGroup.title.length + 1"
+          @change="updateTimerGroupTitle"
+        />
+        <span :ref="timerGroup.uuid" class="underline"></span>
+      </li>
       <li>
         <font-awesome-icon
           class="delete-icon timer-groups-list-item"
@@ -53,12 +47,9 @@
 import { defineComponent } from 'vue'
 import { useStore } from '@/store'
 import { annotate } from 'rough-notation'
-import { VueDraggableNext } from 'vue-draggable-next'
+import Sortable from 'sortablejs'
 
 export default defineComponent({
-  components: {
-    VueDraggableNext,
-  },
   data() {
     return {
       store: useStore(),
@@ -73,6 +64,24 @@ export default defineComponent({
       }
     )
     setTimeout(this.createUnderline, 500)
+    Sortable.create(this.$refs.timerGroupsList, {
+        delay: 100,
+        delayOnTouchOnly: true,
+        touchStartThreshold: 32,
+        animation: 200,
+        draggable: '.draggable',
+        forceFallback: true,
+        onChange: (event: { oldIndex: number, newIndex: number}) => {
+          this.store.commit(
+            'swapOrderOfTimerGroups',
+            {
+              targetIndex1: event.newIndex,
+              targetIndex2: event.oldIndex,
+            }
+          )
+        }
+      }
+    )
   },
   methods: {
     createUnderline() {
