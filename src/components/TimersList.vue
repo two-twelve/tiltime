@@ -1,19 +1,14 @@
 <template>
-  <ul class="timers-list">
-    <VueDraggableNext
-      class="timers-list-draggable-section"
-      :list="store.getters.activeTimerGroup.timers"
-      @change="updateTimersOrder"
-    >
-      <TimerCard
-        v-for="timer of store.getters.activeTimerGroup.timers"
-        :key="timer.uuid"
-        :title="timer.title"
-        :from="timer.from"
-        :to="timer.to"
-        :uuid="timer.uuid"
-      />
-    </VueDraggableNext>
+  <ul ref="timersList" class="timers-list">
+    <TimerCard
+      v-for="timer of store.getters.activeTimerGroup.timers"
+      :key="timer.uuid"
+      class="draggable"
+      :title="timer.title"
+      :from="timer.from"
+      :to="timer.to"
+      :uuid="timer.uuid"
+    />
     <li
       v-if="
         store.getters.activeTimerGroup.timers.length == 0 &&
@@ -47,13 +42,12 @@
 import { defineComponent } from 'vue'
 import { useStore } from '@/store'
 import TimerCard from '@/components/TimerCard.vue'
-import { VueDraggableNext } from 'vue-draggable-next'
+import Sortable from 'sortablejs'
 import ColourTheme from '@/types/ColourTheme'
 
 export default defineComponent({
   components: {
-    TimerCard,
-    VueDraggableNext,
+    TimerCard
   },
   data() {
     return {
@@ -73,6 +67,27 @@ export default defineComponent({
           return '👋'
       }
     }
+  },
+  mounted() {
+    Sortable.create(this.$refs.timersList, {
+      sort: true,
+      delay: 100,
+      delayOnTouchOnly: true,
+      touchStartThreshold: 32,
+      animation: 200,
+      draggable: '.draggable',
+      forceFallback: true,
+      onChange: (event : { newIndex: number, oldIndex: number }) => {
+        this.store.commit(
+          'swapOrderOfTimers',
+          {
+            targetTimerGroupUUID: this.store.state.activeTimerGroupUUID,
+            targetIndex1: event.newIndex,
+            targetIndex2: event.oldIndex,
+          }
+        )
+      }
+    })
   },
   methods: {
     deleteActiveTimerGroup() {
