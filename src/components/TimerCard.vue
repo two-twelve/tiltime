@@ -18,7 +18,7 @@
             aria-label="Share This Timer"
             :icon="['fas', 'share-nodes']"
             tabindex="0"
-            @pointerdown="shareTimer"
+            @click="shareTimer"
             @keyup.enter="shareTimer"
           />
           <font-awesome-icon
@@ -26,7 +26,7 @@
             aria-label="Delete This Timer"
             :icon="['fas', 'times']"
             tabindex="0"
-            @pointerdown="deleteTimer"
+            @click="deleteTimer"
             @keyup.enter="deleteTimer"
           />
         </div>

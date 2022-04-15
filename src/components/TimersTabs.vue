@@ -6,7 +6,7 @@
         :key="timerGroup.uuid"
         :aria-label="'Go To Timer Group \'' + timerGroup.title + '\''"
         :class="(timerGroup.uuid == store.state.activeTimerGroupUUID ? 'selected' : '') + ' timer-groups-list-item draggable'"
-        @pointerup="
+        @click="
           (e) => {
             setActiveTimerGroup(e, timerGroup.uuid)
           }
