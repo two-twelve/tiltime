@@ -2,7 +2,7 @@
   <section class="new-timer-form-container">
     <form class="new-timer-form">
       <div class="datetime-inputs-container">
-        <DatePicker v-model="from" :timezone="''" :max-date="to" class="dateTime" mode="dateTime" color="pink" is24hr>
+        <DatePicker v-model="from" :timezone="''" :max-date="to" class="dateTime" mode="dateTime" is24hr dark>
           <template #default="{ inputValue, inputEvents }">
             <div class="datetime-input-container">
               <font-awesome-icon class="icon" icon="hourglass-start" />
@@ -22,7 +22,6 @@
           :min-date="new Date()"
           class="dateTime"
           mode="dateTime"
-          color="pink"
           is24hr
         >
           <template #default="{ inputValue, inputEvents }">
