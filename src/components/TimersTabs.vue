@@ -66,13 +66,13 @@ export default defineComponent({
       }
     )
     setTimeout(this.createUnderline, 500)
-    Sortable.create(this.$refs.timerGroupsList, {
+    Sortable.create(this.$refs.timerGroupsList as HTMLElement, {
       delay: 100,
       touchStartThreshold: 32,
       animation: 200,
       draggable: '.draggable',
       forceFallback: true,
-      onChange: (event: { oldIndex: number; newIndex: number }) => {
+      onChange: (event: Sortable.SortableEvent) => {
         this.store.commit('swapOrderOfTimerGroups', {
           targetIndex1: event.newIndex,
           targetIndex2: event.oldIndex,

@@ -67,13 +67,13 @@ export default defineComponent({
     },
   },
   mounted() {
-    Sortable.create(this.$refs.timersList, {
+    Sortable.create(this.$refs.timersList as HTMLElement, {
       delay: 100,
       touchStartThreshold: 32,
       animation: 200,
       draggable: '.draggable',
       forceFallback: true,
-      onChange: (event: { newIndex: number; oldIndex: number }) => {
+      onChange: (event: Sortable.SortableEvent) => {
         this.store.commit('swapOrderOfTimers', {
           targetTimerGroupUUID: this.store.state.activeTimerGroupUUID,
           targetIndex1: event.newIndex,
