@@ -190,7 +190,7 @@ export const store = createStore<State>({
     ): void {
       const target1 = state.user.timerGroups[targetIndex1]
       state.user.timerGroups[targetIndex1] = state.user.timerGroups[targetIndex2]
-      state.user.timerGroups[targetIndex1] = target1
+      state.user.timerGroups[targetIndex2] = target1
     },
     swapOrderOfTimers(
       state: State,
