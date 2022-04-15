@@ -2,7 +2,7 @@
   <section class="new-timer-form-container">
     <form class="new-timer-form">
       <div class="datetime-inputs-container">
-        <DatePicker v-model="from" :timezone="''" :max-date="to" class="dateTime" mode="dateTime" is24hr dark>
+        <DatePicker v-model="from" :timezone="''" :max-date="to" class="dateTime" mode="dateTime" is24hr :is-dark="isDarkMode">
           <template #default="{ inputValue, inputEvents }">
             <div class="datetime-input-container">
               <font-awesome-icon class="icon" icon="hourglass-start" />
@@ -16,7 +16,7 @@
             </div>
           </template>
         </DatePicker>
-        <DatePicker v-model="to" :timezone="''" :min-date="new Date()" class="dateTime" mode="dateTime" is24hr>
+        <DatePicker v-model="to" :timezone="''" :min-date="new Date()" class="dateTime" mode="dateTime" is24hr :is-dark="isDarkMode">
           <template #default="{ inputValue, inputEvents }">
             <div class="datetime-input-container">
               <font-awesome-icon class="icon" icon="hourglass-end" />
@@ -48,6 +48,7 @@
 import { defineComponent } from 'vue'
 import { useStore } from '@/store'
 import { DatePicker } from 'v-calendar'
+import ColourTheme from '@/types/ColourTheme'
 import 'v-calendar/dist/style.css'
 
 export default defineComponent({
@@ -66,6 +67,11 @@ export default defineComponent({
         return to
       })(),
     }
+  },
+  computed: {
+    isDarkMode(): boolean {
+      return this.store.state.user.colourTheme === ColourTheme.dark
+    },
   },
   mounted() {
     this.$watch(
