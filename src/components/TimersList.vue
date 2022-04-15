@@ -70,7 +70,6 @@ export default defineComponent({
   },
   mounted() {
     Sortable.create(this.$refs.timersList, {
-      sort: true,
       delay: 100,
       delayOnTouchOnly: true,
       touchStartThreshold: 32,
