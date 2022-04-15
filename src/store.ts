@@ -204,7 +204,7 @@ export const store = createStore<State>({
         if (timerGroup.uuid === targetTimerGroupUUID) {
           const target1 = timerGroup.timers[targetIndex1]
           timerGroup.timers[targetIndex1] = timerGroup.timers[targetIndex2]
-          timerGroup.timers[targetIndex1] = target1
+          timerGroup.timers[targetIndex2] = target1
           return
         }
       }
