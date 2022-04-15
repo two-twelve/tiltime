@@ -5,7 +5,9 @@
         v-for="timerGroup of store.state.user.timerGroups"
         :key="timerGroup.uuid"
         :aria-label="'Go To Timer Group \'' + timerGroup.title + '\''"
-        :class="(timerGroup.uuid == store.state.activeTimerGroupUUID ? 'selected' : '') + ' timer-groups-list-item draggable'"
+        :class="
+          (timerGroup.uuid == store.state.activeTimerGroupUUID ? 'selected' : '') + ' timer-groups-list-item draggable'
+        "
         @click="
           (e) => {
             setActiveTimerGroup(e, timerGroup.uuid)
@@ -65,23 +67,19 @@ export default defineComponent({
     )
     setTimeout(this.createUnderline, 500)
     Sortable.create(this.$refs.timerGroupsList, {
-        delay: 100,
-        delayOnTouchOnly: true,
-        touchStartThreshold: 32,
-        animation: 200,
-        draggable: '.draggable',
-        forceFallback: true,
-        onChange: (event: { oldIndex: number, newIndex: number}) => {
-          this.store.commit(
-            'swapOrderOfTimerGroups',
-            {
-              targetIndex1: event.newIndex,
-              targetIndex2: event.oldIndex,
-            }
-          )
-        }
-      }
-    )
+      delay: 100,
+      delayOnTouchOnly: true,
+      touchStartThreshold: 32,
+      animation: 200,
+      draggable: '.draggable',
+      forceFallback: true,
+      onChange: (event: { oldIndex: number; newIndex: number }) => {
+        this.store.commit('swapOrderOfTimerGroups', {
+          targetIndex1: event.newIndex,
+          targetIndex2: event.oldIndex,
+        })
+      },
+    })
   },
   methods: {
     createUnderline() {

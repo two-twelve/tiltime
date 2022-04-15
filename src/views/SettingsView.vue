@@ -181,7 +181,7 @@ nav {
         flex-shrink: 0;
         .icon {
           margin-right: $spacer * 0.5;
-        color: var(--foreground-alt);
+          color: var(--foreground-alt);
         }
       }
       .warning-message {

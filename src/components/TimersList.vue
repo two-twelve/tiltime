@@ -23,9 +23,7 @@
         <li>See how long it is until your next birthday 🎂</li>
         <li>Count down to your next holiday 🏖️</li>
       </ul>
-      <p>
-        If you run into trouble, <a href="https://joshuarainbow.co.uk/about/">contact me.</a> {{ signoffEmoji }}
-      </p>
+      <p>If you run into trouble, <a href="https://joshuarainbow.co.uk/about/">contact me.</a> {{ signoffEmoji }}</p>
     </li>
     <li
       v-if="store.state.activeTimerGroupUUID && store.getters.activeGroupDeletable"
@@ -47,7 +45,7 @@ import ColourTheme from '@/types/ColourTheme'
 
 export default defineComponent({
   components: {
-    TimerCard
+    TimerCard,
   },
   data() {
     return {
@@ -66,7 +64,7 @@ export default defineComponent({
         default:
           return '👋'
       }
-    }
+    },
   },
   mounted() {
     Sortable.create(this.$refs.timersList, {
@@ -76,16 +74,13 @@ export default defineComponent({
       animation: 200,
       draggable: '.draggable',
       forceFallback: true,
-      onChange: (event : { newIndex: number, oldIndex: number }) => {
-        this.store.commit(
-          'swapOrderOfTimers',
-          {
-            targetTimerGroupUUID: this.store.state.activeTimerGroupUUID,
-            targetIndex1: event.newIndex,
-            targetIndex2: event.oldIndex,
-          }
-        )
-      }
+      onChange: (event: { newIndex: number; oldIndex: number }) => {
+        this.store.commit('swapOrderOfTimers', {
+          targetTimerGroupUUID: this.store.state.activeTimerGroupUUID,
+          targetIndex1: event.newIndex,
+          targetIndex2: event.oldIndex,
+        })
+      },
     })
   },
   methods: {
@@ -101,7 +96,7 @@ export default defineComponent({
         targetIndex2: event.moved.newIndex,
       })
     },
-  }
+  },
 })
 </script>
 

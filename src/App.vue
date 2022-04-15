@@ -16,7 +16,7 @@
           <font-awesome-icon
             v-if="needRefresh"
             :class="['update-icon', updating ? 'updating' : '']"
-            :aria-label="updating? 'Updating TilTi.me...' : 'Update TilTi.me'"
+            :aria-label="updating ? 'Updating TilTi.me...' : 'Update TilTi.me'"
             :icon="['fas', 'sync-alt']"
             @click="updatePWA"
           />
@@ -43,23 +43,20 @@ import ColourTheme from './types/ColourTheme'
 
 export default defineComponent({
   setup() {
-    const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW();
-    return { offlineReady, needRefresh, updateServiceWorker };
+    const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW()
+    return { offlineReady, needRefresh, updateServiceWorker }
   },
   data() {
     return {
       installPromptEvent: null as any,
       store: useStore(),
       titleHighlight: null as null | RoughAnnotation,
-      updating: false
+      updating: false,
     }
   },
   mounted() {
     this.updateColourTheme()
-    this.$watch(
-      () => this.store.state.user.colourTheme,
-      this.updateColourTheme
-    )
+    this.$watch(() => this.store.state.user.colourTheme, this.updateColourTheme)
     window.addEventListener('beforeinstallprompt', (event) => {
       event.preventDefault()
       this.installPromptEvent = event
@@ -79,9 +76,9 @@ export default defineComponent({
     updateColourTheme() {
       var theme = this.store.state.user.colourTheme
       if (theme === ColourTheme.system) {
-        theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? ColourTheme.dark : ColourTheme.light
+        theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? ColourTheme.dark : ColourTheme.light
       }
-      document.getElementsByTagName("html")[0].setAttribute("class", theme)
+      document.getElementsByTagName('html')[0].setAttribute('class', theme)
       this.highlightTitle()
     },
     highlightTitle() {
@@ -97,7 +94,7 @@ export default defineComponent({
         animate: wasAlreadyHighlighted,
       })
       this.titleHighlight.show()
-    }
+    },
   },
 })
 </script>
@@ -139,7 +136,8 @@ main {
   .user-icon {
     padding: $spacer * 2;
   }
-  .download-icon, .update-icon {
+  .download-icon,
+  .update-icon {
     font-size: $font-size-l;
   }
   .update-icon {
@@ -147,7 +145,7 @@ main {
       animation-name: spin;
       animation-duration: 2000ms;
       animation-iteration-count: infinite;
-      animation-timing-function: linear;      
+      animation-timing-function: linear;
     }
   }
   .user-icon {
@@ -156,7 +154,11 @@ main {
 }
 
 @keyframes spin {
-    from {transform:rotate(0deg);}
-    to {transform:rotate(360deg);}
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 </style>

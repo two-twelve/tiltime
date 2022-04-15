@@ -16,14 +16,7 @@
             </div>
           </template>
         </DatePicker>
-        <DatePicker
-          v-model="to"
-          :timezone="''"
-          :min-date="new Date()"
-          class="dateTime"
-          mode="dateTime"
-          is24hr
-        >
+        <DatePicker v-model="to" :timezone="''" :min-date="new Date()" class="dateTime" mode="dateTime" is24hr>
           <template #default="{ inputValue, inputEvents }">
             <div class="datetime-input-container">
               <font-awesome-icon class="icon" icon="hourglass-end" />
