@@ -2,6 +2,7 @@
   <ul ref="timersList" class="timers-list">
     <TimerCard
       v-for="timer of store.getters.activeTimerGroup.timers"
+      :id="timer.uuid"
       :key="timer.uuid"
       class="draggable"
       :title="timer.title"

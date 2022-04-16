@@ -23,6 +23,7 @@
         "
       >
         <input
+          :id="timerGroup.uuid"
           maxlength="20"
           aria-label="Current Timer Group Title"
           class="timer-group-title-input"
