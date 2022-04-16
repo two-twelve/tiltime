@@ -1,4 +1,4 @@
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="5 10 60 65" width="512" height="512">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" width="512" height="512">
   <style type="text/css">
     /* latin */
     @font-face {
@@ -11,10 +11,9 @@
     }
     text {
       font-family: 'Vollkorn', serif;
-      font-size: 40px;
+      font-size: 55px;
     }
  </style>
-  <path d="M28.700533832988004 45.69990216390579 C32.37881552897161 41.8511537052918, 34.73285978889908 39.25465844965016, 44.08245144617395 45.72000826252042" fill="none" stroke=" hsl(77, 60%, 75%)" stroke-width="46.55"/>
-  <path d="M43.33332141329883 41.17669134811149 C37.029492981941445 45.79452468818694, 35.79637291483232 43.91942161368846, 25.760507214529206 39.00000253934995" fill="none" stroke=" hsl(77, 60%, 75%)" stroke-width="46.55"/>
-  <text x="44%" y="82%">t</text>
+  <circle cx="30" cy="30" r="27.5" stroke="hsl(77, 60%, 75%)" fill="hsl(77, 60%, 75%)"/>
+  <text x="49%" y="56%" text-anchor="middle" dominant-baseline="middle">t</text>
 </svg>
