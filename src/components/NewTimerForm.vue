@@ -2,7 +2,16 @@
   <section class="new-timer-form-container">
     <form class="new-timer-form">
       <div class="datetime-inputs-container">
-        <DatePicker v-model="from" :timezone="''" :max-date="to" class="dateTime" mode="dateTime" is24hr :is-dark="isDarkMode" :color="datePickerColor">
+        <DatePicker
+          v-model="from"
+          :timezone="''"
+          :max-date="to"
+          class="dateTime"
+          mode="dateTime"
+          is24hr
+          :is-dark="isDarkMode"
+          :color="datePickerColor"
+        >
           <template #default="{ inputValue, inputEvents }">
             <div class="datetime-input-container">
               <font-awesome-icon class="icon" icon="hourglass-start" />
@@ -16,7 +25,16 @@
             </div>
           </template>
         </DatePicker>
-        <DatePicker v-model="to" :timezone="''" :min-date="new Date()" class="dateTime" mode="dateTime" is24hr :is-dark="isDarkMode" :color="datePickerColor">
+        <DatePicker
+          v-model="to"
+          :timezone="''"
+          :min-date="new Date()"
+          class="dateTime"
+          mode="dateTime"
+          is24hr
+          :is-dark="isDarkMode"
+          :color="datePickerColor"
+        >
           <template #default="{ inputValue, inputEvents }">
             <div class="datetime-input-container">
               <font-awesome-icon class="icon" icon="hourglass-end" />
@@ -74,14 +92,14 @@ export default defineComponent({
     },
     datePickerColor(): string {
       switch (this.store.state.user.colourTheme) {
-        case (ColourTheme.green):
+        case ColourTheme.green:
           return 'green'
-        case (ColourTheme.pink):
+        case ColourTheme.pink:
           return 'pink'
         default:
           return 'blue'
       }
-    }
+    },
   },
   mounted() {
     this.$watch(

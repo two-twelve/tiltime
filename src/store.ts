@@ -214,32 +214,31 @@ export const store = createStore<State>({
       {
         sourceTimerGroupUUID,
         destinationTimerGroupUUID,
-        targetTimerUUID
-      }: { sourceTimerGroupUUID: string, destinationTimerGroupUUID: string, targetTimerUUID: string }
+        targetTimerUUID,
+      }: { sourceTimerGroupUUID: string; destinationTimerGroupUUID: string; targetTimerUUID: string }
     ): void {
       var targetTimer
       var targetTimerIndex
       var sourceTimerGroup
-      findTimerLoop:
-        for (const timerGroup of state.user.timerGroups) {
-          if (timerGroup.uuid === sourceTimerGroupUUID) {
-            sourceTimerGroup = timerGroup
-            for (var i = 0; i < timerGroup.timers.length; i++) {
-              if (timerGroup.timers[i].uuid === targetTimerUUID) {
-                targetTimer = timerGroup.timers[i]
-                targetTimerIndex = i
-                break findTimerLoop
-              }
+      findTimerLoop: for (const timerGroup of state.user.timerGroups) {
+        if (timerGroup.uuid === sourceTimerGroupUUID) {
+          sourceTimerGroup = timerGroup
+          for (var i = 0; i < timerGroup.timers.length; i++) {
+            if (timerGroup.timers[i].uuid === targetTimerUUID) {
+              targetTimer = timerGroup.timers[i]
+              targetTimerIndex = i
+              break findTimerLoop
             }
           }
         }
+      }
       if (targetTimer && sourceTimerGroup && targetTimerIndex != undefined) {
         for (const timerGroup of state.user.timerGroups) {
           if (timerGroup.uuid === destinationTimerGroupUUID) {
-            sourceTimerGroup.timers.splice(targetTimerIndex,1)
+            sourceTimerGroup.timers.splice(targetTimerIndex, 1)
             timerGroup.timers.push(targetTimer)
           }
-        }  
+        }
       }
     },
     deleteUserData(state: State): void {

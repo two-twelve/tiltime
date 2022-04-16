@@ -82,7 +82,7 @@ export default defineComponent({
         })
       },
       onEnd: (event: Sortable.SortableEvent) => {
-        var destinationTimerGroupUUID;
+        var destinationTimerGroupUUID
         if ((event as any).originalEvent.type === 'touchend') {
           const originalEvent = (event as any).originalEvent as TouchEvent
           const touch = originalEvent.changedTouches[0]
@@ -92,16 +92,16 @@ export default defineComponent({
           }
         } else {
           const originalEvent = (event as any).originalEvent as PointerEvent
-          destinationTimerGroupUUID = (originalEvent.target as HTMLElement).id          
+          destinationTimerGroupUUID = (originalEvent.target as HTMLElement).id
         }
-        if (destinationTimerGroupUUID !== "") {
+        if (destinationTimerGroupUUID !== '') {
           this.store.commit('moveTimerToDifferentGroup', {
             sourceTimerGroupUUID: this.store.state.activeTimerGroupUUID,
             destinationTimerGroupUUID: destinationTimerGroupUUID,
-            targetTimerUUID: event.item.id
+            targetTimerUUID: event.item.id,
           })
         }
-      }
+      },
     })
   },
   methods: {
