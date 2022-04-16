@@ -82,9 +82,19 @@ export default defineComponent({
         })
       },
       onEnd: (event: Sortable.SortableEvent) => {
-        const originalEvent = (event as any).originalEvent as PointerEvent
-        if (originalEvent && originalEvent.target) {
-          const destinationTimerGroupUUID = (originalEvent.target as HTMLElement).id
+        var destinationTimerGroupUUID;
+        if ((event as any).originalEvent.type === 'touchend') {
+          const originalEvent = (event as any).originalEvent as TouchEvent
+          const touch = originalEvent.changedTouches[0]
+          const target = document.elementFromPoint(touch.clientX, touch.clientY)
+          if (target) {
+            destinationTimerGroupUUID = target.id
+          }
+        } else {
+          const originalEvent = (event as any).originalEvent as PointerEvent
+          destinationTimerGroupUUID = (originalEvent.target as HTMLElement).id          
+        }
+        if (destinationTimerGroupUUID !== "") {
           this.store.commit('moveTimerToDifferentGroup', {
             sourceTimerGroupUUID: this.store.state.activeTimerGroupUUID,
             destinationTimerGroupUUID: destinationTimerGroupUUID,
