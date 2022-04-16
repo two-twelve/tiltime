@@ -81,6 +81,17 @@ export default defineComponent({
           targetIndex2: event.oldIndex,
         })
       },
+      onEnd: (event: Sortable.SortableEvent) => {
+        const originalEvent = (event as any).originalEvent as PointerEvent
+        if (originalEvent && originalEvent.target) {
+          const destinationTimerGroupUUID = (originalEvent.target as HTMLElement).id
+          this.store.commit('moveTimerToDifferentGroup', {
+            sourceTimerGroupUUID: this.store.state.activeTimerGroupUUID,
+            destinationTimerGroupUUID: destinationTimerGroupUUID,
+            targetTimerUUID: event.item.id
+          })
+        }
+      }
     })
   },
   methods: {
