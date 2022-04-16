@@ -233,7 +233,7 @@ export const store = createStore<State>({
             }
           }
         }
-      if (targetTimer && sourceTimerGroup && targetTimerIndex) {
+      if (targetTimer && sourceTimerGroup && targetTimerIndex != undefined) {
         for (const timerGroup of state.user.timerGroups) {
           if (timerGroup.uuid === destinationTimerGroupUUID) {
             sourceTimerGroup.timers.splice(targetTimerIndex,1)
