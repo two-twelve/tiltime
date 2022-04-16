@@ -209,6 +209,37 @@ export const store = createStore<State>({
         }
       }
     },
+    moveTimerToDifferentGroup(
+      state: State,
+      {
+        sourceTimerGroupUUID,
+        destinationTimerGroupUUID,
+        targetTimerUUID
+      }: { sourceTimerGroupUUID: string, destinationTimerGroupUUID: string, targetTimerUUID: string }
+    ): void {
+      var targetTimer
+      var sourceTimerGroup
+      findTimerLoop:
+        for (const timerGroup of state.user.timerGroups) {
+          if (timerGroup.uuid === sourceTimerGroupUUID) {
+            sourceTimerGroup = timerGroup
+            for (var i = 0; i < timerGroup.timers.length; i++) {
+              if (timerGroup.timers[i].uuid === targetTimerUUID) {
+                targetTimer = timerGroup.timers[i]
+                break findTimerLoop
+              }
+            }
+          }
+        }
+      if (targetTimer && sourceTimerGroup) {
+        for (const timerGroup of state.user.timerGroups) {
+          if (timerGroup.uuid === destinationTimerGroupUUID) {
+            sourceTimerGroup.timers.splice(i,1)
+            timerGroup.timers.push(targetTimer)
+          }
+        }  
+      }
+    },
     deleteUserData(state: State): void {
       this.replaceState(Object.assign(state, getDefaultState()))
     },
