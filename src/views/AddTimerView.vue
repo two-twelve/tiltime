@@ -60,7 +60,6 @@ export default defineComponent({
       const to = Number(<string>this.$router.currentRoute.value.query.to)
       const altTo = new Date()
       altTo.setHours(altTo.getHours() + 1)
-      console.log(from, to, !from || from < to)
       return from < to || (!from && to) ? new Date(to * 1000) : altTo
     },
   },
