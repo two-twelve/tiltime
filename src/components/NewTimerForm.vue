@@ -28,7 +28,7 @@
         <DatePicker
           v-model="to"
           :timezone="''"
-          :min-date="new Date()"
+          :min-date="from"
           class="dateTime"
           mode="dateTime"
           is24hr
