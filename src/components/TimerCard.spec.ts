@@ -1,7 +1,8 @@
 import ColourTheme from '@/types/ColourTheme';
 import TimerGroup from '@/types/TimerGroup';
 import User from '@/types/User';
-import { mount } from '@vue/test-utils'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { shallowMount } from '@vue/test-utils'
 import TimerCard from './TimerCard.vue'
 
 jest.mock('@/store', () => ({
@@ -20,7 +21,7 @@ jest.mock('@/store', () => ({
 describe('TimerCard', () => {
   it('should display timer title', () => {
     const testTitle = 'Test Title'
-    const wrapper = mount(
+    const wrapper = shallowMount(
       TimerCard,
       {
         props: {
@@ -28,8 +29,13 @@ describe('TimerCard', () => {
           title: testTitle,
           from: new Date(),
           to: new Date()
+        },
+        global: {
+          components: {
+            'font-awesome-icon': FontAwesomeIcon
+          }
         }
-      }
+      },
     )
 
     expect(wrapper.find('input').element.value).toEqual(testTitle)
