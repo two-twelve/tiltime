@@ -32,6 +32,6 @@ describe('TimerCard', () => {
       }
     )
 
-    expect(wrapper.find('input').text()).toEqual(testTitle)
+    expect(wrapper.find('input').element.value).toEqual(testTitle)
   })
 })
