@@ -1,5 +1,6 @@
 import { precacheAndRoute } from 'workbox-precaching'
 
+// eslint-disable-next-line no-undef
 declare let self: ServiceWorkerGlobalScope
 
 self.addEventListener('message', (event) => {
