@@ -59,7 +59,7 @@ describe('TimerCardComplete', () => {
     expect(wrapper.find(".countdown").element.textContent).toEqual('0 hours,\n0 minutes\nand 0 seconds!')
   })
   it('should display the correct percentage time elapsed', () => {
-    expect(wrapper.find(".progress-indicator").element.textContent).toEqual('100% elapsed ')
+    expect(wrapper.find(".progress-indicator").element.textContent?.trim()).toEqual('100% elapsed')
   })
 })
 
@@ -104,6 +104,6 @@ describe('TimerCardNotYetStarted', () => {
     expect(wrapper.find(".countdown").element.textContent).toEqual('242 days,\n4 hours, 47 minutes\nand 16 seconds.')
   })
   it('should display the correct percentage time elapsed', () => {
-    expect(wrapper.find(".progress-indicator").element.textContent).toEqual('0% elapsed ')
+    expect(wrapper.find(".progress-indicator").element.textContent?.trim()).toEqual('0% elapsed')
   })
 })
