@@ -1,5 +1,5 @@
 module.exports = {
-  env: { node: true },
+  env: { node: true, jest: true },
   extends: ['eslint:recommended', 'plugin:vue/vue3-recommended', 'prettier'],
   globals: {
     defineEmits: 'readonly',

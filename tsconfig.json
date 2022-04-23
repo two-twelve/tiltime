@@ -15,7 +15,7 @@
       "@/*": ["./src/*"]
     },
     "skipLibCheck": true,
-    "types": ["vite-plugin-pwa/client"]
+    "types": ["vite-plugin-pwa/client", "@types/jest", "node"]
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
   "exclude": ["**/*.worker.ts"]
