@@ -1,9 +1,21 @@
+import ColourTheme from '@/types/ColourTheme';
+import TimerGroup from '@/types/TimerGroup';
+import User from '@/types/User';
 import { mount } from '@vue/test-utils'
 import TimerCard from './TimerCard.vue'
 
-jest.mock('@fortawesome/vue-fontawesome', () => ({
-  FontAwesomeIcon: ''
-}))
+jest.mock('@/store', () => ({
+  useStore: () => ({
+    commit: jest.fn(),
+    state: {
+      user: {
+        timerGroups: [{ uuid: 'Welcome', title: 'Welcome', timers: [] }] as Array<TimerGroup>,
+        colourTheme: ColourTheme.system as ColourTheme,
+      } as User,
+      activeTimerGroupUUID: 'Welcome',
+    }
+  }),
+}));
 
 describe('TimerCard', () => {
   it('should display timer title', () => {
