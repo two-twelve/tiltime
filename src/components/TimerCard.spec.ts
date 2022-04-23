@@ -55,7 +55,10 @@ describe('TimerCardComplete', () => {
   it('should display the correct end time', () => {
     expect(wrapper.find(".end-container").element.textContent).toContain('20:10')
   })
+  it('should display 0 hours, 0 minutes and 0 seconds remaining', () => {
+    expect(wrapper.find(".countdown").element.textContent).toEqual('0 hours,\n0 minutes\nand 0 seconds!')
+  })
   it('should display the correct percentage time elapsed', () => {
-    expect(wrapper.find(".progress-indicator").element.textContent).toEqual("100% elapsed ")
+    expect(wrapper.find(".progress-indicator").element.textContent).toEqual('100% elapsed ')
   })
 })
