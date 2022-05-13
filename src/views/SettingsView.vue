@@ -27,6 +27,9 @@
     </section>
     <section class="settings-group delete-data">
       <h2 class="section-title">Your Data</h2>
+      <p>
+        Your data is kept on your device only.
+      </p>
       <form class="delete-data-form">
         <button
           class="delete-data-button button"
@@ -164,6 +167,9 @@ nav {
       font-size: $font-size-l;
       font-weight: $font-weight-bold;
     }
+    p {
+      margin: $spacer;
+    }
   }
   .colour-themes {
     .options-list {
@@ -171,6 +177,12 @@ nav {
     }
   }
   .delete-data {
+    p {
+        margin-bottom: $spacer*2;
+      @media (max-width: $app-width) {
+        text-align: center;
+      }
+    }
     .delete-data-form {
       display: flex;
       align-items: center;
@@ -198,9 +210,6 @@ nav {
     }
   }
   .about {
-    p {
-      margin: $spacer;
-    }
     .github-link {
       text-decoration: underline;
       .icon {
