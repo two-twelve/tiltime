@@ -19,10 +19,14 @@
     <section class="settings-group about">
       <h2 class="section-title">About</h2>
       <p>
-        This app is open source! You can find it on
-        <a class="github-link" href="https://github.com/two-twelve/tiltime" target="_blank">
-          GitHub<font-awesome-icon class="icon" :icon="['fab', 'github']" />
+        This app was built with 💖 by 
+        <a class="github-link" href="https://www.twotwelve.uk/">
+          TwoTwelve<font-awesome-icon class="icon" :icon="['fas','globe-europe']" />
         </a>
+      </p>
+      <p>
+        If you're having trouble using TilTi.me, let us know on
+        <a class="github-link" href="">Twitter<font-awesome-icon class="icon" :icon="['fab','twitter']" /></a>
       </p>
     </section>
     <section class="settings-group delete-data">
