@@ -24,7 +24,7 @@
         <li>See how long it is until your next birthday 🎂</li>
         <li>Count down to your next holiday 🏖️</li>
       </ul>
-      <p>If you run into trouble, <a href="https://twitter.com/TwoTwelveTweets">contact us.</a> {{ signoffEmoji }}</p>
+      <p>If you run into trouble, <a href="https://twitter.com/TwoTwelveTweets">send us a tweet!</a> {{ signoffEmoji }}</p>
     </li>
     <li
       v-if="store.state.activeTimerGroupUUID && store.getters.activeGroupDeletable"

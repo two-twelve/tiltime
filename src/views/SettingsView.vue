@@ -19,14 +19,21 @@
     <section class="settings-group about">
       <h2 class="section-title">About</h2>
       <p>
-        This app is open source! You can find it on
-        <a class="github-link" href="https://github.com/two-twelve/tiltime" target="_blank">
-          GitHub<font-awesome-icon class="icon" :icon="['fab', 'github']" />
+        This app was built with 💖 by 
+        <a class="link" href="https://www.twotwelve.uk/">
+          TwoTwelve<font-awesome-icon class="icon" :icon="['fas','globe-europe']" />
         </a>
+      </p>
+      <p>
+        If you're having trouble using TilTi.me, let us know on
+        <a class="link" href="https://twitter.com/twotwelvetweets">Twitter<font-awesome-icon class="icon" :icon="['fab','twitter']" /></a>
       </p>
     </section>
     <section class="settings-group delete-data">
       <h2 class="section-title">Your Data</h2>
+      <p>
+        Your data is kept on your device only.
+      </p>
       <form class="delete-data-form">
         <button
           class="delete-data-button button"
@@ -164,6 +171,9 @@ nav {
       font-size: $font-size-l;
       font-weight: $font-weight-bold;
     }
+    p {
+      margin: $spacer;
+    }
   }
   .colour-themes {
     .options-list {
@@ -171,6 +181,12 @@ nav {
     }
   }
   .delete-data {
+    p {
+        margin-bottom: $spacer*2;
+      @media (max-width: $app-width) {
+        text-align: center;
+      }
+    }
     .delete-data-form {
       display: flex;
       align-items: center;
@@ -198,10 +214,7 @@ nav {
     }
   }
   .about {
-    p {
-      margin: $spacer;
-    }
-    .github-link {
+    .link {
       text-decoration: underline;
       .icon {
         margin-left: $spacer * 0.5;
