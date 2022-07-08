@@ -154,6 +154,11 @@ nav {
         text-align: center;
         font-weight: $font-weight-bold;
       }
+      &.selected {
+        .timer-group-title-input {
+          cursor: text;
+        }
+      }
       .underline {
         position: absolute;
         bottom: 0;
