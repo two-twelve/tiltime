@@ -32,7 +32,7 @@
     <section class="settings-group delete-data">
       <h2 class="section-title">Your Data</h2>
       <p>
-        Your data is kept on your device only.
+        Your data is kept on your device only. For information on how we use your data, see our <a class="link" href="https://twotwelve.uk/legal/privacy/" target="_blank">Privacy Policy</a> and <a class="link" href="https://twotwelve.uk/legal/cookies/" target="_blank">Cookie Policy</a>.
       </p>
       <form class="delete-data-form">
         <button
@@ -182,7 +182,7 @@ nav {
   }
   .delete-data {
     p {
-        margin-bottom: $spacer*2;
+        margin-bottom: $spacer*4;
       @media (max-width: $app-width) {
         text-align: center;
       }
@@ -213,9 +213,10 @@ nav {
       }
     }
   }
-  .about {
+  .about, .delete-data {
     .link {
       text-decoration: underline;
+      cursor: pointer;
       .icon {
         margin-left: $spacer * 0.5;
       }
