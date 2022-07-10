@@ -19,20 +19,24 @@
     <section class="settings-group about">
       <h2 class="section-title">About</h2>
       <p>
-        This app was built with 💖 by 
+        This app was built with 💖 by
         <a class="link" href="https://www.twotwelve.uk/">
-          TwoTwelve<font-awesome-icon class="icon" :icon="['fas','globe-europe']" />
+          TwoTwelve<font-awesome-icon class="icon" :icon="['fas', 'globe-europe']" />
         </a>
       </p>
       <p>
         If you're having trouble using TilTi.me, let us know on
-        <a class="link" href="https://twitter.com/twotwelvetweets">Twitter<font-awesome-icon class="icon" :icon="['fab','twitter']" /></a>
+        <a class="link" href="https://twitter.com/twotwelvetweets"
+          >Twitter<font-awesome-icon class="icon" :icon="['fab', 'twitter']"
+        /></a>
       </p>
     </section>
     <section class="settings-group delete-data">
       <h2 class="section-title">Your Data</h2>
       <p>
-        Your data is kept on your device only. For information on how we use your data, see our <a class="link" href="https://twotwelve.uk/legal/privacy/" target="_blank">Privacy Policy</a> and <a class="link" href="https://twotwelve.uk/legal/cookies/" target="_blank">Cookie Policy</a>.
+        Your data is kept on your device only. For information on how we use your data, see our
+        <a class="link" href="https://twotwelve.uk/legal/privacy/" target="_blank">Privacy Policy</a> and
+        <a class="link" href="https://twotwelve.uk/legal/cookies/" target="_blank">Cookie Policy</a>.
       </p>
       <form class="delete-data-form">
         <button
@@ -182,7 +186,7 @@ nav {
   }
   .delete-data {
     p {
-        margin-bottom: $spacer*4;
+      margin-bottom: $spacer * 4;
       @media (max-width: $app-width) {
         text-align: center;
       }
@@ -213,7 +217,8 @@ nav {
       }
     }
   }
-  .about, .delete-data {
+  .about,
+  .delete-data {
     .link {
       text-decoration: underline;
       cursor: pointer;

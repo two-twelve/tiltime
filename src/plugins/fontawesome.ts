@@ -23,9 +23,7 @@ import {
   faCircle as unselectedRadioOrCheckbox,
 } from '@fortawesome/free-regular-svg-icons'
 
-import {
-  faTwitter as twitter
-} from '@fortawesome/free-brands-svg-icons'
+import { faTwitter as twitter } from '@fortawesome/free-brands-svg-icons'
 
 library.add(
   pwaInstall,
@@ -35,7 +33,7 @@ library.add(
   startTime,
   endTime,
   unselectedRadioOrCheckbox,
-  selectedRadioButton, 
+  selectedRadioButton,
   //selectedCheckbox, // Currently no checkboxes in app
   share,
   cross,
