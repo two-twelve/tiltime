@@ -14,7 +14,7 @@
         <div v-if="uuid !== ''" class="timer-buttons">
           <p v-if="justCopiedShareLink" class="copied-notif">Copied!</p>
           <font-awesome-icon
-            class="share-icon"
+            class="share-icon focusable"
             aria-label="Share This Timer"
             :icon="['fas', 'share-nodes']"
             tabindex="0"
@@ -22,7 +22,7 @@
             @keyup.enter="shareTimer"
           />
           <font-awesome-icon
-            class="delete-icon"
+            class="delete-icon focusable"
             aria-label="Delete This Timer"
             :icon="['fas', 'times']"
             tabindex="0"
@@ -279,6 +279,7 @@ export default defineComponent({
         font-size: inherit;
         font-weight: $font-weight-bold;
         text-align: left;
+        cursor: text;
       }
       .timer-buttons {
         display: flex;

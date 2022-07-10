@@ -77,6 +77,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .option {
   margin: $spacer $spacer * 4;
+  width: fit-content;
   .icon {
     margin-right: $spacer * 1.5;
   }

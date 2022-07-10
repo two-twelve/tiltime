@@ -36,8 +36,9 @@
       </li>
       <li>
         <font-awesome-icon
-          class="delete-icon timer-groups-list-item"
+          class="delete-icon timer-groups-list-item focusable"
           aria-label="Create A New Timer Group"
+          tabindex="0"
           :icon="['fas', 'plus']"
           @click="createNewTimerGroup"
         />
@@ -153,6 +154,11 @@ nav {
       .timer-group-title-input {
         text-align: center;
         font-weight: $font-weight-bold;
+      }
+      &.selected {
+        .timer-group-title-input {
+          cursor: text;
+        }
       }
       .underline {
         position: absolute;

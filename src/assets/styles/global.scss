@@ -38,4 +38,9 @@ a,
   &:focus {
     border-color: var(--colour-blue-alt);
   }
+  cursor: pointer;
+}
+
+.draggable {
+  cursor: grab;
 }
