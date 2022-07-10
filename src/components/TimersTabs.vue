@@ -36,8 +36,9 @@
       </li>
       <li>
         <font-awesome-icon
-          class="delete-icon timer-groups-list-item"
+          class="delete-icon timer-groups-list-item focusable"
           aria-label="Create A New Timer Group"
+          tabindex="0"
           :icon="['fas', 'plus']"
           @click="createNewTimerGroup"
         />
