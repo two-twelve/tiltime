@@ -1,7 +1,5 @@
 # [TilTi.me](https://tilti.me/)
 
-test
-
 It's a timer app. You can use it for things like:
 
 - Keeping track of your deadlines 📚
