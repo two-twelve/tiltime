@@ -34,7 +34,7 @@
     <section class="settings-group delete-data">
       <h2 class="section-title">Your Data</h2>
       <p>
-        Your data is kept on your device only. For information on how we use your data, see our
+        Your timers are kept on your device only. For information on how we use your data, see our
         <a class="link" href="https://twotwelve.uk/legal/privacy/" target="_blank">Privacy Policy</a> and
         <a class="link" href="https://twotwelve.uk/legal/cookies/" target="_blank">Cookie Policy</a>.
       </p>
@@ -42,11 +42,11 @@
         <button
           class="delete-data-button button"
           type="button"
-          :aria-label="deleteUserDataConfirmState ? 'Confirm' : 'Delete Your Data'"
+          :aria-label="deleteUserDataConfirmState ? 'Confirm' : 'Delete Your Timers'"
           @click="deleteUserData"
         >
           <font-awesome-icon class="icon" :icon="['fas', 'exclamation-circle']" />
-          {{ deleteUserDataConfirmState ? 'Confirm' : 'Delete Your Data' }}
+          {{ deleteUserDataConfirmState ? 'Confirm' : 'Delete Your Timers' }}
         </button>
         <span v-if="deleteUserDataConfirmState" class="warning-message">
           Are you sure? All of your timers will be lost forever!</span
