@@ -6,11 +6,13 @@ It's a timer app. You can use it for things like:
 - Seeing how long it is until your next birthday 🎂
 - Counting down the days until your next holiday 🏖️
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/bf156c24-1095-472d-85f7-f6a198573159/deploy-status)](https://app.netlify.com/sites/subtle-entremet-488072/deploys)
+All of the little drawing animations were implemented using [Rough Notation](https://roughnotation.com/).
+
+
 
 ## Development Setup
 
-TilTi.me is a Vue 3 + TS project setup using Vite.
+TilTi.me is a [Vue 3](https://vuejs.org/) + TS project setup using [Vite](https://vitejs.dev/).
 
 ```bash
 git clone git@github.com:two-twelve/tiltime.git
@@ -19,18 +21,20 @@ npm install
 npm run dev
 ```
 
-Eslint and Prettier have also been setup on TilTi.me:
+[Eslint](https://eslint.org/) and [Prettier](https://prettier.io/) have also been setup on TilTi.me:
 
 ```bash
 npm run format
 npm run lint
 ```
 
-And tests have been implemented using Jest:
+And tests have been implemented using [Jest](https://jestjs.io/):
 
 ```bash
 npm run test
 ```
+
+
 
 ## Production Deployment
 
@@ -45,3 +49,5 @@ You'll find all your static files in `/dist`. You can preview a production deplo
 ```bash
 npm run preview
 ```
+
+We deploy tilti.me to [Cloudflare Pages](https://pages.cloudflare.com/) :)
