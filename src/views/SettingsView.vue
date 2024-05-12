@@ -27,7 +27,7 @@
       <p>
         If you're having trouble using TilTi.me, send us an email at
         <a class="link" href="mailto:hi@twotwelve.uk"
-          >hi@twotwelve.uk<font-awesome-icon class="icon" :icon="['fab', 'envelope']"
+          >hi@twotwelve.uk<font-awesome-icon class="icon" :icon="['fas', 'envelope']"
         /></a>
       </p>
     </section>
