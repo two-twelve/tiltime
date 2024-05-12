@@ -25,9 +25,9 @@
         </a>
       </p>
       <p>
-        If you're having trouble using TilTi.me, let us know on
-        <a class="link" href="https://twitter.com/twotwelvetweets"
-          >Twitter<font-awesome-icon class="icon" :icon="['fab', 'twitter']"
+        If you're having trouble using TilTi.me, send us an email at
+        <a class="link" href="mailto:hi@twotwelve.uk"
+          >hi@twotwelve.uk<font-awesome-icon class="icon" :icon="['fab', 'envelope']"
         /></a>
       </p>
     </section>

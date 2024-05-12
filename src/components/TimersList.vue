@@ -25,7 +25,7 @@
         <li>Count down to your next holiday 🏖️</li>
       </ul>
       <p>
-        If you run into trouble, <a href="https://twitter.com/TwoTwelveTweets">send us a tweet!</a> {{ signoffEmoji }}
+        If you run into trouble, <a href="mailto:hi@twotwelve.uk">send us an email!</a> {{ signoffEmoji }}
       </p>
     </li>
     <li
