@@ -16,6 +16,7 @@ import {
   faCogs as settings,
   faGlobeEurope as globeEurope,
   faExclamationCircle as warning,
+  faEnvelope as envelope,
 } from '@fortawesome/free-solid-svg-icons'
 
 import {
@@ -23,7 +24,6 @@ import {
   faCircle as unselectedRadioOrCheckbox,
 } from '@fortawesome/free-regular-svg-icons'
 
-import { faTwitter as twitter } from '@fortawesome/free-brands-svg-icons'
 
 library.add(
   pwaInstall,
@@ -43,5 +43,5 @@ library.add(
   settings,
   globeEurope,
   warning,
-  twitter
+  envelope
 )
